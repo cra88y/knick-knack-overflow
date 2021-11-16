@@ -3,6 +3,7 @@ const db = require("./db/models");
 const loginUser = async (req, res, user) => {
   req.session.regenerate((err) => {
     req.session.userId = user.id;
+    res.redirect("/");
   });
 };
 const logoutUser = async (req, res) => {
