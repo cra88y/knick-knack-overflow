@@ -11,14 +11,14 @@ html
       if locals.authenticated
         ul(class="navRight")
           li
-            a(href="/users/logout" class="navLink") Log Out
+            a(href="/users/logout" class="navLink") Log out
           li  
             a(href="/users/:id" class="navLink") Profile
       else
 
         ul(class="navRight")
           li
-            a(href="/users/login" class="navLink") Log In
+            a(href="/users/login" class="navLink") Log in
           li
-            a(href="/users/signup" class="navLink") Sign Up
+            a(href="/users/register" class="navLink") Sign up
     block content
