@@ -1,17 +1,23 @@
 body {
-  padding: 50px;
+  background-color: #2e3440;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin-top: 5%;
 }
 
 a {
-  color: #00B7FF;
+  color: #88c0d0;
+  text-decoration: none;
 }
 
 * {
+  border: 0;
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
 }
+/*
+h1, h2, h3, h4, h5, h6, a, ol, li, ul, div, span,
 
-/* h1, h2, h3, h4, h5, h6, a, ol, li, ul, div, span,
 body, header, nav {
   font-size: 1rem;
   color: inherit;
@@ -24,21 +30,61 @@ body, header, nav {
 
 h1 {
   font-size: 2rem;
+  color: #88c0d0;
+}
+ul li {
+  margin-left: 30px;
+  list-style: none;
+}
+.questions-container {
+  /* margin-top: 100px; */
+}
+
+.question-card {
+  border-radius: 2px;
+  overflow: hidden;
+  color: #88c0d0;
+  padding: 20px;
+  background-color: #4c566a;
+  margin: auto;
+  margin-top: 10px;
+  width: 50%;
+  height: 250px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+.question-card > * {
+  color: #d8dee9;
+  margin: 10px;
+  /* list-style: upper-latin; */
+}
+
+.question-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.question-card > h1 {
+  color: #81a1c1;
 }
 
 #navBar {
-display: flex;
-padding: 10px;
-list-style-type: none;
-justify-content: space-between;}
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #3b4252;
+  display: flex;
+  padding: 10px;
+  margin: 0;
+  list-style-type: none;
+  justify-content: space-between;
+}
 
 .navLink {
- text-decoration: none;
- padding: 10px;
+  text-decoration: none;
+  padding: 10px;
 }
 
 .navRight {
-display: flex;
-list-style-type: none;
-justify-content: space-around;
+  display: flex;
+  list-style-type: none;
+  justify-content: space-around;
 }
