@@ -7,7 +7,6 @@ const { userValidators, loginValidators } = require("./validations");
 const db = require("../db/models");
 const { check, validationResult } = require("express-validator");
 
-
 router.get("/register", csrfProtection, (req, res) => {
   const user = db.User.build();
   res.render("user-register", {
@@ -23,14 +22,14 @@ router.post(
   csrfProtection,
   userValidators,
   asyncHandler(async (req, res) => {
-    const { username, emailAddress, password, confirmedPassword } = req.body;
+    const { username, email, password, confirmedPassword } = req.body;
     const reqBody = {
       username,
-      emailAddress,
+      email,
       password,
       confirmedPassword,
     };
-    const user = db.User.build({ username, email: emailAddress });
+    const user = db.User.build({ username, email });
     const validatorErrors = validationResult(req);
     if (validatorErrors.isEmpty()) {
       const hashedPassword = await bcrypt.hash(confirmedPassword, 10);
@@ -63,14 +62,14 @@ router.post(
   csrfProtection,
   loginValidators,
   asyncHandler(async (req, res) => {
-    const { emailAddress, password } = req.body;
+    const { email, password } = req.body;
 
     let errors = [];
     const validatorErrors = validationResult(req);
 
     if (validatorErrors.isEmpty()) {
       // Attempt to get the user by their email address.
-      const user = await db.User.findOne({ where: { emailAddress } });
+      const user = await db.User.findOne({ where: { email } });
 
       if (user !== null) {
         // If the user exists then compare their password
@@ -85,9 +84,9 @@ router.post(
           // and redirect them to the default route.
           loginUser(req, res, user);
           req.session.save(() => {
-
             return res.redirect("/");
-          })
+          });
+          return;
         }
       }
 
@@ -99,19 +98,13 @@ router.post(
 
     res.render("user-login", {
       title: "Login",
-      emailAddress,
+      email,
       errors,
       csrfToken: req.csrfToken(),
     });
   })
 );
 router.post("/logout", (req, res) => {
-
   logoutUser(req, res);
-  req.session.save(() => {
-
-    return res.redirect("/users/login");
-  });
-
 });
 module.exports = router;
