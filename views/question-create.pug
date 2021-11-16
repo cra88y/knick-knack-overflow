@@ -1,8 +1,14 @@
-//- will have layout extended here
-//- tmp
-html
-  head
-    title Temp title
-  body
-    h2 Ask a question!
-    form(action="/questions/new" method="post")
+extends layout.pug
+include utils.pug
+block content
+  +validationErrorSummary(errors)
+  h2 Ask a question!
+  form(action="/questions/new" method="post")
+    input(type="hidden", name="_csrf" value=csrfToken)
+    +field("Title", "title", question.title)
+    label(for="content") Body
+    textarea(name="content" value=question.content id="editor")
+    button(type="submit") Ask Question
+
+    script(src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js")
+    script(src="/javascripts/formEditor.js")
