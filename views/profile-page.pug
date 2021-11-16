@@ -6,7 +6,7 @@ html
                 div(class=`post-container-${question.id}`)
                     div=question.title
                     div=question.content
-                    a(href=`/questions/${question.id}`) Got to the Question!
+                    a(href=`/questions/${question.id}`) Go to the Question!
                     if question.userId == userId
                         form(action=`/questions/${question.id}/delete` method="post")
                             button(class="delete-btn" id=question.id) Delete
