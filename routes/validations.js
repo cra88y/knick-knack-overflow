@@ -1,5 +1,4 @@
 const { check, validationResult } = require("express-validator");
-const { }
 const userValidators = [
   check("username")
     .exists({ checkFalsy: true })
@@ -34,21 +33,25 @@ const loginValidators = [
 ];
 
 const questionValidators = [
-  check('content')
+  check("content")
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a question!'),
-  check('title')
+    .withMessage("Please provide a question!"),
+  check("title")
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a title!')
+    .withMessage("Please provide a title!")
     .custom(async (value, { req }) => {
-      const otherQuestion = await db.Question.findOne({ where: { title: value } });
+      const otherQuestion = await db.Question.findOne({
+        where: { title: value },
+      });
 
       if (otherQuestion) {
-        return Promise.reject('Title taken... Your question was probably already asked!');
+        return Promise.reject(
+          "Title taken... Your question was probably already asked!"
+        );
       } else {
         return true;
       }
-    })
+    }),
 ];
 
 module.exports = { userValidators, loginValidators };
