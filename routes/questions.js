@@ -29,7 +29,7 @@ router.post(
       await Question.create({
         title,
         content,
-        user: user.id,
+        userId: user.id
       });
 
       res.redirect("/");
