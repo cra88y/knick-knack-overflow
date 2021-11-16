@@ -28,7 +28,7 @@ router.post(
       password,
       confirmedPassword,
     };
-    const user = db.User.build({ username, emailAddress });
+    const user = db.User.build({ username, email: emailAddress });
     const validatorErrors = validationResult(req);
     if (validatorErrors.isEmpty()) {
       const hashedPassword = await bcrypt.hash(confirmedPassword, 10);
