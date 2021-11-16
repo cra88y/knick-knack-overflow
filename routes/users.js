@@ -107,32 +107,25 @@ router.post("/logout", (req, res) => {
 router.get(
   "/:id(\\d+)",
   // requireAuth,
-  asyncHandler(async (req, res) => {
-    let userId = req.params.id;
-    const user = await db.User.findByPk(userId, {
-      include: [
-        {
-          model: db.Question,
-          attributes: {
-            exclude: ["createdAt", "updatedAt", "hashedPassword"],
-          },
-        },
-        {
-          model: db.Answer,
-          attributes: {
-            exclude: ["createdAt", "updatedAt"],
-          },
-        },
-      ],
-    });
-
-    if (req.session.user) {
-      userId = req.session.user.userId;
+  asyncHandler(async(req, res) => {
+  let userId = req.params.id
+  const currentUser = await db.User.findByPk(userId, {
+    include: [{model: db.Question,
+    attributes: {
+      exclude: ['createdAt', 'updatedAt', 'hashedPassword']
+    }},
+    {model: db.Answer,
+    attributes: {
+      exclude: ['createdAt', 'updatedAt']
     }
-    console.log(user);
-    res.render("profile-page", {
-      user,
-    });
+    }]})
+
+  if (req.session.user) {
+      userId = req.session.userId
+  }
+  console.log(res.locals.user);
+  res.render('profile-page', {
+      currentUser
   })
-);
+}));
 module.exports = router;
