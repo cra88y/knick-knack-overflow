@@ -1,10 +1,11 @@
 const db = require("./db/models");
 
 const loginUser = async (req, res, user) => {
-  req.session.regenerate((err) => {
+  req.session.regenerate(async (err) => {
     req.session.userId = user.id;
-    req.session.save();
-    res.redirect("/");
+    await req.session.save((err) => {
+      res.redirect("/");
+    });
   });
 };
 const logoutUser = async (req, res) => {
