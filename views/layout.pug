@@ -6,21 +6,22 @@ html
         link(rel='stylesheet' href='/stylesheets/reset.css')
   body
     ul(id='navBar')
-      li
-        a(href="/" class="navLink") Home
+      ul(class="navLeft")
+        li
+          a(href="/" class="navLink navTitle") Knick Knack Overflow
       if locals.authenticated
         ul(class="navRight")
           li
-            form(action='/users/logout' method='post')
-              button(class="navLink") Logout
-          li  
             a(href=`/users/${user.id}` class="navLink") Profile
-          li  
+          li
             a(href="/questions/new" class="navLink") Ask a question!
+          li
+            form(action='/users/logout' method='post')
+              button(class="navLink logout-btn") Logout
       else
         ul(class="navRight")
           li
-            a(href="/users/login" class="navLink") Log in
+            a(href="/users/login" class="navLink login-btn") Log in
           li
-            a(href="/users/register" class="navLink") Register
+            a(href="/users/register" class="navLink register-btn") Register
     block content
