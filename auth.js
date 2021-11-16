@@ -4,9 +4,11 @@ const loginUser = (req, res, user) => {
   req.session.auth = {
     userId: user.id,
   };
+  // return true
 };
 const logoutUser = (req, res) => {
   delete req.session.auth;
+  return true
 };
 const restoreUser = async (req, res, next) => {
   if (req.session.auth) {
