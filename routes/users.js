@@ -127,5 +127,5 @@ router.get(
   res.render('profile-page', {
       currentUser
   })
-);
+}));
 module.exports = router;
