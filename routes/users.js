@@ -1,5 +1,5 @@
 var express = require("express");
-const { restoreUser, loginUser, logoutUser } = require("../auth");
+const { restoreUser, loginUser, logoutUser,requireAuth } = require("../auth");
 var router = express.Router();
 const bcrypt = require("bcryptjs");
 const { csrfProtection, asyncHandler } = require("./utils");
@@ -107,4 +107,30 @@ router.post(
 router.post("/logout", (req, res) => {
   logoutUser(req, res);
 });
+
+
+router.get(
+  '/:id(\\d+)',
+  // requireAuth,
+  asyncHandler(async(req, res) => {
+  let userId = req.params.id
+  const user = await db.User.findByPk(userId, {
+    include: [{model: db.Question,
+    attributes: {
+      exclude: ['createdAt', 'updatedAt', 'hashedPassword']
+    }},
+    {model: db.Answer,
+    attributes: {
+      exclude: ['createdAt', 'updatedAt']
+    }
+    }]})
+
+  if (req.session.user) {
+      userId = req.session.user.userId
+  }
+  console.log(user);
+  res.render('profile-page', {
+      user
+  })
+}))
 module.exports = router;
