@@ -1,5 +1,5 @@
 var express = require("express");
-const { restoreUser, loginUser, logoutUser } = require("../auth");
+const { restoreUser, loginUser, logoutUser,requireAuth } = require("../auth");
 var router = express.Router();
 const bcrypt = require("bcryptjs");
 const { csrfProtection, asyncHandler } = require("./utils");
@@ -107,7 +107,7 @@ router.post("/logout", (req, res) => {
 
 router.get(
   '/:id(\\d+)',
-  requireAuth,
+  // requireAuth,
   asyncHandler(async(req, res) => {
   console.log("Hii")
   const user = await db.User.findByPk(userId, {include: [{model: db.Question}, {model: db.Answer}]})
