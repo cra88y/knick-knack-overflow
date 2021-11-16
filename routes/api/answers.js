@@ -35,7 +35,7 @@ router.post(
       questionId,
     });
     await answer.save();
-    res.redirect(`/questions/questionId`);
+    res.redirect(`/questions/${questionId}`);
   })
 );
 
