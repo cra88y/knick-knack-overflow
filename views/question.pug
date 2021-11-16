@@ -7,6 +7,7 @@ block content
       each answer in answers
         p(class=`answer-${answer.id}`)
           include answer-card
+        script(src="/javascripts/votes.js")
   div(class=write_answer)
       form(action=`/api/answers/${question.id}`, method="post")
         +field("", "_csrf", csrfToken, "hidden")
