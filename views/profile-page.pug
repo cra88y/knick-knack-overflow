@@ -1,8 +1,18 @@
-html
-    head
-        body
+extends layout.pug
+include utils.pug
+block content
             h1 Profile Page
-            each question in user
+            h2 Username
+                div=user.username
+            if userId == userId
+                form(action=`/${user.id}/username/edit` method="post")
+                    button(class="edit-btn" id=user.id) Edit Username
+            h2 Email
+                div=user.email
+            if userId == userId
+                form(action=`/${user.id}/email/edit` method="post")
+                    button(class="edit-btn" id=user.id) Edit Email
+            each question in user.Questions
                 div(class=`post-container-${question.id}`)
                     div=question.title
                     div=question.content
