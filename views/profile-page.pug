@@ -27,7 +27,7 @@ block content
             h2 Answers
             each answer in currentUser.Answers
                 div(class=`post-container-${answer.id}`)
-                    div=answer.content
+                    include answer-card
                     a(href=`/answers/${answer.id}`) Go to your Answer!
                     if answer.userId == userId
                         form(action=`/answers/${answer.id}/delete` method="post")
