@@ -28,7 +28,7 @@ router.post(
   asyncHandler(async (req, res) => {
     const questionId = req.params.id;
     const userId = res.locals.user.id;
-    const { answerContents, questionId } = req.body;
+    const { answerContents } = req.body;
     console.log(answerContents);
     const answer = db.Answer.build({
       userId,
