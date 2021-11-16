@@ -14,7 +14,7 @@ const restoreUser = async (req, res, next) => {
 
     try {
       const user = await db.User.findByPk(userId);
-
+      user.hashedPassword = null;
       if (user) {
         res.locals.authenticated = true;
         res.locals.user = user;
