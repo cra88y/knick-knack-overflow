@@ -105,21 +105,29 @@ router.post("/logout", (req, res) => {
   res.redirect("/users/login");
 });
 
+
 router.get(
   '/:id(\\d+)',
   // requireAuth,
   asyncHandler(async(req, res) => {
-  console.log("Hii")
-  const user = await db.User.findByPk(userId, {include: [{model: db.Question}, {model: db.Answer}]})
-  let userId = undefined
+  let userId = req.params.id
+  const user = await db.User.findByPk(userId, {
+    include: [{model: db.Question,
+    attributes: {
+      exclude: ['createdAt', 'updatedAt', 'hashedPassword']
+    }},
+    {model: db.Answer,
+    attributes: {
+      exclude: ['createdAt', 'updatedAt']
+    }
+    }]})
+
   if (req.session.user) {
       userId = req.session.user.userId
   }
+  console.log(user);
   res.render('profile-page', {
-      user,
-      title,
-      content
+      user
   })
 }))
-
 module.exports = router;
