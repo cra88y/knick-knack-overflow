@@ -82,9 +82,6 @@ router.post(
           // If the password hashes match, then login the user
           // and redirect them to the default route.
           loginUser(req, res, user);
-          req.session.save(() => {
-            return res.redirect("/");
-          });
           return;
         }
       }
@@ -113,7 +110,7 @@ router.get(
   // requireAuth,
   asyncHandler(async(req, res) => {
   let userId = req.params.id
-  const user = await db.User.findByPk(userId, {
+  const currentUser = await db.User.findByPk(userId, {
     include: [{model: db.Question,
     attributes: {
       exclude: ['createdAt', 'updatedAt', 'hashedPassword']
@@ -125,11 +122,11 @@ router.get(
     }]})
 
   if (req.session.user) {
-      userId = req.session.user.userId
+      userId = req.session.userId
   }
-  console.log(user);
+  console.log(res.locals.user);
   res.render('profile-page', {
-      user
+      currentUser
   })
 }))
 module.exports = router;
