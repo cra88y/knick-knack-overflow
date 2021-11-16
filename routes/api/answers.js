@@ -54,9 +54,7 @@ router.post(
     res.status(201).json({
       voteType,
     });
-
   })
 );
-
 
 module.exports = router;
