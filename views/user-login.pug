@@ -4,6 +4,6 @@ block content
     +validationErrorSummary(errors)
     form(action="/users/login" method="post")
         +field("", "_csrf", csrfToken, "hidden")
-        +field("Email Address", "emailAddress", emailAddress)
+        +field("Email Address", "email", email)
         +field("Password", "password")
         button les go mate
