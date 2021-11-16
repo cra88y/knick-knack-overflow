@@ -5,7 +5,7 @@ block content
     form(action="/users/register" method="post")
         +field("", "_csrf", csrfToken, "hidden")
         +field("Username", "username", reqBody.username)
-        +field("Email Address", "emailAddress", reqBody.emailAddress)
+        +field("Email Address", "email", reqBody.email)
         +field("Password", "password")
         +field("Confirm Password", "confirmedPassword")
         button get on wit it
