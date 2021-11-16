@@ -1,32 +1,31 @@
 const db = require("./db/models");
 
-const loginUser = (req, res, user) => {
-  req.session.auth = {
-    userId: user.id,
-  };
+const loginUser = async (req, res, user) => {
+  req.session.regenerate((err) => {
+    req.session.userId = user.id;
+  });
 };
-const logoutUser = (req, res) => {
-  delete req.session.auth;
+const logoutUser = async (req, res) => {
+  req.session.destroy((err) => {
+    res.redirect("/users/login");
+  });
 };
 const restoreUser = async (req, res, next) => {
-  if (req.session.auth) {
-    const { userId } = req.session.auth;
-
-    try {
-      const user = await db.User.findByPk(userId);
-      user.hashedPassword = null;
-      if (user) {
-        res.locals.authenticated = true;
-        res.locals.user = user;
-        next();
-      }
-    } catch (err) {
-      res.locals.authenticated = false;
-      next(err);
+  res.locals.authenticated = false;
+  if (!req.session.userId) {
+    return next();
+  }
+  const userId = req.session.userId;
+  try {
+    const user = await db.User.findByPk(userId);
+    user.hashedPassword = null;
+    if (user) {
+      res.locals.authenticated = true;
+      res.locals.user = user;
+      return next();
     }
-  } else {
-    res.locals.authenticated = false;
-    next();
+  } catch (err) {
+    return next(err);
   }
 };
 const requireAuth = (req, res, next) => {
