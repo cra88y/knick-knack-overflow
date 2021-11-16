@@ -20,3 +20,5 @@ router.get(
         content
     })
 }))
+
+module.exports = router;
