@@ -25,3 +25,20 @@ body, header, nav {
 h1 {
   font-size: 2rem;
 }
+
+#navBar {
+display: flex;
+padding: 10px;
+list-style-type: none;
+justify-content: space-between;}
+
+.navLink {
+ text-decoration: none;
+ padding: 10px;
+}
+
+.navRight {
+display: flex;
+list-style-type: none;
+justify-content: space-around;
+}
