@@ -1,6 +1,6 @@
 // imports
 const router = require("express").Router();
-const db = require("../db/models");
+const { Question } = require("../db/models");
 const { questionValidators } = require('./validations');
 const {
   csrfProtection,
@@ -10,7 +10,7 @@ const {
 
 // route GET /questions/new => render new question form
 router.get("/new", csrfProtection, (req, res) => {
-  const question = db.Question.build();
+  const question = Question.build();
   res.render('question-create', { title: "Ask Question", question, csrfToken: req.csrfToken() });
 });
 
@@ -26,7 +26,7 @@ router.post(
 
     if (!errors.length) {
       // validations pass
-      await db.Question.create({
+      await Question.create({
         title,
         content,
         user: user.id
@@ -35,12 +35,12 @@ router.post(
       res.redirect("/");
     } else {
       // validations don't pass
-      res.render("question-create", { 
+      res.render("question-create", {
         title: "Ask Question",
-        question: req.body, 
+        question: req.body,
         csrfToken: req.csrfToken(),
         errors: errors.map(err => err.msg)
-      }); 
+      });
     }
   }));
 
