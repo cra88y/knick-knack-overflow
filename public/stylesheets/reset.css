@@ -1,7 +1,12 @@
 body {
   background-color: #2e3440;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  margin-top: 10%;
+  margin-top: 5rem;
+
+  height: 100%;
+}
+html {
+  height: 100%;
 }
 
 a {
@@ -36,7 +41,10 @@ ul li {
   margin-left: 30px;
   list-style: none;
 }
-
+.questions-container {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
 .question-card {
   border-radius: 2px;
   overflow: hidden;
@@ -127,4 +135,36 @@ ul li {
 .navTitle {
   color: #eceff4;
   font-size: 1.25em;
+}
+.write-answer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.write-answer-container > * {
+  display: block;
+  text-align: center;
+}
+.answerContents {
+  margin: 1rem;
+  color: #eceff4;
+  background-color: #4c566a;
+  display: block;
+  white-space: normal;
+  -moz-text-align-last: center; /* Firefox 12+ */
+  text-align-last: center;
+  resize: none;
+  width: 15rem;
+  height: 5rem;
+  border: solid #d08770 1px;
+}
+.answerContents:focus {
+  outline: none;
+  border: solid #d08770 3px;
+}
+.answer-btn {
+  padding: 1rem;
+  background-color: #d08770;
+  color: #eceff4;
 }
