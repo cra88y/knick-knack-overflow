@@ -1,12 +1,12 @@
 const db = require("./db/models");
 
-const loginUser = (req, res, user) => {
+const loginUser = async(req, res, user) => {
   req.session.auth = {
     userId: user.id,
   };
   // return true
 };
-const logoutUser = (req, res) => {
+const logoutUser = async(req, res) => {
   delete req.session.auth;
   return true
 };
