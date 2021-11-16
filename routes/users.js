@@ -84,7 +84,10 @@ router.post(
           // If the password hashes match, then login the user
           // and redirect them to the default route.
           loginUser(req, res, user);
-          return res.redirect("/");
+          req.session.save(() => {
+
+            return res.redirect("/");
+          })
         }
       }
 
@@ -107,7 +110,7 @@ router.post("/logout", (req, res) => {
   logoutUser(req, res);
   req.session.save(() => {
 
-    res.redirect("/users/login");
+    return res.redirect("/users/login");
   });
 
 });
