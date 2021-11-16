@@ -7,9 +7,13 @@ block content
       each answer in answers
         p(class=`answer-${answer.id}`)
           include answer-card
+<<<<<<< HEAD
         script(src="/javascripts/votes.js")
   div(class=write_answer)
+=======
+  div(class="write-answer-container")
+>>>>>>> f40d825d4915d1767103ad63557daa8c24d5ff92
       form(action=`/api/answers/${question.id}`, method="post")
         +field("", "_csrf", csrfToken, "hidden")
         textarea(class="answerContents" name="answerContents")
-        button post answer
+        button(class="answer-btn") post answer
