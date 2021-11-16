@@ -29,14 +29,13 @@ router.post(
     const questionId = req.params.id;
     const userId = res.locals.user.id;
     const { answerContents } = req.body;
-    console.log(answerContents);
     const answer = db.Answer.build({
       userId,
       content: answerContents,
       questionId,
     });
     await answer.save();
-    res.redirect("/api/answers/test");
+    res.redirect(`/questions/questionId`);
   })
 );
 
