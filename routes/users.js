@@ -6,6 +6,8 @@ const { csrfProtection, asyncHandler } = require("./utils");
 const { userValidators, loginValidators } = require("./validations");
 const db = require("../db/models");
 const { check, validationResult } = require("express-validator");
+
+
 router.get("/register", csrfProtection, (req, res) => {
   const user = db.User.build();
   res.render("user-register", {
@@ -101,8 +103,12 @@ router.post(
   })
 );
 router.post("/logout", (req, res) => {
-  if (logoutUser(req, res)) {
+
+  logoutUser(req, res);
+  req.session.save(() => {
+
     res.redirect("/users/login");
-  }
+  });
+
 });
 module.exports = router;
