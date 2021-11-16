@@ -1,8 +1,14 @@
-//- will have layout extended here
-//- tmp
-html
-  head
-    title Temp title
-  body
-    h2 Ask a question!
-    form(action="/questions/new" method="post")
+extends layout.pug
+include utils.pug
+block content
+  +validationErrorSummary(errors)
+  html
+    head
+      title Temp title
+    body
+      h2 Ask a question!
+      form(action="/questions/new" method="post")
+        input(type="hidden", name="_csrf" value=csrfToken)
+        +field("Title", "title", question.title)
+        +field("Question", "question", question.content, "textarea")
+        button(type="submit") Ask Question
