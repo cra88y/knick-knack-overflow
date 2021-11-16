@@ -9,3 +9,8 @@ append head
 block content
   h1= title
   p Welcome to your Project Skeleton
+
+  ul 
+    each question in questions 
+      li=question.title
+        a(href="/questions/#{question.id}")
