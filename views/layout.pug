@@ -11,9 +11,10 @@ html
       if locals.authenticated
         ul(class="navRight")
           li
-            a(href="/users/logout" class="navLink") Log out
+            form(action='/users/logout' method='post')
+              button(class="navLink") Logout
           li  
-            a(href="/users/:id" class="navLink") Profile
+            a(href="/users/:id" class="navLink") Register
       else
 
         ul(class="navRight")
