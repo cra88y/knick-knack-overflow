@@ -16,8 +16,7 @@ block content
             h2 Questions
             each question in currentUser.Questions
                 div(class=`post-container-${question.id}`)
-                    div=question.title
-                    div=question.content
+                   include question-card
                     a(href=`/questions/${question.id}`) Go to your  Question!
                     if question.userId == userId
                         form(action=`/questions/${question.id}/delete` method="post")
