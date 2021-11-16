@@ -11,14 +11,16 @@ html
       if locals.authenticated
         ul(class="navRight")
           li
-            a(href="/users/logout" class="navLink") Log out
+            form(action='/users/logout' method='post')
+              button(class="navLink") Logout
           li  
             a(href="/users/:id" class="navLink") Profile
+          li  
+            a(href="/questions/new" class="navLink") Ask a question!
       else
-
         ul(class="navRight")
           li
             a(href="/users/login" class="navLink") Log in
           li
-            a(href="/users/register" class="navLink") Sign up
+            a(href="/users/register" class="navLink") Register
     block content

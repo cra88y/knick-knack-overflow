@@ -1,11 +1,13 @@
 const { check, validationResult } = require("express-validator");
+const db = require("../db/models");
+
 const userValidators = [
   check("username")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a username")
     .isLength({ max: 20 })
     .withMessage("Username must not be more than 20 characters long"),
-  check("emailAddress")
+  check("email")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a value for Email Address")
     .isLength({ max: 255 })
@@ -24,7 +26,7 @@ const userValidators = [
     .withMessage("Confirm Password must not be more than 50 characters long"),
 ];
 const loginValidators = [
-  check("emailAddress")
+  check("email")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a value for Email Address"),
   check("password")
@@ -39,7 +41,7 @@ const questionValidators = [
   check("title")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a title!")
-    .custom(async (value, { req }) => {
+    .custom(async (value) => {
       const otherQuestion = await db.Question.findOne({
         where: { title: value },
       });
@@ -54,4 +56,4 @@ const questionValidators = [
     }),
 ];
 
-module.exports = { userValidators, loginValidators };
+module.exports = { userValidators, loginValidators, questionValidators };
