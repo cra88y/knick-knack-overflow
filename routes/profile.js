@@ -5,7 +5,10 @@ const db = require("../../db/models");
 const { asyncHandler } = require("../utils");
 
 
-router.get('/users/:id(\\d+)', requireAuth, asyncHandler(async(req, res) => {
+router.get(
+    '/users/:id(\\d+)',
+    requireAuth,
+    asyncHandler(async(req, res) => {
     const user = await db.user.FindByPk(userId, {include: [{model: db.questions}]})
     let userId = undefined
     if (req.session.user) {
