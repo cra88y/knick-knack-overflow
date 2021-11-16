@@ -5,7 +5,8 @@ block content
   if answers
     div(class=answers)
       each answer in answers
-        p(class=`answer-${answer.id}`)= answer.content
+        p(class=`answer-${answer.id}`)
+          include answer-card
   div(class=write_answer)
       form(action=`/api/answers/${question.id}`, method="post")
         +field("", "_csrf", csrfToken, "hidden")

@@ -2,24 +2,37 @@ extends layout.pug
 include utils.pug
 block content
             h1 Profile Page
+            p=userId
             h2 Username
                 div=user.username
-            if userId == userId
+            if currentUser.id == user.id
                 form(action=`/${user.id}/username/edit` method="post")
                     button(class="edit-btn" id=user.id) Edit Username
             h2 Email
                 div=user.email
-            if userId == userId
+            if currentUser.id == user.id
                 form(action=`/${user.id}/email/edit` method="post")
                     button(class="edit-btn" id=user.id) Edit Email
-            each question in user.Questions
+            h2 Questions
+            each question in currentUser.Questions
                 div(class=`post-container-${question.id}`)
                     div=question.title
                     div=question.content
-                    a(href=`/questions/${question.id}`) Go to the Question!
+                    a(href=`/questions/${question.id}`) Go to your  Question!
                     if question.userId == userId
                         form(action=`/questions/${question.id}/delete` method="post")
                             button(class="delete-btn" id=question.id) Delete
                     if question.userId == userId
                         form(action=`/questions/${question.id}/edit` method="post")
                             button(class="edit-btn" id=question.id) Edit
+            h2 Answers
+            each answer in currentUser.Answers
+                div(class=`post-container-${answer.id}`)
+                    div=answer.content
+                    a(href=`/answers/${answer.id}`) Go to your Answer!
+                    if answer.userId == userId
+                        form(action=`/answers/${answer.id}/delete` method="post")
+                            button(class="delete-btn" id=answer.id) Delete
+                    if answer.userId == userId
+                        form(action=`/answers/${answer.id}/edit` method="post")
+                            button(class="edit-btn" id=answer.id) Edit
