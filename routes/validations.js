@@ -1,4 +1,6 @@
 const { check, validationResult } = require("express-validator");
+const db = require("../db/models");
+
 const userValidators = [
   check("username")
     .exists({ checkFalsy: true })
@@ -39,7 +41,7 @@ const questionValidators = [
   check("title")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a title!")
-    .custom(async (value, { req }) => {
+    .custom(async value => {
       const otherQuestion = await db.Question.findOne({
         where: { title: value },
       });
@@ -54,4 +56,4 @@ const questionValidators = [
     }),
 ];
 
-module.exports = { userValidators, loginValidators };
+module.exports = { userValidators, loginValidators, questionValidators };
