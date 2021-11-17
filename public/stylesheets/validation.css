@@ -1,13 +1,12 @@
 .validation-errors {
   background-color: rgba(240, 128, 128, .7);
   border-radius: 5px;
-  width: 30%; /* can change this... */
-  padding: 10px;
   margin: 12px;
+  padding: 10px;
 }
 
-#validation-list {
+/*#validation-list {
   list-style: none;
-}
+}*
 
 
