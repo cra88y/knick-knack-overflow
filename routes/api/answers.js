@@ -76,16 +76,17 @@ router.post(
 );
 
 router.post(
-  "/answers/:id/votes",
+  "/answers/:id/upVotes",
   requireAuth,
   asyncHandler(async (req, res) => {
     const userId = res.locals.user.id;
     let { answerId } = req.body;
     let voteType = true;
-    let voted= false;
+    let voted = false;
+    let destroyed = false;
     let voteId
     answerId = parseInt(answerId, 10)
-    
+
     try {
       const voteStatus = await db.Vote.findOne({
         where: {
@@ -93,22 +94,30 @@ router.post(
           answerId
         }
       })
-      if (voteStatus.voteType === true) voteType = false
+      voteId = voteStatus.id;
+      if (voteStatus.voteType == true) { 
+        try {
+          const vote = await db.Vote.destroy(
+            { where: { id: voteId } }
+          )
+          destroyed = true
+        } catch (err) {
+          return next(err)
+        }
+      }
       else voteType = true
-      voteId = voteStatus.id
     } catch (err) {
       voteType = true;
       const vote = await db.Vote.create({ userId, answerId, voteType });
       voted = true;
     }
 
-    if (voted == false) {
+    if (voted == false && destroyed == false) {
       try {
         const vote = await db.Vote.update(
           { userId, answerId, voteType },
           { where: { id: voteId } }
         )
-        // console.log('successful update')
 
       } catch (err) {
         return next(err)
@@ -121,16 +130,17 @@ router.post(
 );
 
 router.post(
-  "/answers/:id/votes",
+  "/answers/:id/downVotes",
   requireAuth,
   asyncHandler(async (req, res) => {
     const userId = res.locals.user.id;
     let { answerId } = req.body;
-    let voteType = true;
-    let voted= false;
+    let voteType = false;
+    let voted = false;
+    let destroyed = false;
     let voteId
     answerId = parseInt(answerId, 10)
-    
+
     try {
       const voteStatus = await db.Vote.findOne({
         where: {
@@ -138,23 +148,30 @@ router.post(
           answerId
         }
       })
-      if (voteStatus.voteType === true) voteType = false
-      else voteType = true
-      voteId = voteStatus.id
+      voteId = voteStatus.id;
+      if (voteStatus.voteType == false) { 
+        try {
+          const vote = await db.Vote.destroy(
+            { where: { id: voteId } }
+          )
+          destroyed = true
+        } catch (err) {
+          return next(err)
+        }
+      } else voteType = false
+      
     } catch (err) {
-      voteType = true;
+      voteType = false;
       const vote = await db.Vote.create({ userId, answerId, voteType });
       voted = true;
     }
 
-    if (voted == false) {
+    if (voted == false && destroyed == false) {
       try {
         const vote = await db.Vote.update(
           { userId, answerId, voteType },
           { where: { id: voteId } }
         )
-        console.log('successful update')
-
       } catch (err) {
         return next(err)
       }
@@ -164,5 +181,6 @@ router.post(
     });
   })
 );
+
 
 module.exports = router;
