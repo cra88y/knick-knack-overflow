@@ -200,6 +200,7 @@ ul li {
   text-align: center;
   align-self: center;
 }
+
 #register-page-btn {
   display: block;
   padding: 3px;
@@ -224,9 +225,8 @@ ul li {
   padding:120px;
 }
 
- .form-group {
 
-/* .form-group {
+.form-group {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,11 +236,7 @@ ul li {
   padding: 10px;
 }
 
-#email_label {
-  border-radius: 2px;
-}
 
-} */
 .downVote,
 .upVote {
   width: 1rem;

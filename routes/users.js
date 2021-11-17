@@ -6,6 +6,8 @@ const { csrfProtection, asyncHandler } = require("./utils");
 const { userValidators, loginValidators } = require("./validations");
 const db = require("../db/models");
 const { check, validationResult } = require("express-validator");
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 router.get("/register", csrfProtection, (req, res) => {
   const user = db.User.build();
@@ -124,4 +126,16 @@ router.get(
     });
   })
 );
+
+// Search for Questions
+router.get('/search', asyncHandler(async(req, res) => {
+  const {term} = req.query;
+  const results = await db.Question.findAll({
+    where:{
+      title: {[Op.like]: '%' + term + '%'}
+    }
+  })
+  .then(() => res.render("search-results", {results}))
+  .catch(err => console.log(err))
+}));
 module.exports = router;
