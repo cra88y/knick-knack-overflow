@@ -8,7 +8,6 @@ router.get(
   "/test",
   asyncHandler(async (req, res) => {
     const answers = await db.Answer.findAll({ limit: 10 });
-    // console.log(answers);
     res.render("question", {
       answers,
     });
@@ -129,7 +128,6 @@ router.post(
       count = await db.Vote.count(
         { where: { answerId, voteType: true } }
       )
-      console.log('COUNT', count)
 
     } catch (err) {
       return next(err)
@@ -195,7 +193,6 @@ router.post(
       count = await db.Vote.count(
         { where: { answerId, voteType: false } }
       )
-      console.log('COUNT', count)
 
     } catch (err) {
       return next(err)
