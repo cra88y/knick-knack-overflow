@@ -4,10 +4,10 @@ block content
   script(src="/javascripts/votes.js")
   include question-card
   if answers
-    div(class=answers)
+    div(class="answers-container")
       each answer in answers
-        p(class=`answer-${answer.id}`)
-          include answer-card
+        div(class=`answer-${answer.id}`)
+        include answer-card
   div(class="write-answer-container")
       form(action=`/api/answers/${question.id}`, method="post")
         +field("", "_csrf", csrfToken, "hidden")
