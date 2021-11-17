@@ -9,7 +9,7 @@ block content
         div(class=`answer-${answer.id}`)
         include answer-card
   div(class="write-answer-container")
-      form(action=`/api/answers/${question.id}`, method="post")
+      form(action=`/api/questions/${question.id}/answers`, method="post")
         +field("", "_csrf", csrfToken, "hidden")
         textarea(class="answerContents" name="answerContents")
         button(class="answer-btn") post answer
