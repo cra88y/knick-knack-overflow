@@ -90,9 +90,30 @@ router.get(
     const questionId = req.params.id;
     const question = await db.Question.findByPk(questionId);
     if (!question) next(new Error("Question not found"));
+    
     const answers = await db.Answer.findAll({
       where: { questionId: questionId },
     });
+
+    //////////////////////////////////
+    //populate votes:
+    const votes = await db.Vote.findAll({
+      include: [{
+        model: db.Answer,
+        where: {
+          questionId
+        }
+      }],
+      
+      })
+    
+    //populate votes:
+    
+    console.log('VOTES', votes)
+    // answers.forEach(answer => {
+      
+    // })
+
     res.render("question", { question, answers });
   })
 );
