@@ -6,8 +6,7 @@ const { csrfProtection, asyncHandler } = require("./utils");
 const { userValidators, loginValidators } = require("./validations");
 const db = require("../db/models");
 const { check, validationResult } = require("express-validator");
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+
 
 router.get("/register", csrfProtection, (req, res) => {
   const user = db.User.build();
