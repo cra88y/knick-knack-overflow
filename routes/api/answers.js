@@ -21,15 +21,49 @@ router.get(
     const answers = db.Answer.findAll({ limit: 10 });
   })
 );
-
 router.post(
-  "/:id",
+  "/answers/:id/delete",
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const answerId = req.params.id;
+    const userId = res.locals.user.id;
+    const answer = await db.Answer.findByPk(answerId);
+    if (userId != answer.userId) {
+      return next(
+        new Error("You are not the author of this answer. Nice try.")
+      );
+    }
+    answer.destroy();
+    res.redirect("back");
+  })
+);
+router.post(
+  "/questions/:id/delete",
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const questionId = req.params.id;
+    const userId = res.locals.user.id;
+    const question = await db.Question.findByPk(questionId);
+    const relatedAnswers = await db.Answer.findAll({ where: { questionId } });
+    if (userId != question.userId) {
+      return next(
+        new Error("You are not the author of this question. Nice try.")
+      );
+    }
+    relatedAnswers.forEach((ans) => {
+      ans.destroy();
+    });
+    question.destroy();
+    res.redirect("/");
+  })
+);
+router.post(
+  "/questions/:id/answers",
   requireAuth,
   asyncHandler(async (req, res) => {
     const questionId = req.params.id;
     const userId = res.locals.user.id;
     const { answerContents } = req.body;
-    console.log(answerContents);
     const answer = db.Answer.build({
       userId,
       content: answerContents,

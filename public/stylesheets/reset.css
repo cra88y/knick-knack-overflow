@@ -228,11 +228,11 @@ ul li {
 }
 .answer-card {
   color: #eceff4;
-  padding: 10px;
+  padding: 5px;
   margin-top: 10px;
   background-color: #4c566a;
   /* text-align: center; */
-  width: 30%;
+  width: 40%;
   display: flex;
   justify-content: space-between;
   /* flex-direction: column; */
@@ -252,5 +252,18 @@ ul li {
 }
 .answer-text {
   flex-grow: 100;
+  padding: 10px;
+  word-wrap: normal;
+  overflow: hidden;
+  white-space: normal;
+  word-break: break-all;
+}
+
+.answer-util-btn {
+  margin: 0.1rem;
+  background: none;
+  color: #88c0d0;
+  font-size: 0.1rem;
+  cursor: pointer;
 }
 >>>>>>> 9b745643450a52671b885dc3497eef772105d15d
