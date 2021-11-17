@@ -6,7 +6,7 @@
   --ck-font-size-base: 14px;
 
   /* Helper variables to avoid duplication in the colors. */
-  --ck-custom-background: hsl(270, 76%, 39%);
+  --ck-custom-background:#4C566A;
   --ck-custom-foreground: hsl(240, 58%, 42%);
   --ck-custom-border: hsl(300, 1%, 22%);
   --ck-custom-white: hsl(0, 0%, 100%);
@@ -14,8 +14,9 @@
   /* -- Overrides generic colors. ------------------------------------------------------------- */
 
   --ck-color-base-foreground: var(--ck-custom-background);
+  --ck-color-base-background: #D8DEE9;
   --ck-color-focus-border: hsl(208, 90%, 62%);
-  --ck-color-text: hsl(0, 0%, 98%);
+  --ck-color-text: #ECEFF4;
   --ck-color-shadow-drop: hsla(0, 0%, 0%, 0.2);
   --ck-color-shadow-inner: hsla(0, 0%, 0%, 0.1);
 
@@ -59,7 +60,7 @@
 
   --ck-color-input-background: var(--ck-custom-background);
   --ck-color-input-border: hsl(257, 3%, 43%);
-  --ck-color-input-text: hsl(0, 0%, 98%);
+  --ck-color-input-text: #2E3440;
   --ck-color-input-disabled-background: hsl(255, 4%, 21%);
   --ck-color-input-disabled-border: hsl(250, 3%, 38%);
   --ck-color-input-disabled-text: hsl(0, 0%, 78%);
@@ -105,4 +106,12 @@
   /* -- Overrides the default colors used by the ckeditor5-link package. ---------------------- */
 
   --ck-color-link-default: hsl(190, 100%, 75%);
+}
+
+.ck-editor__editable_inline {
+  min-height: 15em;
+}
+
+.ck-editor__editable_inline {
+  color: black;
 }
