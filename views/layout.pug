@@ -11,6 +11,9 @@ html
       ul(class="navLeft")
         li
           a(href="/" class="navLink navTitle") Knick Knack Overflow
+        li
+          form(action="/questions/search" method="post")
+            input(type="text" name="searchTerm" id="searchForm")
       if locals.authenticated
         ul(class="navRight")
           li
