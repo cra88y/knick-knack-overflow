@@ -17,6 +17,10 @@
   padding: 5px;
 }
 
+.add_question_body input {
+  background-color: #d8dee9;
+}
+
 .add_question_body .form-group {
   margin-top: 8px;
 }
