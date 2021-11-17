@@ -95,12 +95,13 @@ router.post(
         }
       })
       voteId = voteStatus.id;
-      if (voteStatus.voteType == true) { 
+      if (voteStatus.voteType == true) {
         try {
           const vote = await db.Vote.destroy(
             { where: { id: voteId } }
-          )
-          destroyed = true
+          );
+          destroyed = true;
+          voteType = null
         } catch (err) {
           return next(err)
         }
@@ -123,8 +124,19 @@ router.post(
         return next(err)
       }
     }
+    let count;
+    try {
+      count = await db.Vote.count(
+        { where: { answerId, voteType: true } }
+      )
+      console.log('COUNT', count)
+
+    } catch (err) {
+      return next(err)
+    }
+
     res.status(201).json({
-      voteType,
+      voteType, count
     });
   })
 );
@@ -149,17 +161,18 @@ router.post(
         }
       })
       voteId = voteStatus.id;
-      if (voteStatus.voteType == false) { 
+      if (voteStatus.voteType == false) {
         try {
           const vote = await db.Vote.destroy(
             { where: { id: voteId } }
           )
-          destroyed = true
+          destroyed = true;
+          voteType = null;
         } catch (err) {
           return next(err)
         }
       } else voteType = false
-      
+
     } catch (err) {
       voteType = false;
       const vote = await db.Vote.create({ userId, answerId, voteType });
@@ -175,9 +188,21 @@ router.post(
       } catch (err) {
         return next(err)
       }
-    }
+    };
+
+    let count;
+    try {
+      count = await db.Vote.count(
+        { where: { answerId, voteType: false } }
+      )
+      console.log('COUNT', count)
+
+    } catch (err) {
+      return next(err)
+    };
+
     res.status(201).json({
-      voteType,
+      voteType, count
     });
   })
 );
