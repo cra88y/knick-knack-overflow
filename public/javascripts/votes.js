@@ -31,7 +31,7 @@ async function hookupVote(upVote) {
 async function hookdownVote(downVote) {
   downVote.addEventListener("click", async (e) => {
     e.stopPropagation();
-    console.log('DOWN')
+    // console.log('DOWN')
     const answerId = downVote.dataset.answerid;
     const body = { answerId };
     const res = await fetch(
