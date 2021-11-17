@@ -18,10 +18,10 @@ block content
                 div(class=`post-container-${question.id}`)
                    include question-card
                     a(href=`/questions/${question.id}`) Go to your  Question!
-                    if question.userId == userId
+                    if question.userId == user.id
                         form(action=`/questions/${question.id}/delete` method="post")
                             button(class="delete-btn" id=question.id) Delete
-                    if question.userId == userId
+                    if question.userId == user.id
                         form(action=`/questions/${question.id}/edit` method="post")
                             button(class="edit-btn" id=question.id) Edit
             h2 Answers
@@ -29,9 +29,9 @@ block content
                 div(class=`post-container-${answer.id}`)
                     include answer-card
                     a(href=`/answers/${answer.id}`) Go to your Answer!
-                    if answer.userId == userId
+                    if answer.userId == user.id
                         form(action=`/answers/${answer.id}/delete` method="post")
                             button(class="delete-btn" id=answer.id) Delete
-                    if answer.userId == userId
+                    if answer.userId == user.id
                         form(action=`/answers/${answer.id}/edit` method="post")
                             button(class="edit-btn" id=answer.id) Edit
