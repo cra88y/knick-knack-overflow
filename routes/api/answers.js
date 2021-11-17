@@ -41,32 +41,32 @@ router.post(
   })
 );
 
-router.post(
-  "/:id/votes",
-  requireAuth,
-  asyncHandler(async (req, res) => {
-    const userId = res.locals.user.id;
+// router.post(
+//   "/:id/votes",
+//   requireAuth,
+//   asyncHandler(async (req, res) => {
+//     const userId = res.locals.user.id;
 
-    const { answerId } = req.body;
-    let voteType = true;
+//     const { answerId } = req.body;
+//     let voteType = true;
 
-try {
-      const voteStatus = await Vote.findOne({
-        where: {
-          userId,
-          answerId
-        }
-      })
-    } catch (err) {
-      voteType = true;
-    }
+// try {
+//       const voteStatus = await Vote.findOne({
+//         where: {
+//           userId,
+//           answerId
+//         }
+//       })
+//     } catch (err) {
+//       voteType = true;
+//     }
 
-    //MAKE THE VOTE
-    const vote = await db.Vote.create({ userId, answerId, voteType });
-    res.status(201).json({
-      voteType,
-    });
-  })
-);
+//     //MAKE THE VOTE
+//     const vote = await db.Vote.create({ userId, answerId, voteType });
+//     res.status(201).json({
+//       voteType,
+//     });
+//   })
+// );
 
 module.exports = router;
