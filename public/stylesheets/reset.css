@@ -264,3 +264,7 @@ ul li {
   font-size: 0.1rem;
   cursor: pointer;
 }
+
+.voted {
+  background-color: #bf616a;
+}
