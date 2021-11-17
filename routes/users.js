@@ -127,15 +127,4 @@ router.get(
   })
 );
 
-// Search for Questions
-router.get('/search', asyncHandler(async(req, res) => {
-  const {term} = req.query;
-  const results = await db.Question.findAll({
-    where:{
-      title: {[Op.like]: '%' + term + '%'}
-    }
-  })
-  .then(() => res.render("search-results", {results}))
-  .catch(err => console.log(err))
-}));
 module.exports = router;
