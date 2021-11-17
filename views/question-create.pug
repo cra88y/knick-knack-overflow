@@ -1,16 +1,17 @@
 extends layout.pug
 include utils.pug
 block content
-  +validationErrorSummary(errors)
+  link(rel='stylesheet' href='/stylesheets/content-styles.css')
   div.add_question_body
     h2 Ask a question!
     form(action="/questions/new" method="post")
+      +validationErrorSummary(errors)
       input(type="hidden", name="_csrf" value=csrfToken)
-      +field("Title", "title", question.title, "title")
-      label(for="content") Body
-      textarea(name="content" value=question.content id="editor")
-      button(type="submit") Post Question
+      div.form-group
+        label(for="title" id="title_label") Title
+        input(name="title" id="title_input" value=question.title)
+      div.form-group
+        label(for="content" id="content_label") Body
+        textarea(name="content" value=question.content id="editor")
+      button(type="submit" id="submit_button") Post Question
 
-      script(src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js")
-      script(src="/javascripts/formEditor.js")
-      link(rel="stylesheet" href="/stylesheets/custom.css" type="text/css")

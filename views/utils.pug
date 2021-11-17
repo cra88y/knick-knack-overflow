@@ -2,9 +2,9 @@
 mixin validationErrorSummary(errors)
   if errors
     div(class='validation-errors')
-      ul#validation-list
+      div#validation-list
         each error in errors
-          li= error
+          p= error
 
 mixin field(labelText, fieldName, fieldValue, fieldType = 'text', placeholder = null)
   div(class='form-group')
