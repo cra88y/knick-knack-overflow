@@ -1,6 +1,12 @@
-// let upVotes = document.querySelectorAll(".upVote")
+window.addEventListener("DOMContentLoaded", (event) => {
+  const upvotes = document.querySelectorAll(".upVote");
+  console.log(upvotes);
+  upvotes.forEach((upVote) => {
+    hookupVote(upVote);
+  });
+});
 
-document.querySelectorAll(".upVote").forEach((upVote) => {
+async function hookupVote(upVote) {
   upVote.addEventListener("click", async (e) => {
     e.stopPropagation();
     const answerId = upVote.dataset.answerid;
@@ -16,9 +22,7 @@ document.querySelectorAll(".upVote").forEach((upVote) => {
       }
     );
   });
-  // window.location.href = "/"
-});
-
+}
 //   addEventListener("click", async (e) => {
 
 //   //- const Answer =
