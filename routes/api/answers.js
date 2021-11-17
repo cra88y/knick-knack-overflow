@@ -49,8 +49,20 @@ router.post(
 
     const { answerId } = req.body;
     let voteType = true;
-    const vote = await db.Vote.create({ userId, answerId, voteType });
 
+try {
+      const voteStatus = await Vote.findOne({
+        where: {
+          userId,
+          answerId
+        }
+      })
+    } catch (err) {
+      voteType = true;
+    }
+
+    //MAKE THE VOTE
+    const vote = await db.Vote.create({ userId, answerId, voteType });
     res.status(201).json({
       voteType,
     });
