@@ -1,6 +1,7 @@
 extends layout.pug
 include utils.pug
 block content
+  script(src="/javascripts/votes.js")
   include question-card
   if answers
     div(class=answers)
