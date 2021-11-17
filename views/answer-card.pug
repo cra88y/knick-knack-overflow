@@ -3,3 +3,8 @@ div(class="answer-card")
     button(class=`upVote` data-answerId=`${answer.id}`) ▲
     button(class=`downVote` data-answerId=`${answer.id}`) ▼
   div(class="answer-text")= answer.content
+  if answer.userId == user.id
+    //- form(class="answer-utils" action=`/api/answers/${answer.id}/edit`)
+    //-   button(class="answer-util-btn") Edit
+    form(class="answer-utils" action=`/api/answers/${answer.id}/delete` method="POST")
+      button(class="answer-util-btn")  Delete
