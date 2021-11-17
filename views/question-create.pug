@@ -6,13 +6,11 @@ block content
     h2 Ask a question!
     form(action="/questions/new" method="post")
       input(type="hidden", name="_csrf" value=csrfToken)
-      div.form-group
-        label(for="title") Title
-        input(type="text" name="title" id="title" class="form-control")
-      div.form-group
-        label(for="content") Body
-        //- textarea(name="content" class="content" value=question.content id="editor")
-        div#editor
+      +field("Title", "title", question.title, "title")
+      label(for="content") Body
+      textarea(name="content" value=question.content id="editor")
       button(type="submit") Ask Question
-    script(src="/javascripts/formEditor.js" type="module")
-    script(src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js")
+
+      script(src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js")
+      script(src="/javascripts/formEditor.js")
+      link(rel="stylesheet" href="/stylesheets/custom.css" type="text/css")
