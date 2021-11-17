@@ -170,15 +170,15 @@ ul li {
   color: #eceff4;
 }
 
-/* .login-container {
+#login-container {
   display:flex;
   justify-content: center;
   background-color: #4c566a;
   padding: 20px;
   flex-direction: column;
-} */
+}
 
-#login-form {
+.login-form {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -198,6 +198,7 @@ ul li {
   align-items:flex-end;
 }
 
+#
 /* .form-group {
   display: flex;
   align-items: center;
