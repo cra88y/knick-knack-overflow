@@ -206,16 +206,6 @@ ul li {
   padding: 20px;
 } */
 
-#login-page-btn {
-  padding: 2px;
-  border-radius: 3px;
-  text-transform: capitalize;
-  background-color: #d08770;
-  color: #eceff4;
-  text-align: center;
-  align-self: center;
-}
-
 #register-page-btn {
   display: block;
   padding: 3px;
@@ -304,4 +294,14 @@ ul li {
 
 .voted {
   background-color: #bf616a;
+}
+
+.login-page-btn {
+  padding: 2px;
+  border-radius: 3px;
+  text-transform: capitalize;
+  background-color: #d08770;
+  color: #eceff4;
+  text-align: center;
+  align-self: center;
 }
