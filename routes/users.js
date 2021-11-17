@@ -7,6 +7,7 @@ const { userValidators, loginValidators } = require("./validations");
 const db = require("../db/models");
 const { check, validationResult } = require("express-validator");
 
+
 router.get("/register", csrfProtection, (req, res) => {
   const user = db.User.build();
   res.render("user-register", {
@@ -124,4 +125,5 @@ router.get(
     });
   })
 );
+
 module.exports = router;

@@ -40,7 +40,7 @@ h1 {
 ul li {
   margin-left: 30px;
   list-style: none;
-} 
+}
 .questions-container {
   overflow-y: hidden;
   overflow-x: hidden;
@@ -112,6 +112,22 @@ ul li {
   list-style-type: none;
   justify-content: space-around;
 }
+
+#search-btn {
+  border-radius: 2px;
+  background-color: #88c0d0;
+  color: #eceff4;
+  height: 2em;
+  width: 5em;
+  font-weight: bold;
+}
+
+#searchForm {
+  border-radius: 2px;
+  width: 15em;
+  height: 2em;
+}
+
 .logout-btn {
   background-color: #bf616a;
   color: #eceff4;
@@ -188,20 +204,44 @@ ul li {
   color: #88c0d0;
   background-color: #4c566a;
   padding: 20px;
-}
+} */
 
 #login-page-btn {
-  display: flex;
   padding: 2px;
-  border-radius: 2px;
+  border-radius: 3px;
   text-transform: capitalize;
   background-color: #d08770;
   color: #eceff4;
-  align-items:flex-end;
+  text-align: center;
+  align-self: center;
+}
+
+#register-page-btn {
+  display: block;
+  padding: 3px;
+  border-radius: 2px;
+  text-transform: capitalize;
+  background-color: #88c0d0;
+  color: #eceff4;
+  text-align: center;
+  align-self: center;
+}
+
+.login-div {
+  display: flex;
+  justify-content: center;
+  /* border-radius: 10px; */
+  padding:120px;
+}
+.register-div {
+  display: flex;
+  justify-content: center;
+  /* border-radius: 10px; */
+  padding:120px;
 }
 
 
-/* .form-group {
+.form-group {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -211,10 +251,7 @@ ul li {
   padding: 10px;
 }
 
-#email-input {
-  display: flex;
 
-} */
 .downVote,
 .upVote {
   width: 1rem;
