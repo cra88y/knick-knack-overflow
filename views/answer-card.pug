@@ -1,6 +1,5 @@
 div(class="answer-card")
   div= answer.content
   .voting
-    button(class="upVote" id=`upVote-${answer.id}`) Upvote
-    button(class="downVote" id=`downVote-${answer.id}`) Downvote
-  
+    button(class=`upVote` data-answerId=`${answer.id}`) Upvote
+    button(class=`downVote` data-answerId=`${answer.id}`) Downvote
