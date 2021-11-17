@@ -64,9 +64,18 @@ router.get(
 
     const questions = await db.Question.findAll({
       where: {
-        title: {
-          [Op.like]: `%${searchTerm}%`
-        }
+        [Op.or]: [
+          {
+            title: {
+              [Op.iLike]: `%${searchTerm}%`
+            }
+          },
+          {
+            content: {
+              [Op.iLike]: `%${searchTerm}%`
+            }
+          }
+        ]
       }
     });
 
