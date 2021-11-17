@@ -4,6 +4,8 @@ const { Question } = require("../db/models");
 const { questionValidators } = require("./validations");
 const { csrfProtection, asyncHandler, validationCheck } = require("./utils");
 const db = require("../db/models");
+const Op = require('sequelize').Op;
+
 // route GET /questions/new => render new question form
 router.get("/new", csrfProtection, (req, res) => {
   const question = Question.build();
@@ -45,6 +47,34 @@ router.post(
   })
 );
 
+// will add error handling
+router.post(
+  '/search',
+  asyncHandler(async (req, res) => {
+    const { searchTerm } = req.body;
+
+    res.redirect(`/questions/search/${searchTerm}`)
+  })
+);
+
+router.get(
+  '/search/:searchTerm',
+  asyncHandler(async (req, res) => {
+    const searchTerm = req.params.searchTerm;
+
+    const questions = await db.Question.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${searchTerm}%`
+        }
+      }
+    });
+
+    res.render('index', { questions });
+  })
+);
+
+
 router.get(
   "/:id",
   asyncHandler(async (req, res, next) => {
@@ -57,6 +87,7 @@ router.get(
     res.render("question", { question, answers });
   })
 );
+
 
 
 module.exports = router;
