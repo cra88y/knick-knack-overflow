@@ -178,7 +178,7 @@ ul li {
   flex-direction: column;
 } */
 
-/* .login-form {
+#login-form {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -186,7 +186,7 @@ ul li {
   color: #88c0d0;
   background-color: #4c566a;
   padding: 20px;
-} */
+}
 
 #login-page-btn {
   display: flex;
@@ -198,7 +198,7 @@ ul li {
   align-items:flex-end;
 }
 
-.form-group {
+/* .form-group {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -211,4 +211,4 @@ ul li {
 #email-input {
   display: flex;
 
-}
+} */
