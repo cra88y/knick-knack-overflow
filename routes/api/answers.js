@@ -76,7 +76,7 @@ router.post(
 );
 
 router.post(
-  "/:id/votes",
+  "answers/:id/votes",
   requireAuth,
   asyncHandler(async (req, res) => {
     const userId = res.locals.user.id;
@@ -121,7 +121,7 @@ router.post(
 );
 
 router.post(
-  "/:id/votes",
+  "answers/:id/votes",
   requireAuth,
   asyncHandler(async (req, res) => {
     const userId = res.locals.user.id;
