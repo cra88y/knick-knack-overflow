@@ -24,12 +24,14 @@ async function hookupVote(upVote) {
           "Content-Type": "application/json",
         },
       }
-    );
+    ).then(res => res.json()).then(data => console.log(data));
   });
 }
 
 async function hookdownVote(downVote) {
   downVote.addEventListener("click", async (e) => {
+    let count;
+    let voteType;
     e.stopPropagation();
     // console.log('DOWN')
     const answerId = downVote.dataset.answerid;
@@ -43,6 +45,16 @@ async function hookdownVote(downVote) {
           "Content-Type": "application/json",
         },
       }
-    );
+    ).then(res => res.json()).then(data => {
+       voteType = data.voteType;
+       count = data.count;
+    });
+    console.log('SECOND DATA', e.target)
+    if (voteType === false) {
+      e.target.classList.add("voted")
+
+    } else {
+      e.target.classList.remove("voted")
+    }
   });
 }
