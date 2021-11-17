@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const db = require("../db/models");
+
 const {
   asyncHandler,
 } = require("./utils");
