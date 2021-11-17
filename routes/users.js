@@ -62,36 +62,25 @@ router.post(
   loginValidators,
   asyncHandler(async (req, res) => {
     const { email, password } = req.body;
-
     let errors = [];
     const validatorErrors = validationResult(req);
-
     if (validatorErrors.isEmpty()) {
-      // Attempt to get the user by their email address.
       const user = await db.User.findOne({ where: { email } });
 
       if (user !== null) {
-        // If the user exists then compare their password
-        // to the provided password.
         const passwordMatch = await bcrypt.compare(
           password,
           user.hashedPassword.toString()
         );
-
         if (passwordMatch) {
-          // If the password hashes match, then login the user
-          // and redirect them to the default route.
           loginUser(req, res, user);
           return;
         }
       }
-
-      // Otherwise display an error message to the user.
       errors.push("Login failed for the provided email address and password");
     } else {
       errors = validatorErrors.array().map((error) => error.msg);
     }
-
     res.render("user-login", {
       title: "Login",
       email,
@@ -107,25 +96,32 @@ router.post("/logout", (req, res) => {
 router.get(
   "/:id(\\d+)",
   // requireAuth,
-  asyncHandler(async(req, res) => {
-  let userId = req.params.id
-  const currentUser = await db.User.findByPk(userId, {
-    include: [{model: db.Question,
-    attributes: {
-      exclude: ['createdAt', 'updatedAt', 'hashedPassword']
-    }},
-    {model: db.Answer,
-    attributes: {
-      exclude: ['createdAt', 'updatedAt']
-    }
-    }]})
+  asyncHandler(async (req, res) => {
+    let userId = req.params.id;
+    const currentUser = await db.User.findByPk(userId, {
+      include: [
+        {
+          model: db.Question,
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "hashedPassword"],
+          },
+        },
+        {
+          model: db.Answer,
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
+    });
 
-  if (req.session.user) {
-      userId = req.session.userId
-  }
-  console.log(res.locals.user);
-  res.render('profile-page', {
-      currentUser
+    if (req.session.user) {
+      userId = req.session.userId;
+    }
+    console.log(res.locals.user);
+    res.render("profile-page", {
+      currentUser,
+    });
   })
-}));
+);
 module.exports = router;
