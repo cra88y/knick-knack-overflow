@@ -16,7 +16,7 @@ async function hookupVote(upVote) {
     const answerId = upVote.dataset.answerid;
     const body = { answerId };
     const res = await fetch(
-      `http://localhost:8080/api/answers/${answerId}/votes`,
+      `http://localhost:8080/api/answers/${answerId}/upVotes`,
       {
         method: "POST",
         body: JSON.stringify(body),
@@ -35,7 +35,7 @@ async function hookdownVote(downVote) {
     const answerId = downVote.dataset.answerid;
     const body = { answerId };
     const res = await fetch(
-      `http://localhost:8080/api/answers/${answerId}/votes`,
+      `http://localhost:8080/api/answers/${answerId}/downVotes`,
       {
         method: "POST",
         body: JSON.stringify(body),
