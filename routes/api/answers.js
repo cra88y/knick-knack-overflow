@@ -51,8 +51,6 @@ router.post(
     let voted= false;
     let voteId
     answerId = parseInt(answerId, 10)
-    // userId = parseInt(userId, 10)
-
     
     try {
 
@@ -70,22 +68,17 @@ router.post(
       const vote = await db.Vote.create({ userId, answerId, voteType });
       voted = true;
     }
-   
 
-    //MAKE THE VOTE
     if (voted == false) {
-
-     
       try {
         const vote = await db.Vote.update(
           { userId, answerId, voteType },
           { where: { id: voteId } }
         )
         console.log('successful update')
-        // handleResult(result)
+
       } catch (err) {
-        // handleError(err)
-        console.log(err)
+        return next(err)
       }
     }
     res.status(201).json({
