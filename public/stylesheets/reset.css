@@ -40,7 +40,7 @@ h1 {
 ul li {
   margin-left: 30px;
   list-style: none;
-}
+} 
 .questions-container {
   overflow-y: hidden;
   overflow-x: hidden;
@@ -172,7 +172,6 @@ ul li {
   color: #eceff4;
 }
 
-<<<<<<< HEAD
 #login-container {
   display:flex;
   justify-content: center;
@@ -201,7 +200,7 @@ ul li {
   align-items:flex-end;
 }
 
-#
+
 /* .form-group {
   display: flex;
   align-items: center;
@@ -216,7 +215,6 @@ ul li {
   display: flex;
 
 } */
-=======
 .downVote,
 .upVote {
   width: 1rem;
@@ -253,4 +251,3 @@ ul li {
 .answer-text {
   flex-grow: 100;
 }
->>>>>>> 9b745643450a52671b885dc3497eef772105d15d
