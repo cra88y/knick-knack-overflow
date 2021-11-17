@@ -41,32 +41,45 @@ router.post(
   })
 );
 
-// router.post(
-//   "/:id/votes",
-//   requireAuth,
-//   asyncHandler(async (req, res) => {
-//     const userId = res.locals.user.id;
+router.post(
+  "/:id/votes",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const userId = res.locals.user.id;
+    // console.log('here000000000')
+    let { answerId } = req.body;
+    let voteType = true;
+    answerId = parseInt(answerId, 10)
+    // userId = parseInt(userId, 10)
 
-//     const { answerId } = req.body;
-//     let voteType = true;
+    // console.log('000000000000000000 userId', typeof(userId), userId)
+    // console.log('000000000000000000 answerId', typeof (answerId), answerId)
+    // console.log('VOTE:', db.Vote)
+    // try {
 
-// try {
-//       const voteStatus = await Vote.findOne({
-//         where: {
-//           userId,
-//           answerId
-//         }
-//       })
-//     } catch (err) {
-//       voteType = true;
-//     }
+      const voteStatus = await db.Vote.findOne({
+        where: {
+          userId,
+          answerId
+        }
+      })
+      console.log('0000000000 DB voteType', voteStatus.voteType)
+      if (voteStatus.voteType === true) voteType = false
+      else voteType = true
+    // } catch (err) {
+    //   voteType = true;
+    // }
+    console.log("000000000000TIME", voteStatus.createdAt)
+    // console.log('00000000000 CATCH')
 
-//     //MAKE THE VOTE
-//     const vote = await db.Vote.create({ userId, answerId, voteType });
-//     res.status(201).json({
-//       voteType,
-//     });
-//   })
-// );
+
+    //MAKE THE VOTE
+
+    // const vote = await db.Vote.update({ userId, answerId, voteType, createdAt: voteStatus.createdAt, updatedAt: voteStatus.updatedAt });
+    res.status(201).json({
+      voteType,
+    });
+  })
+);
 
 module.exports = router;
