@@ -8,7 +8,7 @@ router.get(
   "/test",
   asyncHandler(async (req, res) => {
     const answers = await db.Answer.findAll({ limit: 10 });
-    console.log(answers);
+    // console.log(answers);
     res.render("question", {
       answers,
     });
@@ -76,7 +76,7 @@ router.post(
 );
 
 router.post(
-  "/:id/votes",
+  "/answers/:id/votes",
   requireAuth,
   asyncHandler(async (req, res) => {
     const userId = res.locals.user.id;
@@ -87,7 +87,51 @@ router.post(
     answerId = parseInt(answerId, 10)
     
     try {
+      const voteStatus = await db.Vote.findOne({
+        where: {
+          userId,
+          answerId
+        }
+      })
+      if (voteStatus.voteType === true) voteType = false
+      else voteType = true
+      voteId = voteStatus.id
+    } catch (err) {
+      voteType = true;
+      const vote = await db.Vote.create({ userId, answerId, voteType });
+      voted = true;
+    }
 
+    if (voted == false) {
+      try {
+        const vote = await db.Vote.update(
+          { userId, answerId, voteType },
+          { where: { id: voteId } }
+        )
+        // console.log('successful update')
+
+      } catch (err) {
+        return next(err)
+      }
+    }
+    res.status(201).json({
+      voteType,
+    });
+  })
+);
+
+router.post(
+  "/answers/:id/votes",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const userId = res.locals.user.id;
+    let { answerId } = req.body;
+    let voteType = true;
+    let voted= false;
+    let voteId
+    answerId = parseInt(answerId, 10)
+    
+    try {
       const voteStatus = await db.Vote.findOne({
         where: {
           userId,
