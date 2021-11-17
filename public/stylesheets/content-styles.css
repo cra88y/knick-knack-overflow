@@ -1,7 +1,7 @@
 .add_question_body {
   width: 60%;
-  background-color: #4c566a; /* will change when styling officialized */
-  color: #88c0d0;
+  background-color: #3b4252; /* will change when styling officialized */
+  color: #D8DEE9;
   border-radius: 10px;
   padding: 10px;
   margin: 100px 30px 100px 30px;
@@ -19,13 +19,4 @@
 
 .add_question_body .form-group {
   margin-top: 8px;
-}
-
-
-.ck-editor__editable_inline {
-  min-height: 15em;
-  background-color: black;
-}
-.ck-reset {
-  background-color: black;
 }
