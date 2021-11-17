@@ -8,7 +8,7 @@ router.get(
   "/test",
   asyncHandler(async (req, res) => {
     const answers = await db.Answer.findAll({ limit: 10 });
-    console.log(answers);
+    // console.log(answers);
     res.render("question", {
       answers,
     });
@@ -76,7 +76,7 @@ router.post(
 );
 
 router.post(
-  "answers/:id/votes",
+  "/answers/:id/votes",
   requireAuth,
   asyncHandler(async (req, res) => {
     const userId = res.locals.user.id;
@@ -108,7 +108,7 @@ router.post(
           { userId, answerId, voteType },
           { where: { id: voteId } }
         )
-        console.log('successful update')
+        // console.log('successful update')
 
       } catch (err) {
         return next(err)
@@ -121,7 +121,7 @@ router.post(
 );
 
 router.post(
-  "answers/:id/votes",
+  "/answers/:id/votes",
   requireAuth,
   asyncHandler(async (req, res) => {
     const userId = res.locals.user.id;
