@@ -6,7 +6,8 @@ const {
   asyncHandler,
   onlyImagesAllowed,
   validationCheck,
-  csrfProtection
+  csrfProtection,
+  voteCountForAnswer,
 } = require("../utils");
 const { answerValidators } = require("../validations");
 
@@ -141,10 +142,7 @@ router.post(
         return next(err);
       }
     }
-    let count = await voteCounter(answerId);
-
-    console.log("00000000000000000000000000");
-    console.log(count);
+    let count = await voteCountForAnswer(answerId);
     res.status(201).json({
       voteType,
       count,
@@ -197,10 +195,7 @@ router.post(
         return next(err);
       }
     }
-
-    let count = await voteCounter(answerId);
-
-    
+    let count = await voteCountForAnswer(answerId);
     res.status(201).json({
       voteType,
       count,
