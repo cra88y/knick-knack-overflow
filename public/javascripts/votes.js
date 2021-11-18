@@ -4,6 +4,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     hookupVote(upVote);
   });
 
+
   const downvotes = document.querySelectorAll(".downVote");
   downvotes.forEach((downVote) => {
     hookdownVote(downVote);
@@ -14,11 +15,20 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     const res = await fetch(`${document.location.href}/votes`).then(res => res.json()).then(data => {
       answerVotes = data.answerVotes;
+      userVotes = data.userVotes
     });
-    console.log(`${document.location.href}/votes`)
 
     for (let key in answerVotes) {
       document.getElementById(`voteCount-${key}`).innerText = answerVotes[key]
+    }
+
+    for (let ans in userVotes) {
+      if (userVotes[ans] == true) {
+        document.getElementById(`upVote-${ans}`).classList.toggle("voted")
+      }
+      if (userVotes[ans] == false) {
+        document.getElementById(`downVote-${ans}`).classList.toggle("voted")
+      }
     }
   }
   hookVotes()
