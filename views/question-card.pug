@@ -1,8 +1,9 @@
 div(class="question-card")
   h1= question.title
   div|!{question.content}
-    if question.userId == user.id
-      //- form(class="answer-utils" action=`/api/answers/${answer.id}/edit`)
-      //-   button(class="answer-util-btn") Edit
-      form(class="answer-utils" action=`/api/questions/${question.id}/delete` method="POST")
-        button(class="answer-util-btn")  Delete
+    if user
+      if question.userId == user.id
+        //- form(class="answer-utils" action=`/api/answers/${answer.id}/edit`)
+        //-   button(class="answer-util-btn") Edit
+        form(class="answer-utils" action=`/api/questions/${question.id}/delete` method="POST")
+          button(class="answer-util-btn")  Delete
