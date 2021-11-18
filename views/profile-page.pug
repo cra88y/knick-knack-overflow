@@ -2,21 +2,21 @@ extends layout.pug
 include utils.pug
 block content
             h1(class='header-form') Profile Page
-            h2(class='header-form') Username
-                div=user.username
+            //- h2(class='header-form') Username
+            div(id="username")=user.username
             if currentUser.id == user.id
                 form(action=`/${user.id}/username/edit` method="post")
                 div(class="header-form")
-                    button(class="edit-btn" id=user.id) Edit Username
-            h2(class='header-form') Email
-                div=user.email
+                    button(class="edit-username-btn" id=user.id) Edit Username
+            //- h2(class='header-form') Email
+            div(id="email")=user.email
             if currentUser.id == user.id
                 form(action=`/${user.id}/email/edit` method="post")
                 div(class="header-form")
-                    button(class="edit-btn" id=user.id) Edit Email
+                    button(class="edit-email-btn" id=user.id) Edit Email
             h2(class='header-form') Questions
             each question in currentUser.Questions
-                div(class=`post-container-${question.id}`)
+                div(class=`post-container-${question.id}` id="question-div")
                    include question-card
                     a(href=`/questions/${question.id}`) Go to your  Question!
                     if question.userId == user.id
@@ -25,9 +25,9 @@ block content
                     if question.userId == user.id
                         form(action=`/questions/${question.id}/edit` method="post")
                             button(class="edit-btn" id=question.id) Edit
-            h2(class='header') Answers
+            h2(class='header-form') Answers
             each answer in currentUser.Answers
-                div(class=`post-container-${answer.id}`)
+                div(class=`post-container-${answer.id}` class="answer-div")
                     include answer-card
                     a(href=`/answers/${answer.id}`) Go to your Answer!
                     if answer.userId == user.id
