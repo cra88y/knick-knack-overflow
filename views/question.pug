@@ -2,16 +2,26 @@ extends layout.pug
 include utils.pug
 block content
   script(src="/javascripts/votes.js")
-  include question-card
-  if answers
-    div(class="answers-container")
-      each answer in answers
-        div(class=`answer-${answer.id}`)
-        include answer-card
-  div(class="write-answer-container")
-      form(action=`/api/questions/${question.id}/answers`, method="post")
-        +validationErrorSummary(errors)
-        input(type="hidden" value=csrfToken name="_csrf")
-        textarea(class="answerContents" name="answerContents")= answerContents
-        div #{`You can use <img src=" URL "/> to add an image to your answer!`}
-        button(class="answer-btn") post answer
+  div.question-detail
+    div.answers-content
+      include question-card
+      if answers
+        div(class="answers-container")
+          each answer in answers
+            div(class=`answer-${answer.id}`)
+            include answer-card
+        div(class="write-answer-container")
+          form(action=`/api/questions/${question.id}/answers`, method="post")
+            +validationErrorSummary(errors)
+            input(type="hidden" value=csrfToken name="_csrf")
+            textarea(class="answerContents" name="answerContents")= answerContents
+            div #{`You can use <img src=" URL "/> to add an image to your answer!`}
+            button(class="answer-btn") post answer
+    div(class="suggested-div")
+      h2 Related
+      if suggested.length !== 0
+          each sug in suggested
+            p 
+              a(id="suggested-link" href=`/questions/${sug.id}`)= sug.title
+      else
+        p No related results
