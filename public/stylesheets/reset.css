@@ -326,3 +326,7 @@ ul li {
   padding: 5px;
   font-size: 14px;
 }
+
+img {
+  max-width: 200px;
+}
