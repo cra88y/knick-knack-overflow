@@ -2,24 +2,14 @@ const express = require("express");
 const { requireAuth } = require("../../auth");
 const router = express.Router();
 const db = require("../../db/models");
-const { asyncHandler } = require("../utils");
+const {
+  asyncHandler,
+  onlyImagesAllowed,
+  validationCheck,
+  csrfProtection,
+} = require("../utils");
+const { answerValidators } = require("../validations");
 
-router.get(
-  "/test",
-  asyncHandler(async (req, res) => {
-    const answers = await db.Answer.findAll({ limit: 10 });
-    res.render("question", {
-      answers,
-    });
-  })
-);
-
-router.get(
-  "/",
-  asyncHandler(async (req, res) => {
-    const answers = db.Answer.findAll({ limit: 10 });
-  })
-);
 router.post(
   "/answers/:id/delete",
   requireAuth,
@@ -58,21 +48,41 @@ router.post(
     res.redirect("/");
   })
 );
+
 router.post(
   "/questions/:id/answers",
   requireAuth,
-  asyncHandler(async (req, res) => {
+  answerValidators,
+  validationCheck,
+  csrfProtection,
+  asyncHandler(async (req, res, next) => {
     const questionId = req.params.id;
     const userId = res.locals.user.id;
-    const { answerContents } = req.body;
-    const answer = db.Answer.build({
-      userId,
-      content: answerContents,
-      questionId,
-    });
-    await answer.save();
-
-    res.redirect(`/questions/${questionId}`);
+    let { answerContents } = req.body;
+    let errors = req.errors.errors;
+    if (!errors.length) {
+      answerContents = onlyImagesAllowed(answerContents);
+      if (!answerContents.length) {
+        return next(new Error("Disallowed content"));
+      }
+      const answer = db.Answer.build({
+        userId,
+        content: answerContents,
+        questionId,
+      });
+      await answer.save();
+      res.redirect(`/questions/${questionId}`);
+    } else {
+      // validations don't pass
+      const question = await db.Question.findByPk(questionId);
+      if (!question) next(new Error("Question not found"));
+      res.render(`question`, {
+        question,
+        csrfToken: req.csrfToken(),
+        errors: errors.map((err) => err.msg),
+        answerContents,
+      });
+    }
   })
 );
 
