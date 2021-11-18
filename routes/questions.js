@@ -21,13 +21,20 @@ router.post(
   csrfProtection,
   questionValidators,
   validationCheck,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     let { content, title } = req.body;
     const user = res.locals.user;
-    const errors = req.errors.errors;
+    let errors = req.errors.errors;
     if (!errors.length) {
       // validations pass
-      content = content.replace(/<(?!img src=("[\w.]+")\/>)[^>]+>|svg/g, "");
+      content = content.replace(/<(?!img src=("[\w.]+") ?\/>)[^>]+>|svg/g, "");
+      if (!content.length) {
+        return next(
+          new Error(
+            "No question question content. (disallowed content may have been removed)"
+          )
+        );
+      }
       await Question.create({
         title,
         content,
