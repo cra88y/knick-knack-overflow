@@ -6,7 +6,7 @@ const {
   asyncHandler,
   onlyImagesAllowed,
   validationCheck,
-  csrfProtection,
+  csrfProtection
 } = require("../utils");
 const { answerValidators } = require("../validations");
 
@@ -86,6 +86,16 @@ router.post(
   })
 );
 
+async function voteCounter(answerId) {
+  const votes = await db.Vote.findAll({ where: { answerId } });
+  let count = 0;
+  votes.forEach((v) => {
+     count += v.voteType ? 1 : -1;
+  });
+  return count
+}
+
+
 router.post(
   "/answers/:id/upVotes",
   requireAuth,
@@ -131,11 +141,8 @@ router.post(
         return next(err);
       }
     }
-    let count = 0;
-    const votes = await db.Vote.findAll({ where: { answerId } });
-    votes.forEach((v) => {
-      count += v.voteType ? 1 : -1;
-    });
+    let count = await voteCounter(answerId);
+
     console.log("00000000000000000000000000");
     console.log(count);
     res.status(201).json({
@@ -191,12 +198,9 @@ router.post(
       }
     }
 
-    let count = 0;
-    const votes = await db.Vote.findAll({ where: { answerId } });
-    console.log(votes);
-    votes.forEach((v) => {
-      count += v.voteType ? 1 : -1;
-    });
+    let count = await voteCounter(answerId);
+
+    
     res.status(201).json({
       voteType,
       count,
