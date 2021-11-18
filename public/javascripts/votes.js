@@ -4,6 +4,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     hookupVote(upVote);
   });
 
+
   const downvotes = document.querySelectorAll(".downVote");
   downvotes.forEach((downVote) => {
     hookdownVote(downVote);
@@ -11,18 +12,38 @@ window.addEventListener("DOMContentLoaded", (event) => {
   let answerVotes;
 
   async function hookVotes() {
+    const res = await fetch(`${document.location.href}/votes`)
+      .then((res) => res.json())
+      .then((data) => {
+        answerVotes = data.answerVotes;
+        userVotes = data.userVotes;
+      });
+    console.log(`${document.location.href}/votes`);
 
-    const res = await fetch(`${document.location.href}/votes`).then(res => res.json()).then(data => {
-      answerVotes = data.answerVotes;
-    });
-    console.log(`${document.location.href}/votes`)
 
     for (let key in answerVotes) {
-      document.getElementById(`voteCount-${key}`).innerText = answerVotes[key]
+      document.getElementById(`voteCount-${key}`).innerText =
+        answerVotes[key] || "0";
+    }
+    for (let ans in userVotes) {
+      if (userVotes[ans] == true) {
+        document.getElementById(`upVote-${ans}`).classList.toggle("voted");
+      }
+      if (userVotes[ans] == false) {
+        document.getElementById(`downVote-${ans}`).classList.toggle("voted");
+      }
+    }
+
+    for (let ans in userVotes) {
+      if (userVotes[ans] == true) {
+        document.getElementById(`upVote-${ans}`).classList.toggle("voted")
+      }
+      if (userVotes[ans] == false) {
+        document.getElementById(`downVote-${ans}`).classList.toggle("voted")
+      }
     }
   }
-  hookVotes()
-
+  hookVotes();
 });
 
 async function hookupVote(upVote) {
@@ -31,7 +52,7 @@ async function hookupVote(upVote) {
     let voteType;
     e.stopPropagation();
     const answerId = upVote.dataset.answerid;
-    const downVoteId = `downVote-${answerId}`
+    const downVoteId = `downVote-${answerId}`;
     const body = { answerId };
     const res = await fetch(
       `http://localhost:8080/api/answers/${answerId}/upVotes`,
@@ -42,35 +63,26 @@ async function hookupVote(upVote) {
           "Content-Type": "application/json",
         },
       }
-    ).then(res => res.json()).then(data => {
-      voteType = data.voteType;
-      count = data.count;
-    });
-
-    let voteCountId = `voteCount-${upVote.dataset.answerid}`
-    if (!document.getElementById(voteCountId).innerHTML || document.getElementById(voteCountId).innerHTML == "NaN" || document.getElementById(voteCountId).innerHTML == NaN) {
-      document.getElementById(voteCountId).innerText = '0'
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        voteType = data.voteType;
+        count = data.count;
+      });
+    console.log(voteType);
+    console.log(count);
+    const downVoteEl = document.getElementById(downVoteId);
+    let voteCountId = `voteCount-${upVote.dataset.answerid}`;
+    let countElem = document.getElementById(voteCountId);
+    let num = Number(countElem.innerText);
+    if (voteType == null) {
+      e.target.classList.toggle("voted", false);
+      downVoteEl.classList.toggle("voted", false);
+    } else {
+      e.target.classList.toggle("voted", voteType);
+      downVoteEl.classList.toggle("voted", !voteType);
     }
-
-    el = document.getElementById(voteCountId).innerText
-    let innerHTML = document.getElementById(voteCountId).innerHTML;
-    let num = parseInt(innerHTML, 10)
-    let voted = false;
-    
-    if (document.getElementById(e.target.id).classList.contains("voted")) {
-      document.getElementById(voteCountId).innerText = num - 1
-      voted = true;
-    } else if (!voted) {
-      document.getElementById(voteCountId).innerText = num + 1
-      if (document.getElementById(downVoteId).classList.contains("voted")) {
-        document.getElementById(voteCountId).innerText = num + 2
-      }
-    }
-    
-    e.target.classList.toggle("voted")
-    if (document.getElementById(downVoteId).classList.contains("voted")) {
-      document.getElementById(downVoteId).classList.remove("voted")
-    } 
+    countElem.innerText = count;
   });
 }
 
@@ -80,7 +92,7 @@ async function hookdownVote(downVote) {
     let voteType;
     e.stopPropagation();
     const answerId = downVote.dataset.answerid;
-    const upVoteId = `upVote-${answerId}`
+    const upVoteId = `upVote-${answerId}`;
     const body = { answerId };
     const res = await fetch(
       `http://localhost:8080/api/answers/${answerId}/downVotes`,
@@ -91,39 +103,23 @@ async function hookdownVote(downVote) {
           "Content-Type": "application/json",
         },
       }
-    ).then(res => res.json()).then(data => {
-      voteType = data.voteType;
-      count = data.count;
-    });
-
-    let voteCountId = `voteCount-${downVote.dataset.answerid}`
-    if (!document.getElementById(voteCountId).innerHTML || document.getElementById(voteCountId).innerHTML == "NaN" || document.getElementById(voteCountId).innerHTML == NaN) {
-      document.getElementById(voteCountId).innerText = '0'
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        voteType = data.voteType;
+        count = data.count;
+      });
+    const upVoteEl = document.getElementById(upVoteId);
+    let voteCountId = `voteCount-${downVote.dataset.answerid}`;
+    let countElem = document.getElementById(voteCountId);
+    let num = Number(countElem.innerText);
+    if (voteType == null) {
+      e.target.classList.toggle("voted", false);
+      upVoteEl.classList.toggle("voted", false);
+    } else {
+      e.target.classList.toggle("voted", !voteType);
+      upVoteEl.classList.toggle("voted", voteType);
     }
-    el = document.getElementById(voteCountId).innerText
-    let innerHTML = document.getElementById(voteCountId).innerHTML;
-    let num = parseInt(innerHTML, 10)
-    let voted = false;
-
-    if (document.getElementById(e.target.id).classList.contains("voted")) {
-      document.getElementById(voteCountId).innerText = num + 1
-      voted = true;
-    } else if (!voted) {
-      document.getElementById(voteCountId).innerText = num - 1
-      if (document.getElementById(upVoteId).classList.contains("voted")) {
-        document.getElementById(voteCountId).innerText = num - 2
-      }
-    }
-
-    e.target.classList.toggle("voted");
-    if (document.getElementById(upVoteId).classList.contains("voted")) {
-
-      document.getElementById(upVoteId).classList.remove("voted")
-    }
-
-
-
-
-
+    countElem.innerText = count;
   });
 }
