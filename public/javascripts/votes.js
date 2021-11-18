@@ -19,13 +19,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     for (let key in answerVotes) {
       document.getElementById(`voteCount-${key}`).innerText = answerVotes[key]
-      // console.log(answerVotes[key])
     }
   }
   hookVotes()
 
-
-  // console.log(window.location.href.url)
 });
 
 async function hookupVote(upVote) {
@@ -50,28 +47,29 @@ async function hookupVote(upVote) {
       count = data.count;
     });
 
-
     let voteCountId = `voteCount-${upVote.dataset.answerid}`
+    if (!document.getElementById(voteCountId).innerHTML || document.getElementById(voteCountId).innerHTML == "NaN" || document.getElementById(voteCountId).innerHTML == NaN) {
+      document.getElementById(voteCountId).innerText = '0'
+      console.log('noinnertext')
+    }
+
     el = document.getElementById(voteCountId).innerText
     let innerHTML = document.getElementById(voteCountId).innerHTML;
     let num = parseInt(innerHTML, 10)
-
+    console.log('innertext:', document.getElementById(voteCountId).innerText)
     e.target.classList.toggle("voted")
-    if (document.getElementById(downVoteId).classList.contains("voted")) {
-      document.getElementById(downVoteId).classList.remove("voted")
-    } else {
-      // get current value of voteCount and add one to it
-      // document.getElementById(voteCountId).innerText =  parseInt(document.getElementById(voteCountId).innerHTML, 10) + 1
-      // console.log('VALUE', parseInt(document.getElementById(voteCountId).innerHTML, 10))
-      // console.log('EL', document.getElementById(voteCountId))
-      
+    let voted = false;
+
+    if (document.getElementById(downVoteId).classList.contains("vote")) {
+      console.log('shld go down')
       document.getElementById(voteCountId).innerText = num - 1
 
-    }
-
-    if (document.getElementById(e.target.id).classList.contains("voted")) {
-      
+      document.getElementById(downVoteId).classList.remove("vote")
+      voted = true;
+    } else if (!voted) {
+console.log('2nd vote')
       document.getElementById(voteCountId).innerText = num + 1
+
     }
 
 
@@ -101,12 +99,19 @@ async function hookdownVote(downVote) {
     });
 
     let voteCountId = `voteCount-${downVote.dataset.answerid}`
+    if (!document.getElementById(voteCountId).innerHTML || document.getElementById(voteCountId).innerHTML == "NaN" || document.getElementById(voteCountId).innerHTML == NaN) {
+      document.getElementById(voteCountId).innerText = '0'
+      console.log('noinnertext')
+    }
     el = document.getElementById(voteCountId).innerText
     let innerHTML = document.getElementById(voteCountId).innerHTML;
     let num = parseInt(innerHTML, 10)
+    console.log('innertext:', document.getElementById(voteCountId).innerText)
+
 
     e.target.classList.toggle("voted");
     if (document.getElementById(upVoteId).classList.contains("voted")) {
+      document.getElementById(voteCountId).innerText = num - 1
 
       document.getElementById(upVoteId).classList.remove("voted")
     } else {
@@ -114,12 +119,9 @@ async function hookdownVote(downVote) {
 
     }
 
-    if (document.getElementById(e.target.id).classList.contains("voted")) {
-      
-      document.getElementById(voteCountId).innerText = num - 1
-    }
 
-    // e.target.classList.remove("voted")
+
+
 
   });
 }
