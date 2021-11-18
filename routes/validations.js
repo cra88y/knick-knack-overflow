@@ -60,6 +60,18 @@ const searchValidators = [
   check("searchTerm")
     .exists({ checkFalsy: true })
     .withMessage("invalid search term"),
-]
+];
 
-module.exports = { userValidators, loginValidators, questionValidators, searchValidators };
+const answerValidators = [
+  check("answerContents")
+    .exists({ checkFalsy: true })
+    .withMessage("Can't submit blank answer!"),
+];
+
+module.exports = {
+  userValidators,
+  loginValidators,
+  questionValidators,
+  searchValidators,
+  answerValidators,
+};
