@@ -207,6 +207,9 @@ ul li {
   background-color: #4c566a;
   padding: 20px;
   flex-direction: column;
+  border: 1px solid #2e3440;
+  border-radius: 5px;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
 .login-form {
@@ -298,7 +301,7 @@ ul li {
   margin: 0.1rem;
   background: none;
   color: #88c0d0;
-  font-size: 0.1rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 .answer-utils {
@@ -309,7 +312,7 @@ ul li {
 }
 
 .login-page-btn {
-  padding: 2px;
+  padding: 5px;
   border-radius: 3px;
   text-transform: capitalize;
   background-color: #d08770;
@@ -319,6 +322,11 @@ ul li {
 }
 .searchbar {
   display: flex;
+}
+
+#email_input, #password_input {
+  padding: 5px;
+  font-size: 14px;
 }
 
 img {
