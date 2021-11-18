@@ -3,19 +3,20 @@ include utils.pug
 block content
             h1(class='header-form') Profile Page
             //- h2(class='header-form') Username
-            if currentUser.id == user.id
+            if user.id != currentUser.id
+                div(id="username")=currentUser.username
+            else if currentUser.id == user.id
             div(id="username")=user.username
-            if currentUser.id == user.id
+            div(id="email")=user.email
+            //- if currentUser.id == user.id
                 form(action=`/${user.id}/username/edit` method="post")
                 div(class="header-form")
-                    button(class="edit-username-btn" id=user.id) Edit Username
-            //- h2(class='header-form') Email
-            if currentUser.id == user.id
-            div(id="email")=user.email
-            if currentUser.id == user.id
+                    //- button(class="edit-username-btn" id=user.id) Edit Username
                 form(action=`/${user.id}/email/edit` method="post")
                 div(class="header-form")
-                    button(class="edit-email-btn" id=user.id) Edit Email
+            //- h2(class='header-form') Email
+            //- if currentUser.id == user.id
+                    //- button(class="edit-email-btn" id=user.id) Edit Email
             h2(class='header-form') Questions
             each question in currentUser.Questions
                 div(class=`post-container-${question.id}` id="question-div")
