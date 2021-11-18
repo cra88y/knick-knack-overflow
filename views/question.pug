@@ -15,3 +15,7 @@ block content
         textarea(class="answerContents" name="answerContents")= answerContents
         div #{`You can use <img src=" URL "/> to add an image to your answer!`}
         button(class="answer-btn") post answer
+  div(class="suggested-div")
+    ul
+      each sug in suggested
+        li=sug
