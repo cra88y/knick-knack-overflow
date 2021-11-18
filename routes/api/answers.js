@@ -131,13 +131,13 @@ router.post(
         return next(err);
       }
     }
-    let count;
-    try {
-      count = await db.Vote.count({ where: { answerId, voteType: true } });
-    } catch (err) {
-      return next(err);
-    }
-
+    let count = 0;
+    const votes = await db.Vote.findAll({ where: { answerId } });
+    votes.forEach((v) => {
+      count += v.voteType ? 1 : -1;
+    });
+    console.log("00000000000000000000000000");
+    console.log(count);
     res.status(201).json({
       voteType,
       count,
@@ -191,13 +191,12 @@ router.post(
       }
     }
 
-    let count;
-    try {
-      count = await db.Vote.count({ where: { answerId, voteType: false } });
-    } catch (err) {
-      return next(err);
-    }
-
+    let count = 0;
+    const votes = await db.Vote.findAll({ where: { answerId } });
+    console.log(votes);
+    votes.forEach((v) => {
+      count += v.voteType ? 1 : -1;
+    });
     res.status(201).json({
       voteType,
       count,

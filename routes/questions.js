@@ -169,7 +169,13 @@ router.get(
         },
       ],
     });
-
+    let userId = req.session.userId;
+    let userVotes = {};
+    votes.forEach((vote) => {
+      if (vote.userId == userId) {
+        userVotes[vote.answerId] = vote.voteType;
+      }
+    });
     let answerVotes = {};
     votes.forEach((vote) => {
       if (answerVotes[vote.answerId]) {
@@ -188,7 +194,9 @@ router.get(
     });
 
     res.status(201).json({
-      answerVotes
+      answerVotes,
+      userVotes,
+
     });
   })
 );
