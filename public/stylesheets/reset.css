@@ -342,3 +342,27 @@ ul li {
 img {
   max-width: 200px;
 }
+
+.suggested-div {
+  position: absolute;
+  top: 80px;
+  right: 10px;
+  background-color: #4c566a;
+  padding: 15px;
+  border: #3b4252 solid 1px;
+  border-radius: 3px;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+#suggested-link {
+  color: #88c0d0;
+}
+
+#suggested-link:hover {
+  color: #d8dee9;
+}
+
+.suggested-div h2 {
+  color: #81a1c1;
+  margin-bottom: 10px;
+}
