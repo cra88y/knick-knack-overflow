@@ -218,7 +218,7 @@ ul li {
   background-color: #4c566a;
   padding: 20px;
 }
-*/ #register-page-btn {
+ #register-page-btn {
   display: block;
   padding: 3px;
   border-radius: 2px;
@@ -252,7 +252,6 @@ ul li {
   padding: 10px;
 }
 
-<<<<<<< HEAD
 .header-form {
   display: flex;
   justify-content: center;
@@ -269,8 +268,6 @@ ul li {
   justify-content: center;
 } */
 
-=======
->>>>>>> b9c6817c68d39dbb1e4f512458414355c9599e2b
 .downVote,
 .upVote {
   width: 1rem;
@@ -336,4 +333,38 @@ ul li {
 }
 .searchbar {
   display: flex;
+}
+
+.edit-btn, .edit-username-btn, .edit-email-btn {
+  background-color: #bf616a;
+  padding: 3px;
+  color: #eceff4;
+  border-radius: 2px;
+}
+
+.delete-btn {
+  background-color: #88c0d0;
+  padding: 3px;
+  color: #eceff4;
+  border-radius: 2px;
+}
+
+
+#email {
+  display: flex;
+  text-transform: uppercase;
+  justify-content:center;
+  padding: 5px;
+  font-weight:bold;
+}
+#username {
+  display: flex;
+  text-transform: uppercase;
+  justify-content:center;
+  padding: 5px;
+  font-weight:bold;
+}
+
+.answer-div{
+
 }
