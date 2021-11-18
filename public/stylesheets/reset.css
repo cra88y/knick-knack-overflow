@@ -55,7 +55,7 @@ ul li {
   margin-top: 10px;
   margin-bottom: 10px;
   width: 50%;
-  height: 250px;
+  /* height: 250px; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
 }
@@ -207,6 +207,9 @@ ul li {
   background-color: #4c566a;
   padding: 20px;
   flex-direction: column;
+  border: 1px solid #2e3440;
+  border-radius: 5px;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
 .login-form {
@@ -336,10 +339,12 @@ ul li {
   margin: 0.1rem;
   background: none;
   color: #88c0d0;
-  font-size: 0.1rem;
+  font-size: 1rem;
   cursor: pointer;
 }
-
+.answer-utils {
+  text-align: right;
+}
 .voted {
   background-color: #bf616a;
 }
@@ -347,6 +352,8 @@ ul li {
 .login-page-btn {
   padding: 3px;
   border-radius: 2px;
+  padding: 5px;
+  border-radius: 3px;
   text-transform: capitalize;
   background-color: #d08770;
   color: #eceff4;
@@ -387,6 +394,9 @@ ul li {
   padding: 5px;
   font-weight:bold;
   color: #eceff4;
+#email_input, #password_input {
+  padding: 5px;
+  font-size: 14px;
 }
 
 img {
