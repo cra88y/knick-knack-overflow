@@ -27,7 +27,7 @@ router.post(
     const errors = req.errors.errors;
     if (!errors.length) {
       // validations pass
-      content = content.replace(/<(?!img\s*\/?)[^>]+>/g, "");
+      content = content.replace(/<(?!img src=("[\w.]+")\/>)[^>]+>|svg/g, "");
       await Question.create({
         title,
         content,
