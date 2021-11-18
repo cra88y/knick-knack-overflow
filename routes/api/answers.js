@@ -32,6 +32,7 @@ router.post(
         new Error("You are not the author of this answer. Nice try.")
       );
     }
+    db.Vote.destroy({ where: { answerId: answer.id } });
     answer.destroy();
     res.redirect("back");
   })
@@ -43,13 +44,14 @@ router.post(
     const questionId = req.params.id;
     const userId = res.locals.user.id;
     const question = await db.Question.findByPk(questionId);
-    const relatedAnswers = await db.Answer.findAll({ where: { questionId } });
     if (userId != question.userId) {
       return next(
         new Error("You are not the author of this question. Nice try.")
       );
     }
+    const relatedAnswers = await db.Answer.findAll({ where: { questionId } });
     relatedAnswers.forEach((ans) => {
+      db.Vote.destroy({ where: { answerId: ans.id } });
       ans.destroy();
     });
     question.destroy();
@@ -83,29 +85,26 @@ router.post(
     let voteType = true;
     let voted = false;
     let destroyed = false;
-    let voteId
-    answerId = parseInt(answerId, 10)
+    let voteId;
+    answerId = parseInt(answerId, 10);
 
     try {
       const voteStatus = await db.Vote.findOne({
         where: {
           userId,
-          answerId
-        }
-      })
+          answerId,
+        },
+      });
       voteId = voteStatus.id;
       if (voteStatus.voteType == true) {
         try {
-          const vote = await db.Vote.destroy(
-            { where: { id: voteId } }
-          );
+          const vote = await db.Vote.destroy({ where: { id: voteId } });
           destroyed = true;
-          voteType = null
+          voteType = null;
         } catch (err) {
-          return next(err)
+          return next(err);
         }
-      }
-      else voteType = true
+      } else voteType = true;
     } catch (err) {
       voteType = true;
       const vote = await db.Vote.create({ userId, answerId, voteType });
@@ -117,24 +116,21 @@ router.post(
         const vote = await db.Vote.update(
           { userId, answerId, voteType },
           { where: { id: voteId } }
-        )
-
+        );
       } catch (err) {
-        return next(err)
+        return next(err);
       }
     }
     let count;
     try {
-      count = await db.Vote.count(
-        { where: { answerId, voteType: true } }
-      )
-
+      count = await db.Vote.count({ where: { answerId, voteType: true } });
     } catch (err) {
-      return next(err)
+      return next(err);
     }
 
     res.status(201).json({
-      voteType, count
+      voteType,
+      count,
     });
   })
 );
@@ -148,29 +144,26 @@ router.post(
     let voteType = false;
     let voted = false;
     let destroyed = false;
-    let voteId
-    answerId = parseInt(answerId, 10)
+    let voteId;
+    answerId = parseInt(answerId, 10);
 
     try {
       const voteStatus = await db.Vote.findOne({
         where: {
           userId,
-          answerId
-        }
-      })
+          answerId,
+        },
+      });
       voteId = voteStatus.id;
       if (voteStatus.voteType == false) {
         try {
-          const vote = await db.Vote.destroy(
-            { where: { id: voteId } }
-          )
+          const vote = await db.Vote.destroy({ where: { id: voteId } });
           destroyed = true;
           voteType = null;
         } catch (err) {
-          return next(err)
+          return next(err);
         }
-      } else voteType = false
-
+      } else voteType = false;
     } catch (err) {
       voteType = false;
       const vote = await db.Vote.create({ userId, answerId, voteType });
@@ -182,27 +175,24 @@ router.post(
         const vote = await db.Vote.update(
           { userId, answerId, voteType },
           { where: { id: voteId } }
-        )
+        );
       } catch (err) {
-        return next(err)
+        return next(err);
       }
-    };
+    }
 
     let count;
     try {
-      count = await db.Vote.count(
-        { where: { answerId, voteType: false } }
-      )
-
+      count = await db.Vote.count({ where: { answerId, voteType: false } });
     } catch (err) {
-      return next(err)
-    };
+      return next(err);
+    }
 
     res.status(201).json({
-      voteType, count
+      voteType,
+      count,
     });
   })
 );
-
 
 module.exports = router;
