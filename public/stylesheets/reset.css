@@ -335,6 +335,8 @@ ul li {
 #email_input, #password_input, #username_input, #confirmedPassword_input {
   padding: 5px;
   font-size: 12px;
+  border-radius: 3px;
+  margin-top: 4px;
 }
 
 img {
