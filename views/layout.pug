@@ -10,8 +10,7 @@ html
       ul(class="navLeft")
         li
           a(href="/" class="navLink navTitle") Knick Knack Overflow
-        li
-          form(action="/questions/search" method="post")
+      form(action="/questions/search" method="post")
             if searchErrors
               input(type="text" name="searchTerm" id="searchForm" placeholder=searchErrors)
             else
