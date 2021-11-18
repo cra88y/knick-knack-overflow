@@ -148,7 +148,6 @@ router.get(
         }
       }
     });
-
     res.render("question", { question, answers, csrfToken: req.csrfToken() });
   })
 );
@@ -189,7 +188,7 @@ router.get(
     });
 
     res.status(201).json({
-      answerVotes,
+      answerVotes
     });
   })
 );
