@@ -10,6 +10,6 @@ block content
         include answer-card
   div(class="write-answer-container")
       form(action=`/api/questions/${question.id}/answers`, method="post")
-        +field("", "_csrf", csrfToken, "hidden")
+        input(type="hidden" value=csrfToken name="_csrf")
         textarea(class="answerContents" name="answerContents")
         button(class="answer-btn") post answer
