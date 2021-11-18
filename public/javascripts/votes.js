@@ -4,7 +4,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     hookupVote(upVote);
   });
 
-
   const downvotes = document.querySelectorAll(".downVote");
   downvotes.forEach((downVote) => {
     hookdownVote(downVote);
@@ -20,26 +19,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
       });
     console.log(`${document.location.href}/votes`);
 
-
     for (let key in answerVotes) {
       document.getElementById(`voteCount-${key}`).innerText =
         answerVotes[key] || "0";
     }
+
     for (let ans in userVotes) {
       if (userVotes[ans] == true) {
         document.getElementById(`upVote-${ans}`).classList.toggle("voted");
       }
       if (userVotes[ans] == false) {
         document.getElementById(`downVote-${ans}`).classList.toggle("voted");
-      }
-    }
-
-    for (let ans in userVotes) {
-      if (userVotes[ans] == true) {
-        document.getElementById(`upVote-${ans}`).classList.toggle("voted")
-      }
-      if (userVotes[ans] == false) {
-        document.getElementById(`downVote-${ans}`).classList.toggle("voted")
       }
     }
   }
