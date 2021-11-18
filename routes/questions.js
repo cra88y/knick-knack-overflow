@@ -206,6 +206,7 @@ router.get(
     res.status(201).json({
       answerVotes,
       userVotes,
+
     });
   })
 );
