@@ -1,5 +1,5 @@
 const csrf = require("csurf");
-const { validationResult } = require('express-validator');
+const { validationResult } = require("express-validator");
 
 const csrfProtection = csrf({ cookie: true });
 
@@ -11,9 +11,13 @@ const validationCheck = (req, res, next) => {
   next();
 };
 
+const onlyImagesAllowed = (str) => {
+  return str.replace(/<(?!img src=("[\w._:/-]+") ?\/>)[^>]+>|svg/gi, "");
+};
+
 module.exports = {
   csrfProtection,
   asyncHandler,
-  validationCheck
+  validationCheck,
+  onlyImagesAllowed,
 };
-
