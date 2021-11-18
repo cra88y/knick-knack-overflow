@@ -10,28 +10,22 @@ window.addEventListener("DOMContentLoaded", (event) => {
   });
   let answerVotes;
 
-  //NEED to get questionId
-  // const res = await fetch(
-  //     `http://localhost:8080/api/questions/${questionId}`,
-  //     {
-  //       method: "POST",
-  //       body: JSON.stringify(body),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   ).then(res => res.json()).then(data => {
-  //     voteType = data.voteType;
-  //     answerVotes = data.answerVotes;
-  //   });
-  
-  // console.log(answerVotes)
-  // for (let key in answerVotes) {
-  //   document.getElementById(`voteCount-${key}`).innerText = answerVotes[key]
-  //   // console.log(answerVotes[key])
-  // }
+  async function hookVotes() {
+
+    const res = await fetch(`http://localhost:8080/questions/2/votes`).then(res => res.json()).then(data => {
+      answerVotes = data.answerVotes;
+    });
+    console.log(answerVotes)
+
+    for (let key in answerVotes) {
+      document.getElementById(`voteCount-${key}`).innerText = answerVotes[key]
+      // console.log(answerVotes[key])
+    }
+  }
+  hookVotes()
 
 
+  // console.log(window.location.href.url)
 });
 
 async function hookupVote(upVote) {
