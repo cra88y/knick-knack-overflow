@@ -4,7 +4,7 @@ const { Question } = require("../db/models");
 const { questionValidators, searchValidators } = require("./validations");
 const { csrfProtection, asyncHandler, validationCheck } = require("./utils");
 const db = require("../db/models");
-const Op = require('sequelize').Op;
+const Op = require("sequelize").Op;
 
 // route GET /questions/new => render new question form
 router.get("/new", csrfProtection, (req, res) => {
@@ -22,16 +22,16 @@ router.post(
   questionValidators,
   validationCheck,
   asyncHandler(async (req, res) => {
-    const { content, title } = req.body;
+    let { content, title } = req.body;
     const user = res.locals.user;
     const errors = req.errors.errors;
-
     if (!errors.length) {
       // validations pass
+      content = content.replace(/<(?!img\s*\/?)[^>]+>/g, "");
       await Question.create({
         title,
         content,
-        userId: user.id
+        userId: user.id,
       });
 
       res.redirect("/");
@@ -49,25 +49,25 @@ router.post(
 
 // will add error handling
 router.post(
-  '/search',
+  "/search",
   searchValidators,
   validationCheck,
   asyncHandler(async (req, res) => {
     const { searchTerm } = req.body;
     const errors = req.errors.errors;
-    console.log('errors', errors[0])
+    console.log("errors", errors[0]);
 
     // search validation failed (no search term was entered) => put error in search box
     if (errors.length) {
-      res.render('index', { questions: [], searchErrors: errors[0].msg});
+      res.render("index", { questions: [], searchErrors: errors[0].msg });
     } else {
-      res.redirect(`/questions/search/${searchTerm}`)
+      res.redirect(`/questions/search/${searchTerm}`);
     }
   })
 );
 
 router.get(
-  '/search/:searchTerm',
+  "/search/:searchTerm",
   asyncHandler(async (req, res) => {
     const searchTerm = req.params.searchTerm;
 
@@ -76,74 +76,68 @@ router.get(
         [Op.or]: [
           {
             title: {
-              [Op.iLike]: `%${searchTerm}%`
-            }
+              [Op.iLike]: `%${searchTerm}%`,
+            },
           },
           {
             content: {
-              [Op.iLike]: `%${searchTerm}%`
-            }
-          }
-        ]
-      }
+              [Op.iLike]: `%${searchTerm}%`,
+            },
+          },
+        ],
+      },
     });
 
-    res.render('index', { questions });
+    res.render("index", { questions });
   })
 );
 
+router.get(
+  "/:id",
+  asyncHandler(async (req, res, next) => {
+    const questionId = req.params.id;
+    const question = await db.Question.findByPk(questionId);
+    if (!question) next(new Error("Question not found"));
 
+    const answers = await db.Answer.findAll({
+      where: { questionId: questionId },
+    });
 
-  router.get(
-    "/:id",
-    asyncHandler(async (req, res, next) => {
-      const questionId = req.params.id;
-      const question = await db.Question.findByPk(questionId);
-      if (!question) next(new Error("Question not found"));
-
-      const answers = await db.Answer.findAll({
-        where: { questionId: questionId },
-      });
-
-      //////////////////////////////////
-      //populate votes:
-      const votes = await db.Vote.findAll({
-        include: [{
+    //////////////////////////////////
+    //populate votes:
+    const votes = await db.Vote.findAll({
+      include: [
+        {
           model: db.Answer,
           where: {
-            questionId
-          }
-        }],
+            questionId,
+          },
+        },
+      ],
+    });
 
-      })
+    //populate votes:
 
-      //populate votes:
-
-      // console.log('VOTES', votes)
-      let answerVotes = {}
-      votes.forEach(vote => {
-        if (answerVotes[vote.answerId]) {
-          if (vote.voteType == true) {
-            answerVotes[vote.answerId] += 1
-          } else {
-            answerVotes[vote.answerId] -= 1
-          }
+    // console.log('VOTES', votes)
+    let answerVotes = {};
+    votes.forEach((vote) => {
+      if (answerVotes[vote.answerId]) {
+        if (vote.voteType == true) {
+          answerVotes[vote.answerId] += 1;
+        } else {
+          answerVotes[vote.answerId] -= 1;
         }
-        else {
-          if (vote.voteType == true) {
-            answerVotes[vote.answerId] = 1
-          } else {
-            answerVotes[vote.answerId] = - 1
-          }
+      } else {
+        if (vote.voteType == true) {
+          answerVotes[vote.answerId] = 1;
+        } else {
+          answerVotes[vote.answerId] = -1;
         }
-      })
-     
-      res.render("question", { question, answers, answerVotes});
-    
-    })
-  );
+      }
+    });
 
-
-
+    res.render("question", { question, answers, answerVotes });
+  })
+);
 
 module.exports = router;
