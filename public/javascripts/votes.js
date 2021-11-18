@@ -25,14 +25,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       document.getElementById(`voteCount-${key}`).innerText =
         answerVotes[key] || "0";
     }
-    for (let ans in userVotes) {
-      if (userVotes[ans] == true) {
-        document.getElementById(`upVote-${ans}`).classList.toggle("voted");
-      }
-      if (userVotes[ans] == false) {
-        document.getElementById(`downVote-${ans}`).classList.toggle("voted");
-      }
-    }
+    
 
     for (let ans in userVotes) {
       if (userVotes[ans] == true) {
