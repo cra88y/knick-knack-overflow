@@ -15,9 +15,11 @@ const onlyImagesAllowed = (str) => {
   return str.replace(/<(?!img src=("[\w._:/-]+") ?\/>)[^>]+>|svg/gi, "");
 };
 
+
+
 module.exports = {
   csrfProtection,
   asyncHandler,
   validationCheck,
-  onlyImagesAllowed,
+  onlyImagesAllowed
 };
