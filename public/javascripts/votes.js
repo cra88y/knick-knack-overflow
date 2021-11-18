@@ -12,10 +12,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   async function hookVotes() {
 
-    const res = await fetch(`http://localhost:8080/questions/2/votes`).then(res => res.json()).then(data => {
+    const res = await fetch(`${document.location.href}/votes`).then(res => res.json()).then(data => {
       answerVotes = data.answerVotes;
     });
-    console.log(answerVotes)
+    console.log(`${document.location.href}/votes`)
 
     for (let key in answerVotes) {
       document.getElementById(`voteCount-${key}`).innerText = answerVotes[key]
