@@ -84,39 +84,56 @@ router.get(
 );
 
 
-router.get(
-  "/:id",
-  asyncHandler(async (req, res, next) => {
-    const questionId = req.params.id;
-    const question = await db.Question.findByPk(questionId);
-    if (!question) next(new Error("Question not found"));
-    
-    const answers = await db.Answer.findAll({
-      where: { questionId: questionId },
-    });
 
-    //////////////////////////////////
-    //populate votes:
-    const votes = await db.Vote.findAll({
-      include: [{
-        model: db.Answer,
-        where: {
-          questionId
-        }
-      }],
-      
+  router.get(
+    "/:id",
+    asyncHandler(async (req, res, next) => {
+      const questionId = req.params.id;
+      const question = await db.Question.findByPk(questionId);
+      if (!question) next(new Error("Question not found"));
+
+      const answers = await db.Answer.findAll({
+        where: { questionId: questionId },
+      });
+
+      //////////////////////////////////
+      //populate votes:
+      const votes = await db.Vote.findAll({
+        include: [{
+          model: db.Answer,
+          where: {
+            questionId
+          }
+        }],
+
       })
-    
-    //populate votes:
-    
-    console.log('VOTES', votes)
-    // answers.forEach(answer => {
-      
-    // })
 
-    res.render("question", { question, answers });
-  })
-);
+      //populate votes:
+
+      // console.log('VOTES', votes)
+      let answerVotes = {}
+      votes.forEach(vote => {
+        if (answerVotes[vote.answerId]) {
+          if (vote.voteType == true) {
+            answerVotes[vote.answerId] += 1
+          } else {
+            answerVotes[vote.answerId] -= 1
+          }
+        }
+        else {
+          if (vote.voteType == true) {
+            answerVotes[vote.answerId] = 1
+          } else {
+            answerVotes[vote.answerId] = - 1
+          }
+        }
+      })
+     
+      res.render("question", { question, answers, answerVotes});
+    
+    })
+  );
+
 
 
 
