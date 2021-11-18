@@ -158,7 +158,26 @@ router.get(
         }
       }
     });
-    res.render("question", { question, answers, csrfToken: req.csrfToken() });
+
+    // get suggested other questions
+    // go through current question title and grab all words seperately
+    const titleTerms = question.title.split(' ');
+    const suggested = await db.Question.findAll({
+      where: {
+        [Op.or]: [...titleTerms.map(term => {
+          // using terms longer than 2 chars to try and target more topic specific words
+          if (term.length > 3) {
+            return { title: { [Op.iLike]: `%${term}%` } }
+          }
+        })]
+      },
+      limit: 10,
+      order: [
+        ['createdAt', 'DESC']
+      ]
+    });
+
+    res.render("question", { suggested, question, answers, csrfToken: req.csrfToken() });
   })
 );
 
