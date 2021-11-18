@@ -55,7 +55,6 @@ router.post(
   asyncHandler(async (req, res) => {
     const { searchTerm } = req.body;
     const errors = req.errors.errors;
-    console.log('errors', errors[0])
 
     // search validation failed (no search term was entered) => put error in search box
     if (errors.length) {
