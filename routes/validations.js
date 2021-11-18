@@ -56,4 +56,10 @@ const questionValidators = [
     }),
 ];
 
-module.exports = { userValidators, loginValidators, questionValidators };
+const searchValidators = [
+  check("searchTerm")
+    .exists({ checkFalsy: true })
+    .withMessage("invalid search term"),
+]
+
+module.exports = { userValidators, loginValidators, questionValidators, searchValidators };
