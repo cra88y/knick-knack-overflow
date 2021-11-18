@@ -221,7 +221,7 @@ ul li {
   background-color: #4c566a;
   padding: 20px;
 }
-*/ #register-page-btn {
+#register-page-btn {
   display: block;
   padding: 3px;
   border-radius: 2px;
@@ -241,8 +241,15 @@ ul li {
 .register-div {
   display: flex;
   justify-content: center;
-  /* border-radius: 10px; */
   padding: 120px;
+}
+
+#register-form-div {
+  border: #2e3440 solid 1px;
+  border-radius: 7px;
+  background-color: #4c566a;
+  padding: 10px 14px;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
 .form-group {
@@ -251,7 +258,6 @@ ul li {
   justify-content: center;
   flex-direction: column;
   color: #88c0d0;
-  background-color: #4c566a;
   padding: 10px;
 }
 
@@ -324,9 +330,13 @@ ul li {
   display: flex;
 }
 
-#email_input, #password_input {
+
+/* styling for register /login input */
+#email_input, #password_input, #username_input, #confirmedPassword_input {
   padding: 5px;
-  font-size: 14px;
+  font-size: 12px;
+  border-radius: 3px;
+  margin-top: 4px;
 }
 
 img {
