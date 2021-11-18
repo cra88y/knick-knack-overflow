@@ -50,12 +50,30 @@ async function hookupVote(upVote) {
       count = data.count;
     });
 
+
+    let voteCountId = `voteCount-${upVote.dataset.answerid}`
+    el = document.getElementById(voteCountId).innerText
+    let innerHTML = document.getElementById(voteCountId).innerHTML;
+    let num = parseInt(innerHTML, 10)
+
     e.target.classList.toggle("voted")
     if (document.getElementById(downVoteId).classList.contains("voted")) {
       document.getElementById(downVoteId).classList.remove("voted")
+    } else {
+      // get current value of voteCount and add one to it
+      // document.getElementById(voteCountId).innerText =  parseInt(document.getElementById(voteCountId).innerHTML, 10) + 1
+      // console.log('VALUE', parseInt(document.getElementById(voteCountId).innerHTML, 10))
+      // console.log('EL', document.getElementById(voteCountId))
+      
+      document.getElementById(voteCountId).innerText = num - 1
+
     }
 
-    // e.target.classList.remove("voted")
+    if (document.getElementById(e.target.id).classList.contains("voted")) {
+      
+      document.getElementById(voteCountId).innerText = num + 1
+    }
+
 
   });
 }
@@ -82,11 +100,24 @@ async function hookdownVote(downVote) {
       count = data.count;
     });
 
+    let voteCountId = `voteCount-${downVote.dataset.answerid}`
+    el = document.getElementById(voteCountId).innerText
+    let innerHTML = document.getElementById(voteCountId).innerHTML;
+    let num = parseInt(innerHTML, 10)
+
     e.target.classList.toggle("voted");
     if (document.getElementById(upVoteId).classList.contains("voted")) {
 
       document.getElementById(upVoteId).classList.remove("voted")
-    };
+    } else {
+      document.getElementById(voteCountId).innerText = num + 1
+
+    }
+
+    if (document.getElementById(e.target.id).classList.contains("voted")) {
+      
+      document.getElementById(voteCountId).innerText = num - 1
+    }
 
     // e.target.classList.remove("voted")
 
