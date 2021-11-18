@@ -2,7 +2,12 @@
 const router = require("express").Router();
 const { Question } = require("../db/models");
 const { questionValidators, searchValidators } = require("./validations");
-const { csrfProtection, asyncHandler, validationCheck } = require("./utils");
+const {
+  csrfProtection,
+  asyncHandler,
+  validationCheck,
+  onlyImagesAllowed,
+} = require("./utils");
 const db = require("../db/models");
 const Op = require("sequelize").Op;
 
@@ -21,13 +26,20 @@ router.post(
   csrfProtection,
   questionValidators,
   validationCheck,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     let { content, title } = req.body;
     const user = res.locals.user;
-    const errors = req.errors.errors;
+    let errors = req.errors.errors;
     if (!errors.length) {
       // validations pass
-      content = content.replace(/<(?!img src=("[\w.]+")\/>)[^>]+>|svg/g, "");
+      content = onlyImagesAllowed(content);
+      if (!content.length) {
+        return next(
+          new Error(
+            "No question question content. (disallowed content may have been removed)"
+          )
+        );
+      }
       await Question.create({
         title,
         content,
@@ -94,6 +106,7 @@ router.get(
 
 router.get(
   "/:id",
+  csrfProtection,
   asyncHandler(async (req, res, next) => {
     const questionId = req.params.id;
     const question = await db.Question.findByPk(questionId);
@@ -135,8 +148,7 @@ router.get(
         }
       }
     });
-
-    res.render("question", { question, answers });
+    res.render("question", { question, answers, csrfToken: req.csrfToken() });
   })
 );
 
