@@ -7,6 +7,7 @@ const {
   onlyImagesAllowed,
   validationCheck,
   csrfProtection,
+  voteCountForAnswer,
 } = require("../utils");
 const { answerValidators } = require("../validations");
 
@@ -131,13 +132,7 @@ router.post(
         return next(err);
       }
     }
-    let count;
-    try {
-      count = await db.Vote.count({ where: { answerId, voteType: true } });
-    } catch (err) {
-      return next(err);
-    }
-
+    let count = await voteCountForAnswer(answerId);
     res.status(201).json({
       voteType,
       count,
@@ -190,14 +185,7 @@ router.post(
         return next(err);
       }
     }
-
-    let count;
-    try {
-      count = await db.Vote.count({ where: { answerId, voteType: false } });
-    } catch (err) {
-      return next(err);
-    }
-
+    let count = await voteCountForAnswer(answerId);
     res.status(201).json({
       voteType,
       count,
