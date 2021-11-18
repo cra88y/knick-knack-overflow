@@ -122,8 +122,8 @@ ul li {
   /* border-radius: 2px; */
   background-color: #88c0d0;
   color: #eceff4;
-  height: 1rem;
-  width: 4rem;
+  height: 1.25rem;
+  width: 5rem;
   font-weight: bold;
   display: inline-flex;
   justify-content: center;
@@ -134,7 +134,7 @@ ul li {
   padding: 5px;
   /* border-radius: 2px; */
   width: 15em;
-  height: 1rem;
+  height: 1.25rem;
   color: #eceff4;
   background-color: #4c566a;
 }
@@ -248,15 +248,8 @@ ul li {
 .register-div {
   display: flex;
   justify-content: center;
+  /* border-radius: 10px; */
   padding: 120px;
-}
-
-#register-form-div {
-  border: #2e3440 solid 1px;
-  border-radius: 7px;
-  background-color: #4c566a;
-  padding: 10px 14px;
-  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
 .form-group {
@@ -265,8 +258,26 @@ ul li {
   justify-content: center;
   flex-direction: column;
   color: #88c0d0;
+  background-color: #4c566a;
   padding: 10px;
 }
+
+.header-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  color: #88c0d0;
+}
+/* #user-username {
+  display: flex;
+  justify-content: center;
+} */
+
+/* #user-email {
+  display: flex;
+  justify-content: center;
+} */
 
 .downVote,
 .upVote {
@@ -283,11 +294,23 @@ ul li {
   margin-top: 10px;
   background-color: #4c566a;
   /* text-align: center; */
-  width: 40%;
+  width: 39.5rem;
+  height: 160px;
   display: flex;
   justify-content: space-between;
   /* flex-direction: column; */
   /* align-items: center; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 2px;
+}
+.answer-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.answer-card-div {
+  display: flex;
+  justify-content: center;
 }
 .answers-container {
   display: flex;
@@ -325,6 +348,8 @@ ul li {
 }
 
 .login-page-btn {
+  padding: 3px;
+  border-radius: 2px;
   padding: 5px;
   border-radius: 3px;
   text-transform: capitalize;
@@ -334,22 +359,52 @@ ul li {
   align-self: center;
 }
 .searchbar {
-  display: flex;
+  display: inline-flex;
 }
 
+.edit-btn,
+.edit-username-btn,
+.edit-email-btn {
+  background-color: #bf616a;
+  padding: 3px;
+  color: #eceff4;
+  border-radius: 2px;
+}
 
-/* styling for register /login input */
-#email_input, #password_input, #username_input, #confirmedPassword_input {
+.delete-btn {
+  display: flex;
+  background-color: #bf616a;
+  padding: 3px;
+  color: #eceff4;
+  border-radius: 2px;
+  justify-content: center;
+}
+
+#email {
+  display: flex;
+  text-transform: uppercase;
+  justify-content: center;
   padding: 5px;
-  font-size: 12px;
-  border-radius: 3px;
-  margin-top: 4px;
+  font-weight: bold;
+  color: #eceff4;
+}
+#username {
+  display: flex;
+  text-transform: uppercase;
+  justify-content: center;
+  padding: 5px;
+  font-weight: bold;
+  color: #eceff4;
+}
+#email_input,
+#password_input {
+  padding: 5px;
+  font-size: 14px;
 }
 
 img {
   max-width: 200px;
 }
-
 .suggested-div {
   /*position: absolute;
   top: 80px;
@@ -382,4 +437,7 @@ img {
   display: flex;
   justify-content:center;
   align-content: center;;
+}
+.voteCount {
+  align-self: center;
 }
