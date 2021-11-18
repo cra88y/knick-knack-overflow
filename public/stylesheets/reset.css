@@ -221,7 +221,7 @@ ul li {
   background-color: #4c566a;
   padding: 20px;
 }
- #register-page-btn {
+#register-page-btn {
   display: block;
   padding: 3px;
   border-radius: 2px;
@@ -301,7 +301,7 @@ ul li {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-.answer-card-div{
+.answer-card-div {
   display: flex;
   justify-content: center;
 }
@@ -355,7 +355,9 @@ ul li {
   display: inline-flex;
 }
 
-.edit-btn, .edit-username-btn, .edit-email-btn {
+.edit-btn,
+.edit-username-btn,
+.edit-email-btn {
   background-color: #bf616a;
   padding: 3px;
   color: #eceff4;
@@ -371,28 +373,31 @@ ul li {
   justify-content: center;
 }
 
-
 #email {
   display: flex;
   text-transform: uppercase;
-  justify-content:center;
+  justify-content: center;
   padding: 5px;
-  font-weight:bold;
+  font-weight: bold;
   color: #eceff4;
 }
 #username {
   display: flex;
   text-transform: uppercase;
-  justify-content:center;
+  justify-content: center;
   padding: 5px;
-  font-weight:bold;
+  font-weight: bold;
   color: #eceff4;
 }
-#email_input, #password_input {
+#email_input,
+#password_input {
   padding: 5px;
   font-size: 14px;
 }
 
 img {
   max-width: 200px;
+}
+.voteCount {
+  align-self: center;
 }
