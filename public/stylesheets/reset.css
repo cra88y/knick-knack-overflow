@@ -260,6 +260,7 @@ ul li {
   justify-content: center;
   flex-direction: row;
   align-items: center;
+  color: #88c0d0;
 }
 /* #user-username {
   display: flex;
