@@ -10,6 +10,8 @@ block content
         include answer-card
   div(class="write-answer-container")
       form(action=`/api/questions/${question.id}/answers`, method="post")
+        +validationErrorSummary(errors)
         input(type="hidden" value=csrfToken name="_csrf")
-        textarea(class="answerContents" name="answerContents")
+        textarea(class="answerContents" name="answerContents")= answerContents
+        div #{`You can use <img src=" URL "/> to add an image to your answer!`}
         button(class="answer-btn") post answer
