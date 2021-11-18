@@ -143,7 +143,48 @@ router.get(
       }
     });
 
-    res.render("question", { question, answers, answerVotes });
+    res.render("question", { question, answers });
+  })
+);
+
+router.get(
+  "/:id/votes",
+  asyncHandler(async (req, res, next) => {
+    const questionId = req.params.id;
+
+    //////////////////////////////////
+    //populate votes:
+    const votes = await db.Vote.findAll({
+      include: [
+        {
+          model: db.Answer,
+          where: {
+            questionId,
+          },
+        },
+      ],
+    });
+
+    let answerVotes = {};
+    votes.forEach((vote) => {
+      if (answerVotes[vote.answerId]) {
+        if (vote.voteType == true) {
+          answerVotes[vote.answerId] += 1;
+        } else {
+          answerVotes[vote.answerId] -= 1;
+        }
+      } else {
+        if (vote.voteType == true) {
+          answerVotes[vote.answerId] = 1;
+        } else {
+          answerVotes[vote.answerId] = -1;
+        }
+      }
+    });
+
+    res.status(201).json({
+      answerVotes
+    });
   })
 );
 
