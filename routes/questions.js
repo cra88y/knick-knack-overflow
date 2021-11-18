@@ -1,7 +1,7 @@
 // imports
 const router = require("express").Router();
 const { Question } = require("../db/models");
-const { questionValidators } = require("./validations");
+const { questionValidators, searchValidators } = require("./validations");
 const { csrfProtection, asyncHandler, validationCheck } = require("./utils");
 const db = require("../db/models");
 const Op = require('sequelize').Op;
@@ -50,10 +50,19 @@ router.post(
 // will add error handling
 router.post(
   '/search',
+  searchValidators,
+  validationCheck,
   asyncHandler(async (req, res) => {
     const { searchTerm } = req.body;
+    const errors = req.errors.errors;
+    console.log('errors', errors[0])
 
-    res.redirect(`/questions/search/${searchTerm}`)
+    // search validation failed (no search term was entered) => put error in search box
+    if (errors.length) {
+      res.render('index', { questions: [], searchErrors: errors[0].msg});
+    } else {
+      res.redirect(`/questions/search/${searchTerm}`)
+    }
   })
 );
 
