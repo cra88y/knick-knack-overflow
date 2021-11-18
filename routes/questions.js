@@ -156,12 +156,15 @@ router.get(
       where: {
         [Op.or]: [...titleTerms.map(term => {
           // using terms longer than 2 chars to try and target more topic specific words
-          if (term.length > 2) {
-            return { title: { [Op.iLike]: term } }
+          if (term.length > 3) {
+            return { title: { [Op.iLike]: `%${term}%` } }
           }
         })]
       },
-      limit: 10
+      limit: 10,
+      order: [
+        ['createdAt', 'DESC']
+      ]
     });
 
     res.render("question", { suggested, question, answers, csrfToken: req.csrfToken() });
