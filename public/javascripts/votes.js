@@ -50,29 +50,27 @@ async function hookupVote(upVote) {
     let voteCountId = `voteCount-${upVote.dataset.answerid}`
     if (!document.getElementById(voteCountId).innerHTML || document.getElementById(voteCountId).innerHTML == "NaN" || document.getElementById(voteCountId).innerHTML == NaN) {
       document.getElementById(voteCountId).innerText = '0'
-      console.log('noinnertext')
     }
 
     el = document.getElementById(voteCountId).innerText
     let innerHTML = document.getElementById(voteCountId).innerHTML;
     let num = parseInt(innerHTML, 10)
-    console.log('innertext:', document.getElementById(voteCountId).innerText)
-    e.target.classList.toggle("voted")
     let voted = false;
-
-    if (document.getElementById(downVoteId).classList.contains("vote")) {
-      console.log('shld go down')
+    
+    if (document.getElementById(e.target.id).classList.contains("voted")) {
       document.getElementById(voteCountId).innerText = num - 1
-
-      document.getElementById(downVoteId).classList.remove("vote")
       voted = true;
     } else if (!voted) {
-console.log('2nd vote')
       document.getElementById(voteCountId).innerText = num + 1
-
+      if (document.getElementById(downVoteId).classList.contains("voted")) {
+        document.getElementById(voteCountId).innerText = num + 2
+      }
     }
-
-
+    
+    e.target.classList.toggle("voted")
+    if (document.getElementById(downVoteId).classList.contains("voted")) {
+      document.getElementById(downVoteId).classList.remove("voted")
+    } 
   });
 }
 
@@ -101,22 +99,26 @@ async function hookdownVote(downVote) {
     let voteCountId = `voteCount-${downVote.dataset.answerid}`
     if (!document.getElementById(voteCountId).innerHTML || document.getElementById(voteCountId).innerHTML == "NaN" || document.getElementById(voteCountId).innerHTML == NaN) {
       document.getElementById(voteCountId).innerText = '0'
-      console.log('noinnertext')
     }
     el = document.getElementById(voteCountId).innerText
     let innerHTML = document.getElementById(voteCountId).innerHTML;
     let num = parseInt(innerHTML, 10)
-    console.log('innertext:', document.getElementById(voteCountId).innerText)
+    let voted = false;
 
+    if (document.getElementById(e.target.id).classList.contains("voted")) {
+      document.getElementById(voteCountId).innerText = num + 1
+      voted = true;
+    } else if (!voted) {
+      document.getElementById(voteCountId).innerText = num - 1
+      if (document.getElementById(upVoteId).classList.contains("voted")) {
+        document.getElementById(voteCountId).innerText = num - 2
+      }
+    }
 
     e.target.classList.toggle("voted");
     if (document.getElementById(upVoteId).classList.contains("voted")) {
-      document.getElementById(voteCountId).innerText = num - 1
 
       document.getElementById(upVoteId).classList.remove("voted")
-    } else {
-      document.getElementById(voteCountId).innerText = num + 1
-
     }
 
 
