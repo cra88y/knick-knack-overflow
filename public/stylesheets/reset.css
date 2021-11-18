@@ -318,3 +318,7 @@ ul li {
 .searchbar {
   display: flex;
 }
+
+img {
+  max-width: 200px;
+}
