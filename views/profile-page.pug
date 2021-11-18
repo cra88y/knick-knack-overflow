@@ -1,18 +1,20 @@
 extends layout.pug
 include utils.pug
 block content
-            h1 Profile Page
-            h2 Username
+            h1(class='header-form') Profile Page
+            h2(class='header-form') Username
                 div=user.username
             if currentUser.id == user.id
                 form(action=`/${user.id}/username/edit` method="post")
+                div(class="header-form")
                     button(class="edit-btn" id=user.id) Edit Username
-            h2 Email
+            h2(class='header-form') Email
                 div=user.email
             if currentUser.id == user.id
                 form(action=`/${user.id}/email/edit` method="post")
+                div(class="header-form")
                     button(class="edit-btn" id=user.id) Edit Email
-            h2 Questions
+            h2(class='header-form') Questions
             each question in currentUser.Questions
                 div(class=`post-container-${question.id}`)
                    include question-card
@@ -23,7 +25,7 @@ block content
                     if question.userId == user.id
                         form(action=`/questions/${question.id}/edit` method="post")
                             button(class="edit-btn" id=question.id) Edit
-            h2 Answers
+            h2(class='header') Answers
             each answer in currentUser.Answers
                 div(class=`post-container-${answer.id}`)
                     include answer-card

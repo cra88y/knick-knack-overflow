@@ -241,6 +241,21 @@ ul li {
   padding: 10px;
 }
 
+.header-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+/* #user-username {
+  display: flex;
+  justify-content: center;
+} */
+
+/* #user-email {
+  display: flex;
+  justify-content: center;
+} */
 
 .downVote,
 .upVote {
@@ -297,8 +312,8 @@ ul li {
 }
 
 .login-page-btn {
-  padding: 2px;
-  border-radius: 3px;
+  padding: 3px;
+  border-radius: 2px;
   text-transform: capitalize;
   background-color: #d08770;
   color: #eceff4;
