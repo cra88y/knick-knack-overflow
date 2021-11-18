@@ -3,7 +3,7 @@ div(class="answer-card")
     button(class=`upVote` id=`upVote-${answer.id}` data-answerId=`${answer.id}`) ▲
     button(class=`downVote` id=`downVote-${answer.id}` data-answerId=`${answer.id}`) ▼
   div.voteCount(id=`voteCount-${answer.id}`)
-  div(class="answer-text")= answer.content
+  div(class="answer-text")|!{answer.content}
   if answer.userId == user.id
     //- form(class="answer-utils" action=`/api/answers/${answer.id}/edit`)
     //-   button(class="answer-util-btn") Edit
