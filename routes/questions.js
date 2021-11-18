@@ -7,6 +7,7 @@ const {
   asyncHandler,
   validationCheck,
   onlyImagesAllowed,
+  voteCountForAnswer,
 } = require("./utils");
 const db = require("../db/models");
 const Op = require("sequelize").Op;
@@ -114,7 +115,16 @@ router.get(
 
     const answers = await db.Answer.findAll({
       where: { questionId: questionId },
+      raw: true,
     });
+    for (ans of answers) {
+      ans.voteCount = await voteCountForAnswer(ans.id);
+    }
+    answers.sort((f, s) => {
+      return s.voteCount - f.voteCount;
+    });
+    console.log("000000000000000000000");
+    console.log(answers);
 
     //////////////////////////////////
     //populate votes:
@@ -188,7 +198,13 @@ router.get(
         },
       ],
     });
-
+    let userId = req.session.userId;
+    let userVotes = {};
+    votes.forEach((vote) => {
+      if (vote.userId == userId) {
+        userVotes[vote.answerId] = vote.voteType;
+      }
+    });
     let answerVotes = {};
     votes.forEach((vote) => {
       if (answerVotes[vote.answerId]) {
@@ -208,6 +224,8 @@ router.get(
 
     res.status(201).json({
       answerVotes,
+      userVotes,
+
     });
   })
 );
