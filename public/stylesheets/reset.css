@@ -544,6 +544,27 @@ img {
   color:rgb(210, 210, 210);
 }
 
+.pages-links {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: row;
+  background-color: #4c566a;
+  width: 60%;
+  margin: auto;
+  margin-bottom: 10px;
+  color:rgb(210, 210, 210);
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.pages-links p {
+  margin: 5px;
+}
+
+.pages-links a:hover {
+  color:rgb(210, 210, 210);
+}
+
 .main-footer {
   position: absolute;
   background-color: #3b4252;
