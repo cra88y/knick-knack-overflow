@@ -468,8 +468,8 @@ img {
   padding: 5px 10px 8px 10px;
   border-radius: 3px;
   height: 100%;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
 
 .search-form input {
   flex: 1;
