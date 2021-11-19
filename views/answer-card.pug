@@ -4,14 +4,15 @@ div(class="answer-card")
     button(class=`downVote` id=`downVote-${answer.id}` data-answerId=`${answer.id}`) ▼
     div.voteCount(id=`voteCount-${answer.id}`)= answer.voteCount
   div(class="answer-text")|!{answer.content}
-  if !currentUser
-    .author-container
-      span Author: 
-      a(class="answer-author answer-util-btn" href=`/users/${answer["User.id"]}`)= answer["User.username"]
-  if user
-    if answer.userId == user.id
-      //- form(class="answer-utils" action=`/api/answers/${answer.id}/edit`)
-      //-   button(class="answer-util-btn") Edit
-      form(class="answer-utils" action=`/api/answers/${answer.id}/delete` method="POST")
-        .delete-answer
-          button(class="answer-util-btn" class="delete-answer")  Delete
+  div.answer-options
+    if !currentUser
+      .author-container
+        span Author:
+        a(class="answer-author answer-util-btn" href=`/users/${answer["User.id"]}`)= answer["User.username"]
+    if user
+      if answer.userId == user.id
+        //- form(class="answer-utils" action=`/api/answers/${answer.id}/edit`)
+        //-   button(class="answer-util-btn") Edit
+        form(class="answer-utils" action=`/api/answers/${answer.id}/delete` method="POST")
+          .delete-answer
+            button(class="answer-util-btn" class="delete-answer")  Delete
