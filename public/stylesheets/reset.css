@@ -86,6 +86,10 @@ span {
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
+.question-card-title:hover {
+  filter: brightness(110%);
+}
+
 #navBar {
   position: fixed;
   top: 0;
@@ -264,6 +268,10 @@ span {
   color: #eceff4;
   cursor: pointer;
 }
+.downVote:hover,
+.upVote:hover {
+  filter: brightness(110%);
+}
 .answer-card {
   color: #eceff4;
   padding: 15px;
@@ -315,6 +323,9 @@ span {
   background: none;
   color: #bf616a;
   cursor: pointer;
+}
+.answer-util-btn:hover {
+  filter: brightness(110%);
 }
 
 .answer-author {
@@ -385,13 +396,16 @@ span {
   border-radius: 2px;
 }
 
-.delete-btn {
+/* .delete-btn {
   display: flex;
   background-color: #bf616a;
-  padding: 3px;
+   padding: 3px;
   color: #eceff4;
   border-radius: 2px;
   justify-content: center;
+} */
+.delete-btn:hover {
+  filter: brightness(110%);
 }
 
 #email {
