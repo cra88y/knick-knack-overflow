@@ -167,6 +167,7 @@ span {
   height: 5rem;
   margin-top: 45px;
   margin-bottom: 12px;
+  border-radius: 2px;
 }
 .answerContents:focus {
   outline: none;
@@ -176,9 +177,10 @@ span {
   padding: 10px;
 }
 .answer-btn {
-  padding: 1rem;
+  padding: .5rem;
   background-color: #d08770;
   color: #eceff4;
+  border-radius: 2px;
 }
 
 #login-container {
@@ -210,6 +212,9 @@ span {
   color: #eceff4;
   text-align: center;
   align-self: center;
+}
+#register-page-btn:hover {
+  filter: brightness(110%);
 }
 
 .login-div {
@@ -365,6 +370,10 @@ span {
   text-align: center;
   align-self: center;
 }
+.login-page-btn:hover {
+  filter: brightness(110%);
+}
+
 .searchbar {
   display: inline-flex;
 }
@@ -498,6 +507,7 @@ img {
   text-align: center;
   padding: 5px;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .register-btn {
