@@ -92,23 +92,6 @@ async function hookVoteUpOrDown(vote, isUp) {
     }
 
     countElem.innerText = count;
-    // if (count < 0) {
-    //   countElem.classList.toggle("lowVote", true);
-    //   countElem.classList.toggle("hiVote", false);
-    //   countElem.classList.toggle("mehVote", false);
-
-    // }
-    // else if (count > 0){
-    //   countElem.classList.toggle("hiVote", true);
-    //   countElem.classList.toggle("lowVote", false);
-    //   countElem.classList.toggle("mehVote", false);
-
-    // } else {
-    //   countElem.classList.toggle("hiVote", true);
-    //   countElem.classList.toggle("lowVote", false);
-    //   countElem.classList.toggle("mehVote", true);
-
-    // }
 
     hiOrLowVote(voteCountId, count)
   });
