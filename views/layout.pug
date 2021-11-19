@@ -19,7 +19,7 @@ html
                   input(type="text" name="searchTerm" id="searchForm" placeholder=searchErrors)
                 else
                   input(type="text" name="searchTerm" id="searchForm" placeholder=" Search questions...")
-                button: i(class="fas fa-search") 
+                button: i(class="fas fa-search")
         if locals.authenticated
             li
               a(href=`/users/${user.id}` class="navLink") Profile
