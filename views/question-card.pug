@@ -2,6 +2,10 @@ div(class="question-card")
   div.question-content-container
     a(href=`/questions/${question.id}`)
       h1= question.title
+    div.voting
+      button(class=`upVote` id=`upVote-${question.id}` data-questionId=`${question.id}`) ▲
+      button(class=`downVote` id=`downVote-${question.id}` data-questionId=`${question.id}`) ▼
+      div.voteCount(id=`voteCount-${question.id}`)= question.voteCount
     div.question-content|!{question.content}
   div.answer-options
     if !currentUser
