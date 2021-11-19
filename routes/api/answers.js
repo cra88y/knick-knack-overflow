@@ -12,7 +12,7 @@ const {
 } = require("../utils");
 const { answerValidators } = require("../validations");
 
-router.post(
+router.delete(
   "/answers/:id/delete",
   requireAuth,
   asyncHandler(async (req, res, next) => {
@@ -20,13 +20,15 @@ router.post(
     const userId = res.locals.user.id;
     const answer = await db.Answer.findByPk(answerId);
     if (userId != answer.userId) {
-      return next(
-        new Error("You are not the author of this answer. Nice try.")
-      );
+      res.status(201).json({
+        msg: "failed",
+      });
     }
-    db.Vote.destroy({ where: { answerId: answer.id } });
+    await db.Vote.destroy({ where: { answerId: answer.id } });
     answer.destroy();
-    res.redirect("back");
+    res.status(201).json({
+      msg: "success",
+    });
   })
 );
 router.post(
@@ -47,7 +49,8 @@ router.post(
       ans.destroy();
     });
     question.destroy();
-    res.redirect("/");
+    if (req.headers.referer.includes("questions")) req.headers.referer = "/";
+    res.redirect(req.headers.referer);
   })
 );
 
