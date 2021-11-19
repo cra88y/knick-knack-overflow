@@ -88,16 +88,17 @@ router.get(
     }
 
     if (!questions) {
-      // no questions found return some recent questions (may change to top rated)
-      questions = await db.Question.findAll({
-        limit: 10,
-        order: [['createdAt', 'DESC']]
-      });
-
-      return res.render("index", { questions, searchErrors: 'No Close Results... ' });
+      return res.redirect('/');
     }
 
-    res.render("index", { questions });
+    const numEntries = Math.ceil(questions.length / 10);
+    const pageLinks = [];
+
+    for (let i = 1; i <= numEntries; i++) {
+      pageLinks.push(i);
+    }
+
+    res.render("index", { pageLinks, questions });
   })
 );
 
@@ -197,7 +198,7 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const questionId = req.params.id;
 
-  
+
     const votes = await db.Vote.findAll({
       include: [
         {

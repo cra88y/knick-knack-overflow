@@ -51,6 +51,15 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
+// handle 404
+app.use((err, req, res, next) => {
+  if (err.status === 404) {
+    res.render('404-not-found.pug');
+  } else {
+    next(err);
+  }
+});
+
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
