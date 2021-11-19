@@ -14,7 +14,7 @@ html
           a(href="/" class="navLink navTitle" id="navTitle") Knick Knack Overflow
       ul(class="navRight")
         li
-          form(action="/questions/search" method="post" class="search-form")
+          form(action="/questions/search" method="get" class="search-form")
                 if searchErrors
                   input(type="text" name="searchTerm" id="searchForm" placeholder=searchErrors)
                 else
