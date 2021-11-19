@@ -119,7 +119,6 @@ router.get(
     if (req.session.user) {
       userId = req.session.userId;
     }
-    // console.log(res.locals.user);
     res.render("profile-page", {
       currentUser,
     });
