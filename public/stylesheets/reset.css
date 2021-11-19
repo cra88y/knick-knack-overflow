@@ -319,7 +319,7 @@ ul li {
   background-color: #4c566a;
   /* text-align: center; */
   width: 47.5rem;
-  height: 160px;
+  /* height: 160px; */
   display: flex;
   justify-content: space-between;
   /* flex-direction: column; */
@@ -464,4 +464,9 @@ img {
 }
 .voteCount {
   align-self: center;
+}
+.info-text {
+  margin: 1em;
+  text-align: center;
+  color: #d8dee9;
 }
