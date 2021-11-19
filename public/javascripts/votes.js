@@ -17,8 +17,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
         answerVotes = data.answerVotes;
         userVotes = data.userVotes;
       });
-    console.log(`${document.location.href}/votes`);
-
     for (let key in answerVotes) {
       document.getElementById(`voteCount-${key}`).innerText =
         answerVotes[key] || "0";
