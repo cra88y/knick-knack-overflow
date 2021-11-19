@@ -106,10 +106,6 @@ span {
   box-shadow: 0 4px 2px -2px rgba(15, 15, 15, 0.2);
 }
 
-#navBar > * > * {
-  font-size: 1.5em;
-}
-
 .navLink {
   text-decoration: none;
   padding: 8px;
@@ -541,7 +537,7 @@ img {
   padding: 5px 10px 8px 10px;
   border-radius: 3px;
   height: 100%;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  /* font-family: "Lucida Grande", Helvetica, Arial, sans-serif; */
 }
 
 .search-form input {
@@ -573,7 +569,7 @@ img {
   align-content: center;
   flex-direction: row;
   background-color: #4c566a;
-  width: 60%;
+  max-width: 40%;
   margin: auto;
   margin-bottom: 10px;
   color: rgb(210, 210, 210);
@@ -606,7 +602,9 @@ img {
   float: left;
   padding: 10px;
 }
-
+#snowManHolder {
+  font-size: 1.5rem;
+}
 .main-footer a:hover {
   color: rgb(210, 210, 210);
 }
@@ -621,6 +619,7 @@ img {
   .about-div {
     display: none;
   }
+
   .about-media {
     display: block;
     text-align: center;
