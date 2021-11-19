@@ -1,45 +1,44 @@
 extends layout.pug
 include utils.pug
 block content
-            h1(class='header-form') Profile Page
-            //- h2(class='header-form') Username
-            if user
-              if user.id != currentUser.id
-                  div(id="username")=currentUser.username
-              else
-                  div(id="username")=user.username
-                  div(id="email")=user.email
-            //- if currentUser.id == user.id
-                form(action=`/${user.id}/username/edit` method="post")
-                div(class="header-form")
-                    //- button(class="edit-username-btn" id=user.id) Edit Username
-                form(action=`/${user.id}/email/edit` method="post")
-                div(class="header-form")
-            //- h2(class='header-form') Email
-            //- if currentUser.id == user.id
-                    //- button(class="edit-email-btn" id=user.id) Edit Email
-            h2(class='header-form') Questions
-            div(class="questions-container")
-              each question in currentUser.Questions
-                  div(class=`post-container-${question.id}` id="question-div")
-                    include question-card
-                      div(id="question-link")
-                        a(href=`/questions/${question.id}`) Go to your  Question!
-                      //- if question.userId == user.id
-                      //-     form(action=`/questions/${question.id}/delete` method="post")
-                      //-         button(class="delete-btn" id=question.id) Delete
-                      //- if question.userId == user.id
-                      //-     form(action=`/questions/${question.id}/edit` method="post")
-                      //-         button(class="edit-btn" id=question.id) Edit
-            h2(class='header-form') Answers
-            div(class="answers-container")
-                each answer in currentUser.Answers
-                    div(class=`post-container-${answer.id}` class="answer-div")
-                        include answer-card
-                        //- a(href=`/answers/${answer.id}`) Go to your Answer!
-                        //- if answer.userId == user.id
-                        //-     form(action=`/answers/${answer.id}/delete` method="post")
-                        //-         button(class="delete-btn" id=answer.id) Delete
-                        //- if answer.userId == user.id
-                        //-     form(action=`/answers/${answer.id}/edit` method="post")
-                        //-         button(class="edit-btn" id=answer.id) Edit
+  h1(class='header-form') Profile Page
+  //- h2(class='header-form') Username
+  if user
+    if user.id != currentUser.id
+        div(id="username")=currentUser.username
+    else
+        div(id="username")=user.username
+        div(id="email")=user.email
+  //- if currentUser.id == user.id
+      form(action=`/${user.id}/username/edit` method="post")
+      div(class="header-form")
+          //- button(class="edit-username-btn" id=user.id) Edit Username
+      form(action=`/${user.id}/email/edit` method="post")
+      div(class="header-form")
+  //- h2(class='header-form') Email
+  //- if currentUser.id == user.id
+          //- button(class="edit-email-btn" id=user.id) Edit Email
+  h2(class='header-form') Questions
+  div(class="questions-container")
+    each question in currentUser.Questions
+        div(class=`post-container-${question.id}` id="question-div")
+          include question-card
+            //- if question.userId == user.id
+            //-     form(action=`/questions/${question.id}/delete` method="post")
+            //-         button(class="delete-btn" id=question.id) Delete
+            //- if question.userId == user.id
+            //-     form(action=`/questions/${question.id}/edit` method="post")
+            //-         button(class="edit-btn" id=question.id) Edit
+  h2(class='header-form') Answers
+  div(class="answers-container")
+      each answer in currentUser.Answers
+          div(class=`post-container-${answer.id}` class="answer-div")
+              a(href=`/questions/${answer.questionId}`)
+                include answer-card
+              //- a(href=`/answers/${answer.id}`) Go to your Answer!
+              //- if answer.userId == user.id
+              //-     form(action=`/answers/${answer.id}/delete` method="post")
+              //-         button(class="delete-btn" id=answer.id) Delete
+              //- if answer.userId == user.id
+              //-     form(action=`/answers/${answer.id}/edit` method="post")
+              //-         button(class="edit-btn" id=answer.id) Edit
