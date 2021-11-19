@@ -99,6 +99,8 @@ ul li {
   text-decoration: none;
   padding: 10px;
   height: auto;
+  justify-content: space-around;
+  align-content: center;
 }
 .navLink:hover {
   filter: brightness(110%);
@@ -115,6 +117,8 @@ ul li {
   display: flex;
   list-style-type: none;
   justify-content: space-around;
+  align-content: center;
+
 }
 
 #search-btn {
@@ -170,6 +174,28 @@ ul li {
   color: #eceff4;
   font-size: 1.25em;
 }
+
+@media (max-width: 900px) {
+  #navTitle {
+
+    content:url(../knick-knack-title.png);
+    width: 80px;  
+    /* padding-right: 60px; */
+  }
+  #snowManHolder {
+    display: flex;
+    justify-content:flex-start;
+    align-content:flex-start;
+    margin: 0;
+
+  }
+  .navLeft {
+    list-style-type: none;
+    justify-content:flex-start;
+    align-content:flex-start;
+  }
+}
+  
 .write-answer-container {
   display: flex;
   flex-direction: column;
