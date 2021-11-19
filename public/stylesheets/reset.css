@@ -367,8 +367,29 @@ ul li {
 .answer-utils {
   text-align: right;
 }
+
 .voted {
   background-color: #bf616a;
+  transition: background-color 0.75s ease-in-out;
+}
+
+.lowVote {
+  color: #bb7076;
+  transition: color 0.75s ease-in-out;
+}
+
+.hiVote {
+  color: #8fc1ff;
+  transition: color 0.75s ease-in-out;
+}
+
+.mehVote {
+  color: white;
+  transition: color 0.75s ease-in-out;
+}
+
+.voteCount {
+  margin-right: 5px;
 }
 
 .login-page-btn {
