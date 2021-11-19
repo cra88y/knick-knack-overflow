@@ -14,6 +14,7 @@ block content
     ul
       each question in questions
         li
+          include question-card
           a(href=`/questions/${question.id}`)
             include question-card
     .pages-links
