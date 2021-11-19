@@ -47,7 +47,7 @@ body, header, nav {
 
 h1 {
   font-size: 2rem;
-  color: #88c0d0;
+  color: #81a1c1;
 }
 ul li {
   list-style: none;
@@ -58,6 +58,7 @@ ul li {
 .questions-container {
   height: auto;
 }
+
 .question-card {
   border-radius: 2px;
   overflow: hidden;
@@ -269,7 +270,7 @@ span {
   margin-top: 10px;
   background-color: #4c566a;
   /* text-align: center; */
-  min-width: 47.5rem;
+  width: 47.5rem;
   /* height: 160px; */
   display: flex;
   justify-content: space-between;
@@ -455,8 +456,9 @@ img {
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.15);
   max-width: 200px;
   height: fit-content;
-  margin-top: 10px;
-  margin-left: 30px;
+  margin: 10px 10px;
+  /* margin-top: 10px;
+  margin-left: 30px; */
 }
 #suggested-link {
   color: #88c0d0;
@@ -594,10 +596,35 @@ img {
 .main-footer a:hover {
   color: rgb(210, 210, 210);
 }
+.about-text > h1 {
+  font-size: 1.25rem;
+}
+.about-media {
+  display: none;
+}
+@media (max-width: 1400px) {
+  .about-div {
+    display: none;
+  }
+  .about-media {
+    display: block;
+    text-align: center;
+    width: 50%;
+  }
+}
 @media (max-width: 1230px) {
+  .answers-content {
+    display: block;
+  }
   #navTitle {
     content: url(../knick-knack-title.png);
     width: 80px;
+  }
+  .question-card {
+    width: 90vw;
+  }
+  .answer-card {
+    width: 90vw;
   }
   .question-detail {
     display: flex;
@@ -605,9 +632,14 @@ img {
     justify-content: center;
     align-items: center;
   }
-  .about-div {
-    display: none;
+  .answerContents {
+    width: 80vw;
   }
+  .questions-container {
+    height: auto;
+    display: block;
+  }
+
   .suggested-div {
     margin-left: 0;
   }
