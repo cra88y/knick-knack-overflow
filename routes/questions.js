@@ -1,5 +1,6 @@
 // imports
-const router = require("express").Router();
+const express = require('express');
+const router = express.Router();
 const { Question } = require("../db/models");
 const { questionValidators, searchValidators } = require("./validations");
 const {
@@ -11,6 +12,7 @@ const {
 } = require("./utils");
 const db = require("../db/models");
 const Op = require("sequelize").Op;
+const { application } = require('express');
 
 // route GET /questions/new => render new question form
 router.get("/new", csrfProtection, (req, res) => {
@@ -60,45 +62,40 @@ router.post(
   })
 );
 
-// will add error handling
-router.post(
-  "/search",
-  searchValidators,
-  validationCheck,
-  asyncHandler(async (req, res) => {
-    const { searchTerm } = req.body;
-    const errors = req.errors.errors;
-
-    // search validation failed (no search term was entered) => put error in search box
-    if (errors.length) {
-      res.render("index", { questions: [], searchErrors: errors[0].msg });
-    } else {
-      res.redirect(`/questions/search/${searchTerm}`);
-    }
-  })
-);
-
 router.get(
-  "/search/:searchTerm",
+  "/search",
   asyncHandler(async (req, res) => {
-    const searchTerm = req.params.searchTerm;
+    const searchTerm = req.query.searchTerm;
+    let questions;
 
-    const questions = await db.Question.findAll({
-      where: {
-        [Op.or]: [
-          {
-            title: {
-              [Op.iLike]: `%${searchTerm}%`,
+    if (searchTerm) {
+      questions = await db.Question.findAll({
+        where: {
+          [Op.or]: [
+            {
+              title: {
+                [Op.iLike]: `%${searchTerm}%`,
+              },
             },
-          },
-          {
-            content: {
-              [Op.iLike]: `%${searchTerm}%`,
+            {
+              content: {
+                [Op.iLike]: `%${searchTerm}%`,
+              },
             },
-          },
-        ],
-      },
-    });
+          ],
+        },
+      });
+    }
+
+    if (!questions) {
+      // no questions found return some recent questions (may change to top rated)
+      questions = await db.Question.findAll({
+        limit: 10,
+        order: [['createdAt', 'DESC']]
+      });
+
+      return res.render("index", { questions, searchErrors: 'No Close Results... ' });
+    }
 
     res.render("index", { questions });
   })
@@ -159,19 +156,28 @@ router.get(
       }
     });
 
-    // get suggested other questions
+    /////////////////// Suggested questions /////////////////////////
     // go through current question title and grab all words seperately
     const titleTerms = question.title.split(" ");
     const suggested = await db.Question.findAll({
       where: {
-        [Op.or]: [
-          ...titleTerms.map((term) => {
-            // using terms longer than 2 chars to try and target more topic specific words
-            if (term.length > 3) {
-              return { title: { [Op.iLike]: `%${term}%` } };
+        [Op.and]: [
+          {
+            id: {
+              [Op.not]: questionId
             }
-          }),
-        ],
+          },
+          {
+            [Op.or]: [
+              ...titleTerms.map((term) => {
+                // using terms longer than 2 chars to try and target more topic specific words
+                if (term.length > 3) {
+                  return { title: { [Op.iLike]: `%${term}%` } };
+                }
+              }),
+            ],
+          }
+        ]
       },
       limit: 10,
       order: [["createdAt", "DESC"]],
@@ -202,6 +208,7 @@ router.get(
         },
       ],
     });
+
     let count = 0;
     let voteHiLows = {}
     votes.forEach((vote) => {
@@ -211,7 +218,6 @@ router.get(
         voteHiLows[vote.answerId] = vote.voteType ? 1 : -1
       }
     });
-  
     let userId = req.session.userId;
     let userVotes = {};
     votes.forEach((vote) => {

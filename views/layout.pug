@@ -5,34 +5,32 @@ html
         title="Knackerflow"
         link(rel='stylesheet' href='/stylesheets/reset.css')
         link(rel='stylesheet' href='/stylesheets/validation.css')
+        //- font awesome cdn
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
   body
     ul(id='navBar')
       ul(class="navLeft")
         li(id="snowManHolder")
           a(href="/" class="navLink navTitle" id="navTitle") Knick Knack Overflow
-      form(action="/questions/search" method="post")
-            if searchErrors
-              input(type="text" name="searchTerm" id="searchForm" placeholder=searchErrors)
-            else
-              input(type="text" name="searchTerm" id="searchForm")
-            button(id="search-btn") Search
-      if locals.authenticated
-        ul(class="navRight")
-          li
-            a(href=`/users/${user.id}` class="navLink") Profile
-          li
-            a(href="/questions/new" class="navLink") Ask a question!
-          li
-            a(href="/about" class="navLink") About Us
-          li
-            form(action='/users/logout' method='post')
-              button(class="navLink logout-btn") Logout
-      else
-        ul(class="navRight")
-          li
-            a(href="/about" class="navLink") About Us
-          li
-            a(href="/users/login" class="navLink login-btn") Log in
-          li
-            a(href="/users/register" class="navLink register-btn") Register
+      ul(class="navRight")
+        li
+          form(action="/questions/search" method="get" class="search-form")
+                if searchErrors
+                  input(type="text" name="searchTerm" id="searchForm" placeholder=searchErrors)
+                else
+                  input(type="text" name="searchTerm" id="searchForm" placeholder=" Search questions...")
+                button: i(class="fas fa-search") 
+        if locals.authenticated
+            li
+              a(href=`/users/${user.id}` class="navLink") Profile
+            li
+              a(href="/questions/new" class="navLink") Ask a question!
+            li
+              form(action='/users/logout' method='post')
+                button(class="navLink logout-btn") Logout
+        else
+            li
+              a(href="/users/login" class="navLink login-btn") Log in
+            li
+              a(href="/users/register" class="navLink register-btn") Register
     block content
