@@ -110,13 +110,21 @@ router.get(
   csrfProtection,
   asyncHandler(async (req, res, next) => {
     const questionId = req.params.id;
-    const question = await db.Question.findByPk(questionId);
+    const question = await db.Question.findOne({
+      where: {
+        id: questionId,
+      },
+      raw: true,
+      include: { model: db.User, attributes: ["username", "id"] },
+    });
     if (!question) next(new Error("Question not found"));
 
     const answers = await db.Answer.findAll({
       where: { questionId: questionId },
       raw: true,
+      include: { model: db.User, attributes: ["username", "id"] },
     });
+    console.log(answers);
     for (ans of answers) {
       ans.voteCount = await voteCountForAnswer(ans.id);
     }
