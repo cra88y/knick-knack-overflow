@@ -68,9 +68,13 @@ async function hookVoteUpOrDown(vote, isUp) {
       .then((data) => {
         voteType = data.voteType;
         count = data.count;
-        loggedIn = data.loggedIn
+        if (data.loggedOut) {
+          loggedOut = true
+        } else {
+          loggedOut = false
+        }
       });
-    if (!loggedIn) {
+    if (loggedOut) {
       window.location.href = "/users/login";
       return
     }
