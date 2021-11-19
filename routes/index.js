@@ -11,6 +11,9 @@ router.get(
       limit: 10,
       raw: true,
       include: { model: db.User, attributes: ["username", "id"] },
+      order: [
+        ['createdAt', 'DESC']
+    ],
     });
     res.render("index", {
       questions,
