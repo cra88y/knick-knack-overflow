@@ -12,7 +12,6 @@ router.get(
       raw: true,
       include: { model: db.User, attributes: ["username", "id"] },
     });
-    // console.log(questions);
     res.render("index", {
       questions,
     });
