@@ -49,6 +49,7 @@ router.post(
 
       res.redirect("/");
     } else {
+      console.log(req.body)
       // validations don't pass
       res.render("question-create", {
         title: "Ask Question",

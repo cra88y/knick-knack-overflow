@@ -24,10 +24,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     for (let ans in userVotes) {
       if (userVotes[ans] == true) {
-        document.getElementById(`upVote-${ans}`).classList.toggle("voted");
+        document.getElementById(`upVote-${ans}`).classList.toggle("voted")
       }
       if (userVotes[ans] == false) {
-        document.getElementById(`downVote-${ans}`).classList.toggle("voted");
+        document.getElementById(`downVote-${ans}`).classList.toggle("voted")
       }
     }
   }
