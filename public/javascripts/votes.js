@@ -1,3 +1,4 @@
+
 window.addEventListener("DOMContentLoaded", (event) => {
   const upvotes = document.querySelectorAll(".upVote");
   upvotes.forEach((upVote) => {
@@ -23,7 +24,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       let voteCountId = `voteCount-${ans}`
       let count = voteHiLows[ans]
 
-      console.log('votecountid',voteCountId)
+      console.log('votecountid', voteCountId)
       hiOrLowVote(voteCountId, count)
     }
 
@@ -67,7 +68,12 @@ async function hookVoteUpOrDown(vote, isUp) {
       .then((data) => {
         voteType = data.voteType;
         count = data.count;
+        loggedIn = data.loggedIn
       });
+    if (!loggedIn) {
+      window.location.href = "/users/login";
+      return
+    }
     const toggle = isUp ? voteType : !voteType;
     const toggleTwin = isUp ? !voteType : voteType;
     const twinEl = document.getElementById(twinId);
