@@ -8,11 +8,12 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  .about-div
-      h2 ABOUT
-      p This is a site ask questions and discuss any of your favorite collectible items!
   .questions-container
-    ul
+    div.about-div
+      include about
+    ul.index-questions
+      li(class="about-media question-card")
+        include about
       each question in questions
         li
           include question-card

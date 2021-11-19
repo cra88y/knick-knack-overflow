@@ -2,7 +2,7 @@ var express = require("express");
 const { restoreUser, loginUser, logoutUser, requireAuth } = require("../auth");
 var router = express.Router();
 const bcrypt = require("bcryptjs");
-const { csrfProtection, asyncHandler } = require("./utils");
+const { csrfProtection, asyncHandler, voteCountForAnswer } = require("./utils");
 const { userValidators, loginValidators } = require("./validations");
 const db = require("../db/models");
 const { check, validationResult } = require("express-validator");
@@ -121,7 +121,12 @@ router.get(
         },
       ],
     });
-
+    for (ans of currentUser.Answers) {
+      ans.voteCount = await voteCountForAnswer(ans.id);
+    }
+    currentUser.Answers.sort((f, s) => {
+      return s.voteCount - f.voteCount;
+    });
     if (req.session.user) {
       userId = req.session.userId;
     }
