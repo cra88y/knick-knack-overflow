@@ -137,12 +137,8 @@ ul li {
 
 @media (max-width: 900px) {
   #navTitle {
-<<<<<<< HEAD
 
     content:url(../knick-knack-title.png);
-=======
-    content: url(../knick-knack-title.png);
->>>>>>> a02d6902fdc4ad0e02185e9c444c2b71a61ac85b
     width: 80px;
     /* padding-right: 60px; */
   }
@@ -503,7 +499,7 @@ img {
   background-color: #4c566a;
   width: 168px;
   padding-top: 3px;
-  color: #eceff4; 
+  color: #eceff4;
 }
 
 .search-form input:focus {
