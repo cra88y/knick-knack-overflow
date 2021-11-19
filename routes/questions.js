@@ -49,7 +49,6 @@ router.post(
 
       res.redirect("/");
     } else {
-      console.log(req.body)
       // validations don't pass
       res.render("question-create", {
         title: "Ask Question",
@@ -69,7 +68,6 @@ router.post(
   asyncHandler(async (req, res) => {
     const { searchTerm } = req.body;
     const errors = req.errors.errors;
-    console.log("errors", errors[0]);
 
     // search validation failed (no search term was entered) => put error in search box
     if (errors.length) {
@@ -125,7 +123,6 @@ router.get(
       raw: true,
       include: { model: db.User, attributes: ["username", "id"] },
     });
-    console.log(answers);
     for (ans of answers) {
       ans.voteCount = await voteCountForAnswer(ans.id);
     }
@@ -133,8 +130,6 @@ router.get(
       return s.voteCount - f.voteCount;
     });
 
-    //////////////////////////////////
-    //populate votes:
     const votes = await db.Vote.findAll({
       include: [
         {
@@ -146,9 +141,7 @@ router.get(
       ],
     });
 
-    //populate votes:
 
-    // console.log('VOTES', votes)
     let answerVotes = {};
     votes.forEach((vote) => {
       if (answerVotes[vote.answerId]) {
@@ -198,8 +191,7 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const questionId = req.params.id;
 
-    //////////////////////////////////
-    //populate votes:
+  
     const votes = await db.Vote.findAll({
       include: [
         {
@@ -210,7 +202,16 @@ router.get(
         },
       ],
     });
-    
+    let count = 0;
+    let voteHiLows = {}
+    votes.forEach((vote) => {
+      if (voteHiLows[vote.answerId]) {
+        voteHiLows[vote.answerId] += vote.voteType ? 1 : -1;
+      } else {
+        voteHiLows[vote.answerId] = vote.voteType ? 1 : -1
+      }
+    });
+  
     let userId = req.session.userId;
     let userVotes = {};
     votes.forEach((vote) => {
@@ -238,6 +239,7 @@ router.get(
     res.status(201).json({
       answerVotes,
       userVotes,
+      voteHiLows
     });
   })
 );
