@@ -5,11 +5,13 @@ div(class="answer-card")
     div.voteCount(id=`voteCount-${answer.id}`)= answer.voteCount
   div(class="answer-text")|!{answer.content}
   if !currentUser
-    span Author:
-    a(class="answer-author answer-util-btn" href=`/users/${answer["User.id"]}`)= answer["User.username"]
+    .author-container
+      span Author: 
+      a(class="answer-author answer-util-btn" href=`/users/${answer["User.id"]}`)= answer["User.username"]
   if user
     if answer.userId == user.id
       //- form(class="answer-utils" action=`/api/answers/${answer.id}/edit`)
       //-   button(class="answer-util-btn") Edit
       form(class="answer-utils" action=`/api/answers/${answer.id}/delete` method="POST")
-        button(class="answer-util-btn")  Delete
+        .delete-answer
+          button(class="answer-util-btn" class="delete-answer")  Delete
