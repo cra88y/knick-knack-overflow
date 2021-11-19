@@ -5,14 +5,16 @@ const { asyncHandler } = require("./utils");
 
 /* GET home page. */
 router.get(
-  "/:pageNum?(\d+)",
+  "/:pageNum?",
   asyncHandler(async (req, res, next) => {
     const questionCount = await db.Question.count();
     const pageNum = req.params.pageNum;
     const numPages = Math.ceil(questionCount / 10);
 
     // since we are using this in index route we need to handle out of page range (send to 404)
-    if (pageNum > numPages) return next();
+    if (pageNum) {
+      if (pageNum > numPages || typeof pageNum !== 'number') return next();
+    }
 
     const pageLinks = [];
 
