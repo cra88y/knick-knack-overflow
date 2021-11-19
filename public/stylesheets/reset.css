@@ -5,8 +5,9 @@ body {
   background-image: url("/wallestpaper.jpg");
   background-position: center;
   background-repeat: no-repeat;
-  height: 100%;
-  height: 100vh;
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 125px;
 }
 html {
   height: 100%;
@@ -497,12 +498,24 @@ img {
 }
 
 .main-footer {
-  position: fixed;
+  position: absolute;
   background-color: #3b4252;
   bottom: 0;
-  left: 0;
-  height: 65px;
-  margin-top: -50px;
+  height: 125px;
   width: 100%;
   box-shadow: 4px 0 2px 2px rgba(10, 10, 10, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px
+}
+
+.footer-col {
+  width: 50%;
+  float: left;
+  padding: 10px;
+}
+
+.main-footer a:hover {
+  color:rgb(210, 210, 210);
 }
