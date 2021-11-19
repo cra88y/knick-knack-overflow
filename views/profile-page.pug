@@ -5,9 +5,9 @@ block content
             //- h2(class='header-form') Username
             if user.id != currentUser.id
                 div(id="username")=currentUser.username
-            else if currentUser.id == user.id
-            div(id="username")=user.username
-            div(id="email")=user.email
+            else 
+                div(id="username")=user.username
+                div(id="email")=user.email
             //- if currentUser.id == user.id
                 form(action=`/${user.id}/username/edit` method="post")
                 div(class="header-form")
