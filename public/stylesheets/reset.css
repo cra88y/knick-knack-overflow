@@ -174,6 +174,7 @@ ul li {
   height: 5rem;
   margin-top: 45px;
   margin-bottom: 12px;
+  border-radius: 2px;
 }
 .answerContents:focus {
   outline: none;
@@ -183,9 +184,10 @@ ul li {
   padding: 10px;
 }
 .answer-btn {
-  padding: 1rem;
+  padding: .5rem;
   background-color: #d08770;
   color: #eceff4;
+  border-radius: 2px;
 }
 
 #login-container {
@@ -217,6 +219,9 @@ ul li {
   color: #eceff4;
   text-align: center;
   align-self: center;
+}
+#register-page-btn:hover {
+  filter: brightness(110%);
 }
 
 .login-div {
@@ -359,10 +364,10 @@ ul li {
   text-align: center;
   align-self: center;
 }
-
-.question-redirect-link {
-  display flex
+.login-page-btn:hover {
+  filter: brightness(110%);
 }
+
 .searchbar {
   display: inline-flex;
 }
