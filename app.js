@@ -54,7 +54,7 @@ app.use(function (req, res, next) {
 // handle 404
 app.use((err, req, res, next) => {
   if (err.status === 404) {
-    res.render('404-not-found.pug');
+    res.render("404-not-found.pug");
   } else {
     next(err);
   }
