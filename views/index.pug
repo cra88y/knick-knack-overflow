@@ -7,12 +7,16 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  div(class="about-div")
+  .about-div
       h2 ABOUT
       p This is a site ask questions and discuss any of your favorite collectible items!
-  div(class="questions-container")
+  .questions-container
     ul
       each question in questions
         li
           a(href=`/questions/${question.id}`)
             include question-card
+    .pages-links
+      p Pages
+      each page in pageLinks
+        p: a(href=`/${page}`)=page
