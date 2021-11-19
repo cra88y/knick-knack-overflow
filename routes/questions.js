@@ -250,4 +250,118 @@ router.get(
   })
 );
 
+router.post(
+  "/:id/upVotes",
+  asyncHandler(async (req, res) => {
+    if (!res.locals.authenticated) {
+      res.status(201).json({
+        loggedOut: true
+      });
+    }
+    const userId = res.locals.user.id;
+    let { questionId } = req.body;
+    let voteType = true;
+    let voted = false;
+    let destroyed = false;
+    let voteId;
+    questionId = parseInt(questionId, 10);
+    console.log(questionId)
+    try {
+      const voteStatus = await db.Question_Vote.findOne({
+        where: {
+          userId,
+          questionId,
+        },
+      });
+      voteId = voteStatus.id;
+      if (voteStatus.voteType == true) {
+        try {
+          const vote = await db.Question_Vote.destroy({ where: { id: voteId } });
+          destroyed = true;
+          voteType = null;
+        } catch (err) {
+          return next(err);
+        }
+      } else voteType = true;
+    } catch (err) {
+      voteType = true;
+      const vote = await db.Question_Vote.create({ userId, questionId, voteType });
+      voted = true;
+    }
+
+    if (voted == false && destroyed == false) {
+      try {
+        const vote = await db.Question_Vote.update(
+          { userId, questionId, voteType },
+          { where: { id: voteId } }
+        );
+      } catch (err) {
+        return next(err);
+      }
+    }
+    let count = await voteCountForAnswer(questionId);
+    res.status(201).json({
+      voteType,
+      count,
+    });
+  })
+);
+
+router.post(
+  "/:id/downVotes",
+  asyncHandler(async (req, res) => {
+    if (!res.locals.authenticated) {
+      res.status(201).json({
+        loggedOut: true
+      });
+    }
+    const userId = res.locals.user.id;
+    let { questionId } = req.body;
+    let voteType = false;
+    let voted = false;
+    let destroyed = false;
+    let voteId;
+    questionId = parseInt(questionId, 10);
+    console.log(questionId)
+    try {
+      const voteStatus = await db.Question_Vote.findOne({
+        where: {
+          userId,
+          questionId,
+        },
+      });
+      voteId = voteStatus.id;
+      if (voteStatus.voteType == false) {
+        try {
+          const vote = await db.Question_Vote.destroy({ where: { id: voteId } });
+          destroyed = true;
+          voteType = null;
+        } catch (err) {
+          return next(err);
+        }
+      } else voteType = false;
+    } catch (err) {
+      voteType = false;
+      const vote = await db.Question_Vote.create({ userId, questionId, voteType });
+      voted = true;
+    }
+
+    if (voted == false && destroyed == false) {
+      try {
+        const vote = await db.Question_Vote.update(
+          { userId, questionId, voteType },
+          { where: { id: voteId } }
+        );
+      } catch (err) {
+        return next(err);
+      }
+    }
+    let count = await voteCountForAnswer(questionId);
+    res.status(201).json({
+      voteType,
+      count,
+    });
+  })
+);
+
 module.exports = router;
