@@ -14,11 +14,12 @@ html
           a(href="/" class="navLink navTitle" id="navTitle") Knick Knack Overflow
       ul(class="navRight")
         li
-          form(action="/questions/search" method="post")
+          form(action="/questions/search" method="post" class="search-form")
                 if searchErrors
                   input(type="text" name="searchTerm" id="searchForm" placeholder=searchErrors)
                 else
-                  input(type="text" name="searchTerm" id="searchForm" class="fas" placeholder="\uf002  Search questions...")
+                  input(type="text" name="searchTerm" id="searchForm" class="fas" placeholder=" Search questions...")
+                button: i(class="fas fa-search") 
         if locals.authenticated
             li
               a(href=`/users/${user.id}` class="navLink") Profile
