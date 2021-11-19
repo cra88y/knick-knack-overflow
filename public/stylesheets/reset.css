@@ -268,6 +268,10 @@ span {
   color: #eceff4;
   cursor: pointer;
 }
+.downVote:hover,
+.upVote:hover {
+  filter: brightness(110%);
+}
 .answer-card {
   color: #eceff4;
   padding: 15px;
