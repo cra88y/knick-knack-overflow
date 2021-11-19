@@ -4,6 +4,8 @@ div(class="answer-card")
     button(class=`downVote` id=`downVote-${answer.id}` data-answerId=`${answer.id}`) ▼
     div.voteCount(id=`voteCount-${answer.id}`)= answer.voteCount
   div(class="answer-text")|!{answer.content}
+  span Author:
+  a(class="answer-author answer-util-btn" href=`/users/${answer["User.id"]}`)= answer["User.username"]
   if answer.userId == user.id
     //- form(class="answer-utils" action=`/api/answers/${answer.id}/edit`)
     //-   button(class="answer-util-btn") Edit
