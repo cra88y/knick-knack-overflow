@@ -125,29 +125,6 @@ ul li {
   align-content: center;
 }
 
-#search-btn {
-  /* border-radius: 2px; */
-  background-color: #88c0d0;
-  color: #eceff4;
-  height: 1.25rem;
-  width: 5rem;
-  font-weight: bold;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#searchForm {
-  padding: 5px;
-  /* border-radius: 2px; */
-  width: 15em;
-  height: 1.25rem;
-  color: #eceff4;
-  background-color: #4c566a;
-}
-#searchForm:focus {
-  outline: none;
-}
 ::placeholder {
   color: #eceff4;
   opacity: 0.5;
@@ -454,12 +431,6 @@ img {
   color: #d8dee9;
 }
 
-#searchForm {
-  padding: 12px 8px 14px 8px;
-  font-size: 14px;
-  margin-right: 5px;
-}
-
 .logout-btn {
   background-color: #bf616a;
   color: #eceff4;
@@ -488,4 +459,37 @@ img {
   text-align: center;
   padding: 5px;
   border-radius: 3px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: row;
+  background-color: #4c566a;
+  padding: 5px 10px 8px 10px;
+  border-radius: 3px;
+  height: 100%;
+}
+
+
+.search-form input {
+  flex: 1;
+  border: none;
+  background-color: #4c566a;
+  width: 168px;
+  padding-top: 3px;
+  color: #eceff4; 
+}
+
+.search-form input:focus {
+  outline: none;
+}
+
+.search-form button {
+  background-color: #4c566a;
+  color: rgb(180, 180, 180);
+  padding-top: 4px;
+}
+
+.search-form button:hover {
+  color:rgb(210, 210, 210);
 }
