@@ -73,7 +73,7 @@ router.post(
 
     // search validation failed (no search term was entered) => put error in search box
     if (errors.length) {
-      res.render("index", { questions: [], searchErrors: errors[0].msg });
+      res.render("index", { questions: [], searchErrors: 'Invalid Search Term... ' });
     } else {
       res.redirect(`/questions/search/${searchTerm}`);
     }
@@ -210,7 +210,7 @@ router.get(
         },
       ],
     });
-    
+
     let userId = req.session.userId;
     let userVotes = {};
     votes.forEach((vote) => {
