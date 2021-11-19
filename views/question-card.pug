@@ -1,7 +1,7 @@
 div(class="question-card")
   h1= question.title
   div|!{question.content}
-  if answser
+  if question
     span Author:
     a(class="answer-author answer-util-btn" href=`/users/${question["User.id"]}`)= question["User.username"]
   if user

@@ -4,7 +4,7 @@ div(class="answer-card")
     button(class=`downVote` id=`downVote-${answer.id}` data-answerId=`${answer.id}`) ▼
     div.voteCount(id=`voteCount-${answer.id}`)= answer.voteCount
   div(class="answer-text")|!{answer.content}
-  if answser
+  if answer
     span Author:
     a(class="answer-author answer-util-btn" href=`/users/${answer["User.id"]}`)= answer["User.username"]
   if user
