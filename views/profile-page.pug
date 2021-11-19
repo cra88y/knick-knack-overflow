@@ -1,6 +1,8 @@
 extends layout.pug
 include utils.pug
 block content
+  script(src="/javascripts/votes.js")
+  script(src="/javascripts/delete-answers.js")
   h1(class='header-form') Profile Page
   //- h2(class='header-form') Username
   if user
@@ -33,8 +35,8 @@ block content
   div(class="answers-container")
       each answer in currentUser.Answers
           div(class=`post-container-${answer.id}` class="answer-div")
-              a(href=`/questions/${answer.questionId}`)
-                include answer-card
+            div(class=`answer-${answer.id}`)
+              include answer-card
               //- a(href=`/answers/${answer.id}`) Go to your Answer!
               //- if answer.userId == user.id
               //-     form(action=`/answers/${answer.id}/delete` method="post")
