@@ -84,9 +84,6 @@ span {
 .question-card:hover {
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.15);
 }
-.question-card > h1 {
-  color: #81a1c1;
-}
 
 #navBar {
   position: fixed;
@@ -162,7 +159,6 @@ span {
   background-color: #4c566a;
   display: block;
   white-space: normal;
-  -moz-text-align-last: center; /* Firefox 12+ */
   /* text-align-last: center; */
   resize: none;
   width: 35.625rem;
@@ -274,7 +270,7 @@ span {
   margin-top: 10px;
   background-color: #4c566a;
   /* text-align: center; */
-  width: 47.5rem;
+  min-width: 47.5rem;
   /* height: 160px; */
   display: flex;
   justify-content: space-between;
@@ -480,6 +476,7 @@ img {
   display: flex;
   justify-content: center;
   align-content: center;
+  min-width: 60%;
 }
 .voteCount {
   align-self: center;
