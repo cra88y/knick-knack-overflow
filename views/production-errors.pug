@@ -1,0 +1,7 @@
+extends layout
+block content
+  if errors
+    div(class='validation-errors')
+      div#validation-list
+        each error in errors
+          p= error.msg
