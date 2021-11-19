@@ -3,11 +3,12 @@ include utils.pug
 block content
             h1(class='header-form') Profile Page
             //- h2(class='header-form') Username
-            if user.id != currentUser.id
-                div(id="username")=currentUser.username
-            else 
-                div(id="username")=user.username
-                div(id="email")=user.email
+            if user
+              if user.id != currentUser.id
+                  div(id="username")=currentUser.username
+              else
+                  div(id="username")=user.username
+                  div(id="email")=user.email
             //- if currentUser.id == user.id
                 form(action=`/${user.id}/username/edit` method="post")
                 div(class="header-form")
