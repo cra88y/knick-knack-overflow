@@ -49,7 +49,8 @@ router.post(
       ans.destroy();
     });
     question.destroy();
-    res.redirect("/");
+    if (req.headers.referer.includes("questions")) req.headers.referer = "/";
+    res.redirect(req.headers.referer);
   })
 );
 
