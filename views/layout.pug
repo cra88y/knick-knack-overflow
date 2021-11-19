@@ -8,8 +8,8 @@ html
   body
     ul(id='navBar')
       ul(class="navLeft")
-        li
-          a(href="/" class="navLink navTitle") Knick Knack Overflow
+        li(id="snowManHolder")
+          a(href="/" class="navLink navTitle" id="navTitle") Knick Knack Overflow
       form(action="/questions/search" method="post")
             if searchErrors
               input(type="text" name="searchTerm" id="searchForm" placeholder=searchErrors)
