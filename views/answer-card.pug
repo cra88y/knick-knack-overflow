@@ -13,6 +13,5 @@ div(class="answer-card")
       if answer.userId == user.id
         //- form(class="answer-utils" action=`/api/answers/${answer.id}/edit`)
         //-   button(class="answer-util-btn") Edit
-        form(class="answer-utils" action=`/api/answers/${answer.id}/delete` method="POST")
-          .delete-answer
-            button(class="answer-util-btn" class="delete-answer")  Delete
+        .delete-answer
+          button(class="answer-util-btn delete-ans" data-answerId=`${answer.id}` class="delete-answer")  Delete
