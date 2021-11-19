@@ -87,16 +87,6 @@ router.post(
   })
 );
 
-async function voteCounter(answerId) {
-  const votes = await db.Vote.findAll({ where: { answerId } });
-  let count = 0;
-  votes.forEach((v) => {
-     count += v.voteType ? 1 : -1;
-  });
-  return count
-}
-
-
 router.post(
   "/answers/:id/upVotes",
   requireAuth,
