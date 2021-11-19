@@ -28,6 +28,7 @@ router.get(
       });
     } else {
       questions = await db.Question.findAll({
+        limit: 10,
         raw: true,
         include: { model: db.User, attributes: ["username", "id"] },
         order: [
