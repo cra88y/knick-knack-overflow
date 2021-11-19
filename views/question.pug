@@ -2,6 +2,7 @@ extends layout.pug
 include utils.pug
 block content
   script(src="/javascripts/votes.js")
+  script(src="/javascripts/delete-answers.js")
   div.question-detail
     div.answers-content
       include question-card
@@ -9,7 +10,7 @@ block content
         div(class="answers-container")
           each answer in answers
             div(class=`answer-${answer.id}`)
-            include answer-card
+              include answer-card
         div(class="write-answer-container")
           form(action=`/api/questions/${question.id}/answers`, method="post")
             +validationErrorSummary(errors)
