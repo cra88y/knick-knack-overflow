@@ -1,5 +1,6 @@
 // imports
-const router = require("express").Router();
+const express = require('express');
+const router = express.Router();
 const { Question } = require("../db/models");
 const { questionValidators, searchValidators } = require("./validations");
 const {
@@ -11,6 +12,7 @@ const {
 } = require("./utils");
 const db = require("../db/models");
 const Op = require("sequelize").Op;
+const { application } = require('express');
 
 // route GET /questions/new => render new question form
 router.get("/new", csrfProtection, (req, res) => {
@@ -61,46 +63,40 @@ router.post(
   })
 );
 
-// will add error handling
-router.post(
-  "/search",
-  searchValidators,
-  validationCheck,
-  asyncHandler(async (req, res) => {
-    const { searchTerm } = req.body;
-    const errors = req.errors.errors;
-    console.log("errors", errors[0]);
-
-    // search validation failed (no search term was entered) => put error in search box
-    if (errors.length) {
-      res.render("index", { questions: [], searchErrors: 'Invalid Search Term... ' });
-    } else {
-      res.redirect(`/questions/search/${searchTerm}`);
-    }
-  })
-);
-
 router.get(
-  "/search/:searchTerm",
+  "/search",
   asyncHandler(async (req, res) => {
-    const searchTerm = req.params.searchTerm;
+    const searchTerm = req.query.searchTerm;
+    let questions;
 
-    const questions = await db.Question.findAll({
-      where: {
-        [Op.or]: [
-          {
-            title: {
-              [Op.iLike]: `%${searchTerm}%`,
+    if (searchTerm) {
+      questions = await db.Question.findAll({
+        where: {
+          [Op.or]: [
+            {
+              title: {
+                [Op.iLike]: `%${searchTerm}%`,
+              },
             },
-          },
-          {
-            content: {
-              [Op.iLike]: `%${searchTerm}%`,
+            {
+              content: {
+                [Op.iLike]: `%${searchTerm}%`,
+              },
             },
-          },
-        ],
-      },
-    });
+          ],
+        },
+      });
+    }
+
+    if (!questions) {
+      // no questions found return some recent questions (may change to top rated)
+      questions = await db.Question.findAll({
+        limit: 10,
+        order: [['createdAt', 'DESC']]
+      });
+
+      return res.render("index", { questions, searchErrors: 'No Close Results... ' });
+    }
 
     res.render("index", { questions });
   })
