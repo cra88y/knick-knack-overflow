@@ -3,6 +3,8 @@ div(class="answer-card")
     button(class=`upVote` id=`upVote-${answer.id}` data-answerId=`${answer.id}`) ▲
     button(class=`downVote` id=`downVote-${answer.id}` data-answerId=`${answer.id}`) ▼
     div.voteCount(id=`voteCount-${answer.id}`)= answer.voteCount
+  if currentUser
+    a(href=`/questions/${answer.questionId}`)
   div(class="answer-text")|!{answer.content}
   div.answer-options
     if !currentUser
@@ -15,3 +17,5 @@ div(class="answer-card")
         //-   button(class="answer-util-btn") Edit
         .delete-answer
           button(class="answer-util-btn delete-ans" data-answerId=`${answer.id}` class="delete-answer")  Delete
+        if currentUser
+           a(href=`/questions/${answer.questionId}`) go to this answer
