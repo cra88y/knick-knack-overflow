@@ -137,12 +137,10 @@ ul li {
   color: #eceff4;
   font-size: 1.25em;
 }
-
 @media (max-width: 900px) {
   #navTitle {
     content: url(../knick-knack-title.png);
     width: 80px;
-    /* padding-right: 60px; */
   }
   #snowManHolder {
     display: flex;
@@ -156,7 +154,6 @@ ul li {
     align-content: flex-start;
   }
 }
-
 .write-answer-container {
   display: flex;
   flex-direction: column;
@@ -329,8 +326,29 @@ ul li {
 .answer-utils {
   text-align: right;
 }
+
 .voted {
   background-color: #bf616a;
+  transition: background-color 0.75s ease-in-out;
+}
+
+.lowVote {
+  color: #bb7076;
+  transition: color 0.75s ease-in-out;
+}
+
+.hiVote {
+  color: #8fc1ff;
+  transition: color 0.75s ease-in-out;
+}
+
+.mehVote {
+  color: white;
+  transition: color 0.75s ease-in-out;
+}
+
+.voteCount {
+  margin-right: 5px;
 }
 
 .login-page-btn {
@@ -405,7 +423,22 @@ img {
   margin-top: 10px;
   margin-left: 30px;
 }
-
+.about-div {
+  position: absolute;
+  color: #eceff4;
+  z-index: -1;
+  /*top: 80px;
+  right: 10px; */
+  background-color: #4c566a;
+  padding: 15px;
+  border: #3b4252 solid 1px;
+  border-radius: 3px;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.15);
+  width: 200px;
+  height: fit-content;
+  margin-top: 10px;
+  margin-left: 30px;
+}
 #suggested-link {
   color: #88c0d0;
 }
@@ -480,7 +513,7 @@ img {
   background-color: #4c566a;
   width: 168px;
   padding-top: 3px;
-  color: #eceff4; 
+  color: #eceff4;
 }
 
 .search-form input:focus {
