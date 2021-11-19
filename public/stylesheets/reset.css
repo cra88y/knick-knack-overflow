@@ -38,7 +38,6 @@ h1 {
   color: #88c0d0;
 }
 ul li {
-  margin-left: 30px;
   list-style: none;
 }
 .questions-container {
@@ -320,7 +319,7 @@ ul li {
   margin-top: 10px;
   background-color: #4c566a;
   /* text-align: center; */
-  width: 39.5rem;
+  width: 47.5rem;
   height: 160px;
   display: flex;
   justify-content: space-between;
@@ -461,8 +460,8 @@ img {
 
 .question-detail {
   display: flex;
-  justify-content:center;
-  align-content: center;;
+  justify-content: center;
+  align-content: center;
 }
 .voteCount {
   align-self: center;
