@@ -594,6 +594,7 @@ img {
 .main-footer a:hover {
   color: rgb(210, 210, 210);
 }
+
 @media (max-width: 1230px) {
   #navTitle {
     content: url(../knick-knack-title.png);
@@ -623,3 +624,4 @@ img {
     align-content: flex-start;
   }
 }
+
