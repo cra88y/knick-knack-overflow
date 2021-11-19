@@ -65,7 +65,9 @@ const searchValidators = [
 const answerValidators = [
   check("answerContents")
     .exists({ checkFalsy: true })
-    .withMessage("Can't submit blank answer!"),
+    .withMessage("Can't submit blank answer!")
+    .isLength({ max: 500 })
+    .withMessage("Answer must not exceed 500 characters!"),
 ];
 
 module.exports = {
