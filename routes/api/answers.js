@@ -1,4 +1,5 @@
 const express = require("express");
+const { render } = require("pug");
 const { requireAuth } = require("../../auth");
 const router = express.Router();
 const db = require("../../db/models");
@@ -64,6 +65,8 @@ router.post(
     if (!errors.length) {
       answerContents = onlyImagesAllowed(answerContents);
       if (!answerContents.length) {
+        errors.push({ msg: "Disallowed content removed from answer" });
+        return res.render("production-errors", { errors });
         return next(new Error("Disallowed content"));
       }
       const answer = db.Answer.build({
@@ -72,18 +75,9 @@ router.post(
         questionId,
       });
       await answer.save();
-      res.redirect(`/questions/${questionId}`);
-    } else {
-      // validations don't pass
-      const question = await db.Question.findByPk(questionId);
-      if (!question) next(new Error("Question not found"));
-      res.render(`question`, {
-        question,
-        csrfToken: req.csrfToken(),
-        errors: errors.map((err) => err.msg),
-        answerContents,
-      });
+      return res.redirect(`/questions/${questionId}`);
     }
+    res.render("production-errors", { errors });
   })
 );
 
@@ -92,7 +86,7 @@ router.post(
   asyncHandler(async (req, res) => {
     if (!res.locals.authenticated) {
       res.status(201).json({
-        loggedOut: true
+        loggedOut: true,
       });
     }
     const userId = res.locals.user.id;
@@ -149,7 +143,7 @@ router.post(
   asyncHandler(async (req, res) => {
     if (!res.locals.authenticated) {
       res.status(201).json({
-        loggedOut: true
+        loggedOut: true,
       });
     }
     const userId = res.locals.user.id;
@@ -196,7 +190,7 @@ router.post(
     let count = await voteCountForAnswer(answerId);
     res.status(201).json({
       voteType,
-      count
+      count,
     });
   })
 );
