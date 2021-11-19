@@ -1,12 +1,15 @@
 div(class="question-card")
-  h1= question.title
-  div|!{question.content}
-  if !currentUser
-    span Author:
-    a(class="answer-author answer-util-btn" href=`/users/${question["User.id"]}`)= question["User.username"]
-  if user
-    if question.userId == user.id
-      //- form(class="answer-utils" action=`/api/answers/${answer.id}/edit`)
-      //-   button(class="answer-util-btn") Edit
-      form(class="answer-utils" action=`/api/questions/${question.id}/delete` method="POST")
-        button(class="answer-util-btn") Delete
+  div.question-content-container
+    a(href=`/questions/${question.id}`)
+      h1= question.title
+    div.question-content|!{question.content}
+  div.answer-options
+    if !currentUser
+      div.author
+        span Author:
+        a(class="answer-author answer-util-btn" href=`/users/${question["User.id"]}`)= question["User.username"]
+    div.delete-answer
+      if user
+        if question.userId == user.id
+          form(class="answer-utils" action=`/api/questions/${question.id}/delete` method="POST")
+            button(class="answer-util-btn") Delete
