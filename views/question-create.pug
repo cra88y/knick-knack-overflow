@@ -13,5 +13,5 @@ block content
       div.form-group
         label(for="content" id="content_label") Body
         textarea(name="content" value=question.content id="editor")= question.content
-        p #{`You can use <img src=" URL "/> to add an image to your post!`}
+        div(class="info-text") #{`You can use <img src=" URL "/> to add an image to your post!`}
       button(type="submit" id="submit_button") Post Question
