@@ -1,7 +1,7 @@
 div(class="question-card")
   div.question-content-container
     a(href=`/questions/${question.id}`)
-      h1= question.title
+      h1(class="question-card-title")= question.title
     div.question-content|!{question.content}
   div.answer-options
     if !currentUser
@@ -12,4 +12,4 @@ div(class="question-card")
       if user
         if question.userId == user.id
           form(class="answer-utils" action=`/api/questions/${question.id}/delete` method="POST")
-            button(class="answer-util-btn") Delete
+            button(class="answer-util-btn" class="delete-btn") Delete
