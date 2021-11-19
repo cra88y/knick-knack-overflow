@@ -434,8 +434,8 @@ img {
 
 .question-detail {
   display: flex;
-  justify-content:center;
-  align-content: center;;
+  justify-content: center;
+  align-content: center;
 }
 .voteCount {
   align-self: center;
