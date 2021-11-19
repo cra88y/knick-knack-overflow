@@ -23,7 +23,8 @@ block content
               each question in currentUser.Questions
                   div(class=`post-container-${question.id}` id="question-div")
                     include question-card
-                      a(href=`/questions/${question.id}`) Go to your  Question!
+                      div(id="question-link")
+                        a(href=`/questions/${question.id}`) Go to your  Question!
                       //- if question.userId == user.id
                       //-     form(action=`/questions/${question.id}/delete` method="post")
                       //-         button(class="delete-btn" id=question.id) Delete

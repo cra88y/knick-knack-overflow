@@ -359,6 +359,10 @@ ul li {
   text-align: center;
   align-self: center;
 }
+
+.question-redirect-link {
+  display flex
+}
 .searchbar {
   display: inline-flex;
 }
@@ -482,6 +486,7 @@ img {
   text-align: center;
   padding: 5px;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .register-btn {
