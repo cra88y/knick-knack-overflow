@@ -596,6 +596,7 @@ img {
 .main-footer a:hover {
   color: rgb(210, 210, 210);
 }
+
 .about-text > h1 {
   font-size: 1.25rem;
 }
@@ -612,6 +613,7 @@ img {
     width: 50%;
   }
 }
+
 @media (max-width: 1230px) {
   .answers-content {
     display: block;
@@ -655,3 +657,4 @@ img {
     align-content: flex-start;
   }
 }
+
