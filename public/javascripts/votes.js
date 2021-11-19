@@ -1,12 +1,12 @@
 window.addEventListener("DOMContentLoaded", (event) => {
   const upvotes = document.querySelectorAll(".upVote");
   upvotes.forEach((upVote) => {
-    hookupVote(upVote);
+    hookVoteUpOrDown(upVote, true);
   });
 
   const downvotes = document.querySelectorAll(".downVote");
   downvotes.forEach((downVote) => {
-    hookdownVote(downVote);
+    hookVoteUpOrDown(downVote, false);
   });
   let answerVotes;
 
@@ -17,10 +17,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
         answerVotes = data.answerVotes;
         userVotes = data.userVotes;
       });
-    for (let key in answerVotes) {
-      document.getElementById(`voteCount-${key}`).innerText =
-        answerVotes[key] || "0";
-    }
 
     for (let ans in userVotes) {
       if (userVotes[ans] == true) {
@@ -34,56 +30,22 @@ window.addEventListener("DOMContentLoaded", (event) => {
   hookVotes();
 });
 
-async function hookupVote(upVote) {
-  upVote.addEventListener("click", async (e) => {
-    let count;
-    let voteType;
-    e.stopPropagation();
-    const answerId = upVote.dataset.answerid;
-    const downVoteId = `downVote-${answerId}`;
-    const body = { answerId };
-    const res = await fetch(
-      `http://localhost:8080/api/answers/${answerId}/upVotes`,
-      {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        voteType = data.voteType;
-        count = data.count;
-      });
-    console.log(voteType);
-    console.log(count);
-    const downVoteEl = document.getElementById(downVoteId);
-    let voteCountId = `voteCount-${upVote.dataset.answerid}`;
-    let countElem = document.getElementById(voteCountId);
-    let num = Number(countElem.innerText);
-    if (voteType == null) {
-      e.target.classList.toggle("voted", false);
-      downVoteEl.classList.toggle("voted", false);
-    } else {
-      e.target.classList.toggle("voted", voteType);
-      downVoteEl.classList.toggle("voted", !voteType);
-    }
-    countElem.innerText = count;
-  });
-}
 
-async function hookdownVote(downVote) {
-  downVote.addEventListener("click", async (e) => {
+
+async function hookVoteUpOrDown(vote, isUp) {
+  vote.addEventListener("click", async (e) => {
     let count;
     let voteType;
     e.stopPropagation();
-    const answerId = downVote.dataset.answerid;
-    const upVoteId = `upVote-${answerId}`;
+    const answerId = vote.dataset.answerid;
+
+    const twinId = isUp ? `downVote-${answerId}` : `upVote-${answerId}`
+    const route = isUp ? "up" : "down"
+    
+
     const body = { answerId };
     const res = await fetch(
-      `http://localhost:8080/api/answers/${answerId}/downVotes`,
+      `http://localhost:8080/api/answers/${answerId}/${route}Votes`,
       {
         method: "POST",
         body: JSON.stringify(body),
@@ -97,17 +59,22 @@ async function hookdownVote(downVote) {
         voteType = data.voteType;
         count = data.count;
       });
-    const upVoteEl = document.getElementById(upVoteId);
-    let voteCountId = `voteCount-${downVote.dataset.answerid}`;
+    const toggle = isUp ? voteType : !voteType;
+    const toggleTwin = isUp ? !voteType : voteType;
+    console.log(count)
+    const twinEl = document.getElementById(twinId);
+    let voteCountId = `voteCount-${vote.dataset.answerid}`;
     let countElem = document.getElementById(voteCountId);
     let num = Number(countElem.innerText);
+    console.log(voteType)
     if (voteType == null) {
       e.target.classList.toggle("voted", false);
-      upVoteEl.classList.toggle("voted", false);
+      twinEl.classList.toggle("voted", false);
     } else {
-      e.target.classList.toggle("voted", !voteType);
-      upVoteEl.classList.toggle("voted", voteType);
+      e.target.classList.toggle("voted", toggle);
+      twinEl.classList.toggle("voted", toggleTwin);
     }
     countElem.innerText = count;
+
   });
 }
