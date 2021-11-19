@@ -11,12 +11,20 @@ router.get(
       limit: 10,
       raw: true,
       include: { model: db.User, attributes: ["username", "id"] },
+      order: [
+        ['createdAt', 'DESC']
+    ],
     });
-    // console.log(questions);
     res.render("index", {
       questions,
     });
   })
 );
 
+router.get(
+  "/about",
+  (req, res) => {
+    res.render("about-us")
+  }
+)
 module.exports = router;

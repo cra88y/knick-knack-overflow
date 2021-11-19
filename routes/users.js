@@ -7,7 +7,6 @@ const { userValidators, loginValidators } = require("./validations");
 const db = require("../db/models");
 const { check, validationResult } = require("express-validator");
 
-
 router.get("/register", csrfProtection, (req, res) => {
   const user = db.User.build();
   res.render("user-register", {
@@ -57,6 +56,13 @@ router.get("/login", csrfProtection, (req, res) => {
     csrfToken: req.csrfToken(),
   });
 });
+router.get(
+  "/demo",
+  asyncHandler(async (req, res) => {
+    const user = await db.User.findByPk(1); //ID FOR THE DEMO USER
+    loginUser(req, res, user);
+  })
+);
 router.post(
   "/login",
   csrfProtection,
@@ -119,7 +125,6 @@ router.get(
     if (req.session.user) {
       userId = req.session.userId;
     }
-    // console.log(res.locals.user);
     res.render("profile-page", {
       currentUser,
     });
