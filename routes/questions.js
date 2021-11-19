@@ -198,6 +198,7 @@ router.get(
         },
       ],
     });
+    
     let userId = req.session.userId;
     let userVotes = {};
     votes.forEach((vote) => {
