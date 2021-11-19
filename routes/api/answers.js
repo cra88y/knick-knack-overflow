@@ -89,8 +89,13 @@ router.post(
 
 router.post(
   "/answers/:id/upVotes",
-  requireAuth,
   asyncHandler(async (req, res) => {
+    if (!res.locals.authenticated) {
+      loggedIn = false;
+      res.status(301).json({
+        loggedIn
+      });
+    }
     const userId = res.locals.user.id;
     let { answerId } = req.body;
     let voteType = true;
@@ -142,8 +147,14 @@ router.post(
 
 router.post(
   "/answers/:id/downVotes",
-  requireAuth,
   asyncHandler(async (req, res) => {
+    let loggedIn = true;
+    if (!res.locals.authenticated) {
+      loggedIn = false;
+      res.status(301).json({
+        loggedIn
+      });
+    }
     const userId = res.locals.user.id;
     let { answerId } = req.body;
     let voteType = false;
@@ -188,7 +199,7 @@ router.post(
     let count = await voteCountForAnswer(answerId);
     res.status(201).json({
       voteType,
-      count,
+      count
     });
   })
 );
