@@ -91,9 +91,8 @@ router.post(
   "/answers/:id/upVotes",
   asyncHandler(async (req, res) => {
     if (!res.locals.authenticated) {
-      loggedIn = false;
-      res.status(301).json({
-        loggedIn
+      res.status(201).json({
+        loggedOut: true
       });
     }
     const userId = res.locals.user.id;
@@ -148,11 +147,9 @@ router.post(
 router.post(
   "/answers/:id/downVotes",
   asyncHandler(async (req, res) => {
-    let loggedIn = true;
     if (!res.locals.authenticated) {
-      loggedIn = false;
-      res.status(301).json({
-        loggedIn
+      res.status(201).json({
+        loggedOut: true
       });
     }
     const userId = res.locals.user.id;
