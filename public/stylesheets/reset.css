@@ -6,6 +6,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   height: 100%;
+  height: 100vh;
 }
 html {
   height: 100%;
@@ -91,6 +92,7 @@ ul li {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+  box-shadow: 0 4px 2px -2px rgba(15, 15, 15, 0.2);
 }
 
 #navBar > * > * {
@@ -492,4 +494,15 @@ img {
 
 .search-form button:hover {
   color:rgb(210, 210, 210);
+}
+
+.main-footer {
+  position: fixed;
+  background-color: #3b4252;
+  bottom: 0;
+  left: 0;
+  height: 65px;
+  margin-top: -50px;
+  width: 100%;
+  box-shadow: 4px 0 2px 2px rgba(10, 10, 10, 0.2);
 }
