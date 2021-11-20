@@ -13,7 +13,7 @@ html
         li(id="snowManHolder")
           a(href="/" class="navLink navTitle" id="navTitle") Knick Knack Overflow
       ul(class="navRight")
-        li
+        li.searchy-li
           form(action="/questions/search" method="get" class="search-form")
                 if searchErrors
                   input(type="text" name="searchTerm" id="searchForm" placeholder=searchErrors)
@@ -24,7 +24,7 @@ html
             li
               a(href=`/users/${user.id}` class="navLink") Profile
             li
-              a(href="/questions/new" class="navLink") Ask a question!
+              a(href="/questions/new" class="navLink") Ask Question!
             li
               form(action='/users/logout' method='post')
                 button(class="navLink logout-btn") Logout
@@ -40,17 +40,17 @@ html
     footer(class="main-footer")
       .footer-about
           .footer-col
-            h3 Github 
+            h3 Github
             ul
-              li: a(href="https://github.com/cra88y/knick-knack-overflow") This Website 
-              li: a(href="https://github.com/JacobNicotra") Jacob Nicotra 
+              li: a(href="https://github.com/cra88y/knick-knack-overflow") This Website
+              li: a(href="https://github.com/JacobNicotra") Jacob Nicotra
               li: a(href="https://github.com/walceus") Wid Alceus
-              li: a(href="https://github.com/cra88y") Cameron Abbot 
+              li: a(href="https://github.com/cra88y") Cameron Abbott
               li: a(href="https://github.com/tforde4623") Tommy Forde
           .footer-col
             h3 LinkedIn
-            ul  
+            ul
               li: a(href="https://www.linkedin.com/in/jacobnicotra/") Jacob Nicotra
               li: a(href="https://www.linkedin.com/in/wid-alceus") Wid Alceus
-              li: a(href="https://www.linkedin.com/in/camer0n/") Cameron Abbot
+              li: a(href="https://www.linkedin.com/in/camer0n/") Cameron Abbott
               li: a(href="https://www.linkedin.com/in/tommyforde/") Tommy Forde

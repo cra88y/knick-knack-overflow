@@ -86,6 +86,10 @@ span {
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
+.question-card-title:hover {
+  filter: brightness(110%);
+}
+
 #navBar {
   position: fixed;
   top: 0;
@@ -100,10 +104,6 @@ span {
   align-items: center;
   padding: 10px;
   box-shadow: 0 4px 2px -2px rgba(15, 15, 15, 0.2);
-}
-
-#navBar > * > * {
-  font-size: 1.5em;
 }
 
 .navLink {
@@ -264,6 +264,10 @@ span {
   color: #eceff4;
   cursor: pointer;
 }
+.downVote:hover,
+.upVote:hover {
+  filter: brightness(110%);
+}
 .answer-card {
   color: #eceff4;
   padding: 15px;
@@ -315,6 +319,9 @@ span {
   background: none;
   color: #bf616a;
   cursor: pointer;
+}
+.answer-util-btn:hover {
+  filter: brightness(110%);
 }
 
 .answer-author {
@@ -385,13 +392,16 @@ span {
   border-radius: 2px;
 }
 
-.delete-btn {
+/* .delete-btn {
   display: flex;
   background-color: #bf616a;
-  padding: 3px;
+   padding: 3px;
   color: #eceff4;
   border-radius: 2px;
   justify-content: center;
+} */
+.delete-btn:hover {
+  filter: brightness(110%);
 }
 
 #email {
@@ -527,7 +537,7 @@ img {
   padding: 5px 10px 8px 10px;
   border-radius: 3px;
   height: 100%;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  /* font-family: "Lucida Grande", Helvetica, Arial, sans-serif; */
 }
 
 .search-form input {
@@ -559,7 +569,7 @@ img {
   align-content: center;
   flex-direction: row;
   background-color: #4c566a;
-  width: 60%;
+  max-width: 40%;
   margin: auto;
   margin-bottom: 10px;
   color: rgb(210, 210, 210);
@@ -592,10 +602,13 @@ img {
   float: left;
   padding: 10px;
 }
-
+#snowManHolder {
+  font-size: 1.5rem;
+}
 .main-footer a:hover {
   color: rgb(210, 210, 210);
 }
+
 .about-text > h1 {
   font-size: 1.25rem;
 }
@@ -606,12 +619,14 @@ img {
   .about-div {
     display: none;
   }
+
   .about-media {
     display: block;
     text-align: center;
     width: 50%;
   }
 }
+
 @media (max-width: 1230px) {
   .answers-content {
     display: block;
@@ -655,3 +670,4 @@ img {
     align-content: flex-start;
   }
 }
+
