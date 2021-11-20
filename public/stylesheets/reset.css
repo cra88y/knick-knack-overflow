@@ -269,16 +269,19 @@ span {
 
 .downVote,
 .upVote {
+  border-radius: 2px;
   width: 1rem;
   display: block;
   margin: 5px;
-  background-color: #5e81ac;
+  background-color: #88c0d0;
   color: #eceff4;
   cursor: pointer;
+  filter: brightness(110%);
+  transition: filter 0.1s;
 }
 .downVote:hover,
 .upVote:hover {
-  filter: brightness(110%);
+  filter: brightness(130%);
 }
 .answer-card {
   color: #eceff4;
@@ -329,6 +332,7 @@ span {
 }
 .question-sidebar {
   border-right: 3px solid #d8dee9;
+  /* filter: brightness(110%); */
   flex-grow: 1;
   /* margin-left: 10px; */
   padding-right: 1rem;
@@ -387,11 +391,11 @@ span {
 
 .voted {
   background-color: #bf616a;
-  transition: background-color 0.75s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
 }
 .lowVote {
   color: #bb7076;
-  transition: color 0.75s ease-in-out;
+  transition: color 0.25s ease-in-out;
 }
 
 .hiVote {
