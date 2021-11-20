@@ -12,32 +12,30 @@ window.addEventListener("DOMContentLoaded", (event) => {
   let questionVotes;
 
   async function hookVotes() {
-    const res = await fetch(`${document.location.href}/votes`)
+    const res = await fetch(`http://localhost:8080/qVote/q`)
       .then((res) => res.json())
       .then((data) => {
-        questionVotes = data.questionVotes;
         userVotes = data.userVotes;
         voteHiLows = data.voteHiLows
       });
     console.log('voteHiLows', voteHiLows)
-    for (let ans in voteHiLows) {
-      let voteCountId = `voteCount-${ans}`
-      let count = voteHiLows[ans]
+    for (let q in voteHiLows) {
+      let voteCountId = `voteCount-${q}`
+      let count = voteHiLows[q]
 
-      console.log('votecountid', voteCountId)
       hiOrLowVote(voteCountId, count)
     }
 
-    for (let ans in userVotes) {
-      if (userVotes[ans] == true) {
-        document.getElementById(`upVote-${ans}`).classList.toggle("voted")
+    for (let q in userVotes) {
+      if (userVotes[q] == true) {
+        document.getElementById(`upVote-${q}`).classList.toggle("voted")
       }
-      if (userVotes[ans] == false) {
-        document.getElementById(`downVote-${ans}`).classList.toggle("voted")
+      if (userVotes[q] == false) {
+        document.getElementById(`downVote-${q}`).classList.toggle("voted")
       }
     }
   }
-  // hookVotes();
+  hookVotes();
 });
 
 
@@ -48,7 +46,6 @@ async function hookVoteUpOrDown(vote, isUp) {
     let voteType;
     e.stopPropagation();
     const questionId = vote.dataset.questionid;
-    console.log(questionId)
     const twinId = isUp ? `downVote-${questionId}` : `upVote-${questionId}`
     const route = isUp ? "up" : "down"
 
@@ -68,7 +65,6 @@ async function hookVoteUpOrDown(vote, isUp) {
       .then((data) => {
         voteType = data.voteType;
         count = data.count;
-        console.log('count', count)
 
         if (data.loggedOut) {
           loggedOut = true
@@ -85,7 +81,6 @@ async function hookVoteUpOrDown(vote, isUp) {
     const twinEl = document.getElementById(twinId);
     let voteCountId = `voteCount-${vote.dataset.questionid}`;
     let countElem = document.getElementById(voteCountId);
-    console.log('000000 count elem', countElem)
     if (voteType == null) {
       e.target.classList.toggle("voted", false);
       twinEl.classList.toggle("voted", false);
