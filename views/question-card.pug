@@ -7,13 +7,14 @@ div(class="question-card")
       button(class=`downVote` id=`downVote-${question.id}` data-questionId=`${question.id}`) ▼
       div.voteCount(id=`voteCount-${question.id}`)= question.voteCount
       if !currentUser
-       span #{`Answers: ${question.Answers.length}`}
+        if !url
+          span #{`Answers: ${question.Answers.length}`}
     div.question-content|!{question.content}
   div.answer-options
     if !currentUser
       div.author
         span Author:
-        a(class="answer-author answer-util-btn" href=`/users/${question["User.id"]}`)= question.User.username
+        a(class="answer-author answer-util-btn" href=`/users/${question.User.id}`)= question.User.username
     div.delete-answer
       if user
         if question.userId == user.id

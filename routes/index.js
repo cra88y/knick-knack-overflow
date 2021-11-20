@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const app = require("../app");
 const db = require("../db/models");
 
 const { asyncHandler } = require("./utils");
@@ -12,9 +13,13 @@ router.get(
     const numPages = Math.ceil(questionCount / 10);
 
     // since we are using this in index route we need to handle out of page range (send to 404)
-    if (pageNum) {
-      if (pageNum > numPages || typeof pageNum !== "number") return next();
-    }
+    if (
+      pageNum &&
+      (pageNum > numPages ||
+        pageNum < 1 ||
+        typeof parseInt(pageNum) !== "number")
+    )
+      return next();
 
     const pageLinks = [];
 
