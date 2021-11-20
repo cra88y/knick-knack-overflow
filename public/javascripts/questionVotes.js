@@ -11,33 +11,33 @@ window.addEventListener("DOMContentLoaded", (event) => {
   });
   let questionVotes;
 
-  // async function hookVotes() {
-  //   const res = await fetch(`${document.location.href}/votes`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       questionVotes = data.questionVotes;
-  //       userVotes = data.userVotes;
-  //       voteHiLows = data.voteHiLows
-  //     });
-  //   console.log('voteHiLows', voteHiLows)
-  //   for (let ans in voteHiLows) {
-  //     let voteCountId = `voteCount-${ans}`
-  //     let count = voteHiLows[ans]
+  async function hookVotes() {
+    const res = await fetch(`${document.location.href}/votes`)
+      .then((res) => res.json())
+      .then((data) => {
+        questionVotes = data.questionVotes;
+        userVotes = data.userVotes;
+        voteHiLows = data.voteHiLows
+      });
+    console.log('voteHiLows', voteHiLows)
+    for (let ans in voteHiLows) {
+      let voteCountId = `voteCount-${ans}`
+      let count = voteHiLows[ans]
 
-  //     console.log('votecountid', voteCountId)
-  //     hiOrLowVote(voteCountId, count)
-  //   }
+      console.log('votecountid', voteCountId)
+      hiOrLowVote(voteCountId, count)
+    }
 
-  //   for (let ans in userVotes) {
-  //     if (userVotes[ans] == true) {
-  //       document.getElementById(`upVote-${ans}`).classList.toggle("voted")
-  //     }
-  //     if (userVotes[ans] == false) {
-  //       document.getElementById(`downVote-${ans}`).classList.toggle("voted")
-  //     }
-  //   }
-  // }
-  // hookVotes();
+    for (let ans in userVotes) {
+      if (userVotes[ans] == true) {
+        document.getElementById(`upVote-${ans}`).classList.toggle("voted")
+      }
+      if (userVotes[ans] == false) {
+        document.getElementById(`downVote-${ans}`).classList.toggle("voted")
+      }
+    }
+  }
+  hookVotes();
 });
 
 
@@ -52,7 +52,7 @@ async function hookVoteUpOrDown(vote, isUp) {
     const twinId = isUp ? `downVote-${questionId}` : `upVote-${questionId}`
     const route = isUp ? "up" : "down"
 
-console.log(twinId, route)
+    console.log(twinId, route)
     const body = { questionId };
     const res = await fetch(
       `http://localhost:8080/questions/${questionId}/${route}Votes`,
@@ -64,36 +64,39 @@ console.log(twinId, route)
         },
       }
     )
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     voteType = data.voteType;
-    //     count = data.count;
-    //     if (data.loggedOut) {
-    //       loggedOut = true
-    //     } else {
-    //       loggedOut = false
-    //     }
-    //   });
-    // if (loggedOut) {
-    //   window.location.href = "/users/login";
-    //   return
-    // }
-    // const toggle = isUp ? voteType : !voteType;
-    // const toggleTwin = isUp ? !voteType : voteType;
-    // const twinEl = document.getElementById(twinId);
-    // let voteCountId = `voteCount-${vote.dataset.answerid}`;
-    // let countElem = document.getElementById(voteCountId);
-    // if (voteType == null) {
-    //   e.target.classList.toggle("voted", false);
-    //   twinEl.classList.toggle("voted", false);
-    // } else {
-    //   e.target.classList.toggle("voted", toggle);
-    //   twinEl.classList.toggle("voted", toggleTwin);
-    // }
+      .then((res) => res.json())
+      .then((data) => {
+        voteType = data.voteType;
+        count = data.count;
+        console.log('count', count)
 
-    // countElem.innerText = count;
+        if (data.loggedOut) {
+          loggedOut = true
+        } else {
+          loggedOut = false
+        }
+      });
+    if (loggedOut) {
+      window.location.href = "/users/login";
+      return
+    }
+    const toggle = isUp ? voteType : !voteType;
+    const toggleTwin = isUp ? !voteType : voteType;
+    const twinEl = document.getElementById(twinId);
+    let voteCountId = `voteCount-${vote.dataset.questionid}`;
+    let countElem = document.getElementById(voteCountId);
+    console.log('000000 count elem', countElem)
+    if (voteType == null) {
+      e.target.classList.toggle("voted", false);
+      twinEl.classList.toggle("voted", false);
+    } else {
+      e.target.classList.toggle("voted", toggle);
+      twinEl.classList.toggle("voted", toggleTwin);
+    }
 
-    // hiOrLowVote(voteCountId, count)
+    countElem.innerText = count;
+
+    hiOrLowVote(voteCountId, count)
   });
 }
 

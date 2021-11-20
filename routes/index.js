@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const db = require("../db/models");
+const { voteCountForQuestion } = require("./utils")
 
 const { asyncHandler } = require("./utils");
 
@@ -36,6 +37,14 @@ router.get(
         ],
       });
     }
+    for (q of questions) {
+      q.voteCount = await voteCountForQuestion(q.id);
+      console.log('000000',q.voteCount)
+    }
+    questions.sort((f, s) => {
+      return
+    });
+    // console.log(voteCountForQuestion)
 
 
 
@@ -45,6 +54,8 @@ router.get(
     });
   })
 );
+
+
 
 router.get(
   "/about",
