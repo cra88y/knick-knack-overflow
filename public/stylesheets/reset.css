@@ -314,10 +314,9 @@ span {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  border-bottom: 1px solid #eceff4;
 }
 .question-sidebar {
-  border-right: 1px solid #eceff4;
+  border-right: 3px solid #d8dee9;
   flex-grow: 1;
   margin: 0px 10px;
   display: flex;
