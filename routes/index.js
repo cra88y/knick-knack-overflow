@@ -17,8 +17,9 @@ router.get(
       pageNum &&
       (pageNum > numPages ||
         pageNum < 1 ||
-        typeof parseInt(pageNum) !== 'number'
-      )) return next();
+        typeof parseInt(pageNum) !== "number")
+    )
+      return next();
 
     const pageLinks = [];
 
@@ -28,41 +29,25 @@ router.get(
 
     let questions;
 
-    if (pageNum) {
-      questions = await db.Question.findAll({
-        offset: ((pageNum - 1) * 10),
-        limit: 10,
-        raw: true,
-        include: { model: db.User, attributes: ["username", "id"] },
-        order: [
-          ['createdAt', 'DESC']
-        ],
-      });
-    } else {
-      questions = await db.Question.findAll({
-        limit: 10,
-        raw: true,
-        include: { model: db.User, attributes: ["username", "id"] },
-        order: [
-          ['createdAt', 'DESC']
-        ],
-      });
-    }
-
-
-
+    const offset = req.params.pageNum ? (req.params.pageNum - 1) * 10 : 0;
+    questions = await db.Question.findAll({
+      offset,
+      limit: 10,
+      include: [
+        { model: db.User, attributes: ["username", "id"] },
+        { model: db.Answer },
+      ],
+      order: [["createdAt", "DESC"]],
+    });
     res.render("index", {
       questions,
-      pageLinks
+      pageLinks,
     });
   })
 );
 
-router.get(
-  "/about",
-  (req, res) => {
-    res.render("about-us")
-  }
-)
+router.get("/about", (req, res) => {
+  res.render("about-us");
+});
 
 module.exports = router;
