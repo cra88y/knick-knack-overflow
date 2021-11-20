@@ -19,12 +19,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
         userVotes = data.userVotes;
         voteHiLows = data.voteHiLows
       });
-    console.log('voteHiLows', voteHiLows)
     for (let ans in voteHiLows) {
       let voteCountId = `voteCount-${ans}`
       let count = voteHiLows[ans]
 
-      console.log('votecountid', voteCountId)
       hiOrLowVote(voteCountId, count)
     }
 

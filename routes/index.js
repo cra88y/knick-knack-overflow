@@ -4,6 +4,7 @@ const db = require("../db/models");
 const { voteCountForQuestion } = require("./utils")
 
 const { asyncHandler } = require("./utils");
+let currentQs;
 
 /* GET home page. */
 router.get(
@@ -30,26 +31,23 @@ router.get(
 
     let questions;
 
-const offset = req.params.pageNum ? (req.params.pageNum - 1) * 10 : 0;
-questions = await db.Question.findAll({
-  offset,
-  limit: 10,
-  include: [
-    { model: db.User, attributes: ["username", "id"] },
-    { model: db.Answer },
-  ],
-  order: [["createdAt", "DESC"]],
-});
+    const offset = req.params.pageNum ? (req.params.pageNum - 1) * 10 : 0;
+    questions = await db.Question.findAll({
+      offset,
+      limit: 10,
+      include: [
+        { model: db.User, attributes: ["username", "id"] },
+        { model: db.Answer },
+      ],
+      order: [["createdAt", "DESC"]],
+    });
     for (q of questions) {
       q.voteCount = await voteCountForQuestion(q.id);
-      console.log('000000',q.voteCount)
     }
     questions.sort((f, s) => {
       return
     });
-    // console.log(voteCountForQuestion)
-
-   
+    currentQs = questions
     res.render("index", {
       questions,
       pageLinks,
@@ -60,5 +58,56 @@ questions = await db.Question.findAll({
 router.get("/about", (req, res) => {
   res.render("about-us");
 });
+
+async function votesForQ(q) {
+
+  let qVotes = await db.Question_Vote.findAll({
+    where: {
+      questionId: q.id,
+    },
+  });
+  return qVotes
+}
+
+router.get(
+  "/qVote/q",
+  asyncHandler(async (req, res, next) => {
+
+
+    const votes = []
+    for (q of currentQs) {
+      let res = await votesForQ(q)
+      votes.push(...res)
+    }
+
+
+    let count = 0;
+    let voteHiLows = {};
+    votes.forEach((vote) => {
+      if (voteHiLows[vote.questionId]) {
+        voteHiLows[vote.questionId] += vote.voteType ? 1 : -1;
+      } else {
+        voteHiLows[vote.questionId] = vote.voteType ? 1 : -1;
+      }
+    });
+
+    console.log('000000000000', voteHiLows)
+
+    let userId = req.session.userId;
+    let userVotes = {};
+    votes.forEach((vote) => {
+
+      if (vote.userId == userId) {
+        userVotes[vote.questionId] = vote.voteType;
+      }
+    });
+
+
+    res.status(201).json({
+      userVotes,
+      voteHiLows,
+    });
+  })
+);
 
 module.exports = router;

@@ -265,7 +265,6 @@ router.post(
     let destroyed = false;
     let voteId;
     questionId = parseInt(questionId, 10);
-    console.log(questionId);
     try {
       const voteStatus = await db.Question_Vote.findOne({
         where: {
