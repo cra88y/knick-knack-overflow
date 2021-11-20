@@ -9,6 +9,7 @@ const {
   validationCheck,
   onlyImagesAllowed,
   voteCountForAnswer,
+  voteCountForQuestion
 } = require("./utils");
 const db = require("../db/models");
 const Op = require("sequelize").Op;
@@ -126,33 +127,34 @@ router.get(
       return s.voteCount - f.voteCount;
     });
 
-    const votes = await db.Vote.findAll({
-      include: [
-        {
-          model: db.Answer,
-          where: {
-            questionId,
-          },
-        },
-      ],
-    });
+    // const votes = await db.Vote.findAll({
+    //   include: [
+    //     {
+    //       model: db.Answer,
+    //       where: {
+    //         questionId,
+    //       },
+    //     },
+    //   ],
+    // });
 
-    let answerVotes = {};
-    votes.forEach((vote) => {
-      if (answerVotes[vote.answerId]) {
-        if (vote.voteType == true) {
-          answerVotes[vote.answerId] += 1;
-        } else {
-          answerVotes[vote.answerId] -= 1;
-        }
-      } else {
-        if (vote.voteType == true) {
-          answerVotes[vote.answerId] = 1;
-        } else {
-          answerVotes[vote.answerId] = -1;
-        }
-      }
-    });
+
+    // let answerVotes = {};
+    // votes.forEach((vote) => {
+    //   if (answerVotes[vote.answerId]) {
+    //     if (vote.voteType == true) {
+    //       answerVotes[vote.answerId] += 1;
+    //     } else {
+    //       answerVotes[vote.answerId] -= 1;
+    //     }
+    //   } else {
+    //     if (vote.voteType == true) {
+    //       answerVotes[vote.answerId] = 1;
+    //     } else {
+    //       answerVotes[vote.answerId] = -1;
+    //     }
+    //   }
+    // });
 
     /////////////////// Suggested questions /////////////////////////
     // go through current question title and grab all words seperately
@@ -303,7 +305,7 @@ router.post(
         return next(err);
       }
     }
-    let count = await voteCountForAnswer(questionId);
+    let count = await voteCountForQuestion(questionId);
     res.status(201).json({
       voteType,
       count,
@@ -366,7 +368,7 @@ router.post(
         return next(err);
       }
     }
-    let count = await voteCountForAnswer(questionId);
+    let count = await voteCountForQuestion(questionId);
     res.status(201).json({
       voteType,
       count,
