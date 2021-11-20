@@ -22,10 +22,21 @@ const voteCountForAnswer = async (answerId) => {
   });
   return count;
 };
+
+const voteCountForQuestion = async (questionId) => {
+  let count = 0;
+  const votes = await db.Question_Vote.findAll({ where: { questionId }, raw: true });
+  votes.forEach((v) => {
+    count += v.voteType ? 1 : -1;
+    console.log('voteType', v.voteType)
+  });
+  return count;
+};
 module.exports = {
   csrfProtection,
   asyncHandler,
   validationCheck,
   onlyImagesAllowed,
   voteCountForAnswer,
+  voteCountForQuestion
 };
