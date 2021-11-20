@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       const answerId = el.dataset.answerid;
       let response;
       const res = await fetch(
-        `http://localhost:8080/api/answers/${answerId}/delete`,
+        `/api/answers/${answerId}/delete`,
         { method: "DELETE" }
       )
         .then((res) => res.json())
