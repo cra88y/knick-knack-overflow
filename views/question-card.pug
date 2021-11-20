@@ -5,7 +5,7 @@ div(class="question-card")
       button(class=`downVote` id=`downVote-${question.id}` data-questionId=`${question.id}`) ▼
       div.voteCount(id=`voteCount-${question.id}`)= question.voteCount
     if !currentUser
-      if !url
+      if showAnswersCount
         span(class="answers-count") #{`${question.Answers.length}`}
           span(class="answers-count") Answers
 

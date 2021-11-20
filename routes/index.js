@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const app = require("../app");
 const db = require("../db/models");
-const { voteCountForQuestion } = require("./utils")
+const { voteCountForQuestion } = require("./utils");
 
 const { asyncHandler } = require("./utils");
 
@@ -30,29 +30,29 @@ router.get(
 
     let questions;
 
-const offset = req.params.pageNum ? (req.params.pageNum - 1) * 10 : 0;
-questions = await db.Question.findAll({
-  offset,
-  limit: 10,
-  include: [
-    { model: db.User, attributes: ["username", "id"] },
-    { model: db.Answer },
-  ],
-  order: [["createdAt", "DESC"]],
-});
+    const offset = req.params.pageNum ? (req.params.pageNum - 1) * 10 : 0;
+    questions = await db.Question.findAll({
+      offset,
+      limit: 10,
+      include: [
+        { model: db.User, attributes: ["username", "id"] },
+        { model: db.Answer },
+      ],
+      order: [["createdAt", "DESC"]],
+    });
     for (q of questions) {
       q.voteCount = await voteCountForQuestion(q.id);
-      console.log('000000',q.voteCount)
+      console.log("000000", q.voteCount);
     }
     questions.sort((f, s) => {
-      return
+      return;
     });
     // console.log(voteCountForQuestion)
 
-   
     res.render("index", {
       questions,
       pageLinks,
+      showAnswersCount: true,
     });
   })
 );
