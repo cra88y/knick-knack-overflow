@@ -13,7 +13,7 @@ router.get(
 
     // since we are using this in index route we need to handle out of page range (send to 404)
     if (pageNum) {
-      if (pageNum > numPages || typeof pageNum !== 'number') return next();
+      if (pageNum > numPages || typeof pageNum !== "number") return next();
     }
 
     const pageLinks = [];
@@ -24,41 +24,25 @@ router.get(
 
     let questions;
 
-    if (req.params.pageNum) {
-      questions = await db.Question.findAll({
-        offset: ((req.params.pageNum - 1) * 10),
-        limit: 10,
-        raw: true,
-        include: { model: db.User, attributes: ["username", "id"] },
-        order: [
-          ['createdAt', 'DESC']
-        ],
-      });
-    } else {
-      questions = await db.Question.findAll({
-        limit: 10,
-        raw: true,
-        include: { model: db.User, attributes: ["username", "id"] },
-        order: [
-          ['createdAt', 'DESC']
-        ],
-      });
-    }
-
-
-
+    const offset = req.params.pageNum ? (req.params.pageNum - 1) * 10 : 0;
+    questions = await db.Question.findAll({
+      offset,
+      limit: 10,
+      include: [
+        { model: db.User, attributes: ["username", "id"] },
+        { model: db.Answer },
+      ],
+      order: [["createdAt", "DESC"]],
+    });
     res.render("index", {
       questions,
-      pageLinks
+      pageLinks,
     });
   })
 );
 
-router.get(
-  "/about",
-  (req, res) => {
-    res.render("about-us")
-  }
-)
+router.get("/about", (req, res) => {
+  res.render("about-us");
+});
 
 module.exports = router;
