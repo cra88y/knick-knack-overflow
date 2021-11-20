@@ -1,14 +1,17 @@
 div(class="question-card")
-  div.voting
-    button(class=`upVote` id=`upVote-${question.id}` data-questionId=`${question.id}`) ▲
-    button(class=`downVote` id=`downVote-${question.id}` data-questionId=`${question.id}`) ▼
-    div.voteCount(id=`voteCount-${question.id}`)= question.voteCount
+  div.question-sidebar
+    div.voting
+      button(class=`upVote` id=`upVote-${question.id}` data-questionId=`${question.id}`) ▲
+      button(class=`downVote` id=`downVote-${question.id}` data-questionId=`${question.id}`) ▼
+      div.voteCount(id=`voteCount-${question.id}`)= question.voteCount
+    if !currentUser
+      if !url
+        span(class="answers-count") #{`${question.Answers.length}`}
+          span(class="answers-count") Answers
+
   div.question-content-container
     a(href=`/questions/${question.id}`)
       h1(class="question-card-title")= question.title
-      if !currentUser
-        if !url
-          span #{`Answers: ${question.Answers.length}`}
     div.question-content|!{question.content}
   div.answer-options
     if !currentUser
