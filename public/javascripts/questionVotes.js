@@ -12,7 +12,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   let questionVotes;
 
   async function hookVotes() {
-    const res = await fetch(`http://localhost:8080/qVote/q`)
+    const res = await fetch(`/qVote/q`)
       .then((res) => res.json())
       .then((data) => {
         userVotes = data.userVotes;
@@ -50,7 +50,7 @@ async function hookVoteUpOrDown(vote, isUp) {
 
     const body = { questionId };
     const res = await fetch(
-      `http://localhost:8080/questions/${questionId}/${route}Votes`,
+      `/questions/${questionId}/${route}Votes`,
       {
         method: "POST",
         body: JSON.stringify(body),

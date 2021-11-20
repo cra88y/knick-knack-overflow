@@ -56,7 +56,7 @@ async function hookVoteUpOrDown(vote, isUp) {
 
     const body = { answerId };
     const res = await fetch(
-      `http://localhost:8080/api/answers/${answerId}/${route}Votes`,
+      `/api/answers/${answerId}/${route}Votes`,
       {
         method: "POST",
         body: JSON.stringify(body),
