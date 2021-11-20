@@ -4,7 +4,7 @@ block content
     +validationErrorSummary(errors)
     div(class="login-div")
         form(action="/users/login" method="post" id="login-container")
-            +field("", "_csrf", csrfToken, "hidden")
+            input(type="hidden" value=csrfToken name="_csrf")
             +field("Email Address", "email", email)
             +field("Password", "password")
             div(class="form-group")

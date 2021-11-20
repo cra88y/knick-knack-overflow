@@ -3,9 +3,9 @@ include utils.pug
 block content
     +validationErrorSummary(errors)
     div(class="register-div")
-        div(id="register-form-div")
+        div(id="login-container")
             form(action="/users/register" method="post")
-                +field("", "_csrf", csrfToken, "hidden")
+                input(type="hidden" value=csrfToken name="_csrf")
                 +field("Username", "username", reqBody.username)
                 +field("Email Address", "email", reqBody.email)
                 +field("Password", "password")

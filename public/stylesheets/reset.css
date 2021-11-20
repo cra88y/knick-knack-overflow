@@ -47,7 +47,7 @@ body, header, nav {
 
 h1 {
   font-size: 2rem;
-  color: #81a1c1;
+  color: #88c0d0;
 }
 ul li {
   list-style: none;
@@ -89,6 +89,7 @@ span {
   font-size: 1.5rem;
   padding: 1rem;
   border-bottom: 2px solid #d8dee9;
+  color: #88c0d0;
 }
 .question-card-title:hover {
   filter: brightness(110%);
@@ -215,9 +216,10 @@ span {
   color: #eceff4;
   text-align: center;
   align-self: center;
+  filter: brightness(110%);
 }
 #register-page-btn:hover {
-  filter: brightness(110%);
+  filter: brightness(120%);
 }
 
 .login-div {
@@ -240,6 +242,10 @@ span {
   flex-direction: column;
   color: #88c0d0;
   padding: 10px;
+}
+.form-group > label {
+  font-size: 1.25rem;
+  padding: 0.5rem;
 }
 
 .header-form {
@@ -406,9 +412,10 @@ span {
   color: #eceff4;
   text-align: center;
   align-self: center;
+  filter: brightness(110%);
 }
 .login-page-btn:hover {
-  filter: brightness(110%);
+  filter: brightness(120%);
 }
 
 .searchbar {
@@ -436,14 +443,7 @@ span {
   filter: brightness(110%);
 }
 
-#email {
-  display: flex;
-  text-transform: uppercase;
-  justify-content: center;
-  padding: 5px;
-  font-weight: bold;
-  color: #eceff4;
-}
+#email,
 #username {
   display: flex;
   text-transform: uppercase;
@@ -451,11 +451,19 @@ span {
   padding: 5px;
   font-weight: bold;
   color: #eceff4;
+  /* background-color: #eceff4; */
 }
+
 #email_input,
-#password_input {
-  padding: 5px;
-  font-size: 14px;
+#password_input,
+#username_input,
+#confirmedPassword_input {
+  text-align: center;
+  color: #3b4252;
+  background-color: #eceff4;
+  outline: 2px #88c0d0 solid;
+  padding: 10px;
+  font-size: 1.5rem;
 }
 
 img {
