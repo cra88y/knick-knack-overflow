@@ -3,16 +3,19 @@ div(class="answer-card")
     button(class=`upVote` id=`upVote-${answer.id}` data-answerId=`${answer.id}`) ▲
     button(class=`downVote` id=`downVote-${answer.id}` data-answerId=`${answer.id}`) ▼
     div.voteCount(id=`voteCount-${answer.id}`)= answer.voteCount
+  if currentUser
+    a(href=`/questions/${answer.questionId}`)
   div(class="answer-text")|!{answer.content}
   div.answer-options
     if !currentUser
       .author-container
         span Author:
-        a(class="answer-author answer-util-btn" href=`/users/${answer["User.id"]}`)= answer["User.username"]
+        a(class="answer-author answer-util-btn" href=`/users/${answer.User.id}`)= answer.User.username
     if user
       if answer.userId == user.id
         //- form(class="answer-utils" action=`/api/answers/${answer.id}/edit`)
         //-   button(class="answer-util-btn") Edit
-        form(class="answer-utils" action=`/api/answers/${answer.id}/delete` method="POST")
-          .delete-answer
-            button(class="answer-util-btn" class="delete-answer")  Delete
+        .delete-answer
+          button(class="answer-util-btn delete-ans" data-answerId=`${answer.id}` class="delete-answer")  Delete
+        if currentUser
+           a(href=`/questions/${answer.questionId}`) go to this answer

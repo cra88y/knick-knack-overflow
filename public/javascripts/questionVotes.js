@@ -37,7 +37,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       }
     }
   }
-  hookVotes();
+  // hookVotes();
 });
 
 
