@@ -662,6 +662,10 @@ img {
 .about-text > h1 {
   font-size: 1.25rem;
 }
+
+.about-text > p {
+  font-size: 1rem;
+}
 .about-media {
   display: none;
 }
