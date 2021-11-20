@@ -87,7 +87,7 @@ span {
 }
 .question-card-title {
   font-size: 1.5rem;
-  padding: 20px;
+  padding: 1rem;
   border-bottom: 2px solid #d8dee9;
 }
 .question-card-title:hover {
@@ -323,7 +323,7 @@ span {
   border-right: 3px solid #d8dee9;
   flex-grow: 1;
   /* margin-left: 10px; */
-  padding-right: 20px;
+  padding-right: 1rem;
   /* margin: 0px 0px 0px 10px; */
   display: flex;
   flex-direction: column;
@@ -464,7 +464,7 @@ img {
   padding: 10px 0px;
 }
 .question-content {
-  padding: 20px;
+  padding: 1rem;
   font-size: 1rem;
 }
 .suggested-div {
