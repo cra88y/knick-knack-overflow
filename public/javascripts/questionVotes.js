@@ -18,7 +18,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
         userVotes = data.userVotes;
         voteHiLows = data.voteHiLows
       });
-    console.log('voteHiLows', voteHiLows)
     for (let q in voteHiLows) {
       let voteCountId = `voteCount-${q}`
       let count = voteHiLows[q]

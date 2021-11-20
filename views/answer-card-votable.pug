@@ -11,7 +11,6 @@ block content
         div(class="answers-container")
           each answer in answers
             div(class=`answer-${answer.id}`)
-              //- (let votable = false) 
               include answer-card
         div(class="write-answer-container")
           form(action=`/api/questions/${question.id}/answers`, method="post")

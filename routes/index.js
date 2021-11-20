@@ -49,11 +49,11 @@ router.get(
       return;
     });
     currentQs = questions
-
     res.render("index", {
       questions,
       pageLinks,
       showAnswersCount: true,
+      votableQuestions: true,
     });
   })
 );

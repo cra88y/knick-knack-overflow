@@ -182,11 +182,11 @@ router.get(
       limit: 10,
       order: [["createdAt", "DESC"]],
     });
-
     res.render("question", {
       suggested,
       question,
       answers,
+      votableAnswers: true,
       csrfToken: req.csrfToken(),
     });
   })

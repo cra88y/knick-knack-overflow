@@ -12,6 +12,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   let answerVotes;
 
   async function hookVotes() {
+    
     const res = await fetch(`${document.location.href}/votes`)
       .then((res) => res.json())
       .then((data) => {
@@ -37,7 +38,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
       }
     }
   }
-  hookVotes();
+  if (document.location.href.includes("questions")) {
+    hookVotes();
+  }
 });
 
 
