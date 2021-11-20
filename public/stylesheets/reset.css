@@ -63,7 +63,7 @@ ul li {
   border-radius: 2px;
   overflow: hidden;
   color: #88c0d0;
-  padding: 2rem;
+  padding: 1rem;
   background-color: #4c566a;
   margin: auto;
   margin-top: 10px;
@@ -298,11 +298,32 @@ span {
   justify-content: center;
   align-items: center;
 }
-.voting {
-  flex-grow: 1;
-  margin: 10px;
+.answers-count {
+  align-self: center;
+  font-size: 2rem;
   display: flex;
   flex-direction: column;
+  text-align: center;
+}
+.answers-count > * {
+  font-size: 0.5rem;
+}
+.voting {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid #eceff4;
+}
+.question-sidebar {
+  border-right: 1px solid #eceff4;
+  flex-grow: 1;
+  margin: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 .answer-text {
   flex-grow: 100;
@@ -353,7 +374,6 @@ span {
   background-color: #bf616a;
   transition: background-color 0.75s ease-in-out;
 }
-
 .lowVote {
   color: #bb7076;
   transition: color 0.75s ease-in-out;
@@ -367,10 +387,6 @@ span {
 .mehVote {
   color: white;
   transition: color 0.75s ease-in-out;
-}
-
-.voteCount {
-  margin-right: 5px;
 }
 
 .login-page-btn {
