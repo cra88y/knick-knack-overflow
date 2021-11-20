@@ -48,7 +48,6 @@ async function hookVoteUpOrDown(vote, isUp) {
     const twinId = isUp ? `downVote-${questionId}` : `upVote-${questionId}`
     const route = isUp ? "up" : "down"
 
-    console.log(twinId, route)
     const body = { questionId };
     const res = await fetch(
       `http://localhost:8080/questions/${questionId}/${route}Votes`,

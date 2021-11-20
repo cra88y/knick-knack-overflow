@@ -28,7 +28,6 @@ const voteCountForQuestion = async (questionId) => {
   const votes = await db.Question_Vote.findAll({ where: { questionId }, raw: true });
   votes.forEach((v) => {
     count += v.voteType ? 1 : -1;
-    console.log('voteType', v.voteType)
   });
   return count;
 };

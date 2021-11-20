@@ -43,7 +43,6 @@ router.get(
     });
     for (q of questions) {
       q.voteCount = await voteCountForQuestion(q.id);
-      console.log("000000", q.voteCount);
     }
     questions.sort((f, s) => {
       return;
@@ -84,7 +83,6 @@ router.get(
       votes.push(...res)
     }
     
-    console.log('*******************************')
 
     let count = 0;
     let voteHiLows = {};
@@ -96,7 +94,6 @@ router.get(
       }
     });
 
-    console.log('000000000000', voteHiLows)
 
     let userId = req.session.userId;
     let userVotes = {};
