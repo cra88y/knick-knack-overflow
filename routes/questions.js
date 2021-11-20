@@ -9,7 +9,7 @@ const {
   validationCheck,
   onlyImagesAllowed,
   voteCountForAnswer,
-  voteCountForQuestion
+  voteCountForQuestion,
 } = require("./utils");
 const db = require("../db/models");
 const Op = require("sequelize").Op;
@@ -85,6 +85,7 @@ router.get(
             },
           ],
         },
+        include: [{ model: db.User, attributes: ["username", "id"] }],
       });
     }
 
@@ -138,7 +139,6 @@ router.get(
     //   ],
     // });
 
-
     // let answerVotes = {};
     // votes.forEach((vote) => {
     //   if (answerVotes[vote.answerId]) {
@@ -188,7 +188,6 @@ router.get(
       question,
       answers,
       csrfToken: req.csrfToken(),
-      url: {},
     });
   })
 );

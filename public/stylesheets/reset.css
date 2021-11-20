@@ -11,7 +11,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
-  min-height: 100vh;
+  min-height: 93vh;
   padding-bottom: 200px;
 }
 html {
@@ -90,9 +90,10 @@ span {
   padding: 1rem;
   border-bottom: 2px solid #d8dee9;
   color: #88c0d0;
+  filter: brightness(110%);
 }
 .question-card-title:hover {
-  filter: brightness(110%);
+  filter: brightness(120%);
 }
 
 #navBar {
@@ -119,10 +120,11 @@ span {
   align-content: center;
   font-size: 16px;
   margin-left: 7px;
+  transition: filter 0.1s;
 }
 
 .navLink:hover {
-  filter: brightness(110%);
+  filter: brightness(130%);
 }
 
 .navRight {
@@ -280,7 +282,7 @@ span {
 }
 .answer-card {
   color: #eceff4;
-  padding: 15px;
+  padding: 1rem;
   margin-top: 10px;
   background-color: #4c566a;
   /* text-align: center; */
@@ -338,7 +340,7 @@ span {
 }
 .answer-text {
   flex-grow: 100;
-  padding: 15px 0px;
+  padding: 1rem;
   word-wrap: normal;
   overflow: hidden;
   white-space: normal;
@@ -406,7 +408,6 @@ span {
   padding: 3px;
   border-radius: 2px;
   padding: 5px;
-  border-radius: 3px;
   text-transform: capitalize;
   background-color: #d08770;
   color: #eceff4;
@@ -482,7 +483,7 @@ img {
   background-color: #4c566a;
   padding: 15px;
   border: #3b4252 solid 1px;
-  border-radius: 3px;
+  border-radius: 2px;
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.15);
   width: 200px;
   height: fit-content;
@@ -502,7 +503,7 @@ img {
   background-color: #4c566a;
   padding: 15px;
   border: #3b4252 solid 1px;
-  border-radius: 3px;
+  border-radius: 2px;
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.15);
   max-width: 200px;
   height: fit-content;
@@ -519,8 +520,9 @@ img {
 }
 
 .suggested-div h2 {
-  color: #81a1c1;
+  color: #88c0d0;
   margin-bottom: 10px;
+  filter: brightness(80%);
 }
 
 .question-detail {
@@ -546,7 +548,7 @@ img {
   text-align: center;
   cursor: pointer;
   padding: 5px;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 .login-btn {
@@ -556,7 +558,7 @@ img {
   width: 5em;
   text-align: center;
   padding: 5px;
-  border-radius: 3px;
+  border-radius: 2px;
   cursor: pointer;
 }
 
@@ -567,7 +569,7 @@ img {
   width: 5em;
   text-align: center;
   padding: 5px;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 .search-form {
@@ -575,9 +577,13 @@ img {
   flex-direction: row;
   background-color: #4c566a;
   padding: 5px 10px 8px 10px;
-  border-radius: 3px;
+  border-radius: 2px;
   height: 100%;
+  transition: filter 0.1s;
   /* font-family: "Lucida Grande", Helvetica, Arial, sans-serif; */
+}
+.search-form:hover {
+  filter: brightness(105%);
 }
 
 .search-form input {
