@@ -11,7 +11,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
-  min-height: 93vh;
+  min-height: 100vh;
   padding-bottom: 200px;
 }
 html {
@@ -121,11 +121,11 @@ span {
   align-content: center;
   font-size: 16px;
   margin-left: 7px;
-  transition: filter 0.1s;
+  transition: filter 0.75s;
 }
 
 .navLink:hover {
-  filter: brightness(130%);
+  filter: hue-rotate(-0.25turn) brightness(110%);
 }
 
 .navRight {
@@ -141,7 +141,9 @@ span {
   justify-content: space-around;
   align-content: center;
 }
-
+button:hover {
+  cursor: pointer;
+}
 ::placeholder {
   color: #eceff4;
   opacity: 0.5;
@@ -188,8 +190,11 @@ span {
   background-color: #d08770;
   color: #eceff4;
   border-radius: 2px;
+  transition: filter 0.1s;
 }
-
+.answer-btn:hover {
+  filter: brightness(120%);
+}
 #login-container {
   display: flex;
   justify-content: center;
@@ -345,7 +350,7 @@ span {
 }
 .answer-text {
   flex-grow: 100;
-  padding: 1rem;
+  padding: 0 1rem;
   word-wrap: normal;
   overflow: hidden;
   white-space: normal;
@@ -400,7 +405,8 @@ span {
 }
 
 .hiVote {
-  color: #8fc1ff;
+  color: #88c0d0;
+  filter: brightness(90%);
   transition: color 0.75s ease-in-out;
 }
 
@@ -418,10 +424,13 @@ span {
   color: #eceff4;
   text-align: center;
   align-self: center;
-  filter: brightness(110%);
+
+  transition: filter 1.5s;
 }
 .login-page-btn:hover {
-  filter: brightness(120%);
+  filter: hue-rotate(-0.5turn) brightness(130%);
+  /* filter: brightness(110%); */
+  cursor: pointer;
 }
 
 .searchbar {
@@ -726,7 +735,8 @@ img {
   }
 }
 
-#title_input, #editor {
+#title_input,
+#editor {
   color: #3b4252;
   padding: 12px;
 }
