@@ -1,9 +1,10 @@
 div(class="question-card")
   div.question-sidebar
     div.voting
-      button(class=`upVote` id=`upVote-${question.id}` data-questionId=`${question.id}`) ▲
-      button(class=`downVote` id=`downVote-${question.id}` data-questionId=`${question.id}`) ▼
-      div.voteCount(id=`voteCount-${question.id}`)= question.voteCount
+      if votableQuestions
+        button(class=`upVote` id=`upVote-${question.id}` data-questionId=`${question.id}`) ▲
+        button(class=`downVote` id=`downVote-${question.id}` data-questionId=`${question.id}`) ▼
+        div.voteCount(id=`voteCount-${question.id}`)= question.voteCount
     if !currentUser
       if showAnswersCount
         span(class="answers-count") #{`${question.Answers.length}`}

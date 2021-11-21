@@ -12,6 +12,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   let answerVotes;
 
   async function hookVotes() {
+    
     const res = await fetch(`${document.location.href}/votes`)
       .then((res) => res.json())
       .then((data) => {
@@ -19,12 +20,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
         userVotes = data.userVotes;
         voteHiLows = data.voteHiLows
       });
-    console.log('voteHiLows', voteHiLows)
     for (let ans in voteHiLows) {
       let voteCountId = `voteCount-${ans}`
       let count = voteHiLows[ans]
 
-      console.log('votecountid', voteCountId)
       hiOrLowVote(voteCountId, count)
     }
 
@@ -37,7 +36,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
       }
     }
   }
-  hookVotes();
+  if (document.location.href.includes("questions")) {
+    hookVotes();
+  }
 });
 
 
@@ -55,7 +56,7 @@ async function hookVoteUpOrDown(vote, isUp) {
 
     const body = { answerId };
     const res = await fetch(
-      `http://localhost:8080/api/answers/${answerId}/${route}Votes`,
+      `/api/answers/${answerId}/${route}Votes`,
       {
         method: "POST",
         body: JSON.stringify(body),

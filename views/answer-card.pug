@@ -1,8 +1,9 @@
 div(class="answer-card")
   div.voting
-    button(class=`upVote` id=`upVote-${answer.id}` data-answerId=`${answer.id}`) ▲
-    button(class=`downVote` id=`downVote-${answer.id}` data-answerId=`${answer.id}`) ▼
-    div.voteCount(id=`voteCount-${answer.id}`)= answer.voteCount
+    if votableAnswers
+      button(class=`upVote` id=`upVote-${answer.id}` data-answerId=`${answer.id}`) ▲
+      button(class=`downVote` id=`downVote-${answer.id}` data-answerId=`${answer.id}`) ▼
+      div.voteCount(id=`voteCount-${answer.id}`)= answer.voteCount
   if currentUser
     a(href=`/questions/${answer.questionId}`)
   div(class="answer-text")|!{answer.content}
