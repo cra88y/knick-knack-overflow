@@ -695,10 +695,7 @@ img {
   .answers-content {
     display: block;
   }
-  #navTitle {
-    content: url(../knick-knack-title.png);
-    width: 80px;
-  }
+
   .question-card {
     width: 90vw;
   }
@@ -732,6 +729,16 @@ img {
     list-style-type: none;
     justify-content: flex-start;
     align-content: flex-start;
+  }
+}
+
+@media (max-width: 800px) {
+  .answers-content {
+    display: block;
+  }
+  #navTitle {
+    content: url(../knick-knack-title.png);
+    width: 80px;
   }
 }
 
