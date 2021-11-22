@@ -43,8 +43,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
           }
         }
       }
+      hookVotes();
     }
-    hookVotes();
   } catch (err) {
     console.log('No votes on this page...');
   }
