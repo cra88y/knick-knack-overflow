@@ -96,6 +96,8 @@ async function hookVoteUpOrDown(vote, isUp) {
 function hiOrLowVote(voteCountId, count) {
   let countElem = document.getElementById(voteCountId);
 
+  if (!countElem) return;
+
   if (count < 0) {
     countElem.classList.toggle("lowVote", true);
     countElem.classList.toggle("hiVote", false);
