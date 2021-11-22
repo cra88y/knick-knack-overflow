@@ -6,6 +6,6 @@ block content
         form(action="/users/login" method="post" id="login-container")
             input(type="hidden" value=csrfToken name="_csrf")
             +field("Email Address", "email", email)
-            +field("Password", "password")
+            +field("Password", "password", "", "password")
             div(class="form-group")
                 button(class="login-page-btn") les go mate

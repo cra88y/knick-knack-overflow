@@ -59,7 +59,7 @@ router.get("/login", csrfProtection, (req, res) => {
 router.get(
   "/demo",
   asyncHandler(async (req, res) => {
-    const user = await db.User.findByPk(1); //ID FOR THE DEMO USER
+    const user = await db.User.findByPk(10); //ID FOR THE DEMO USER
     loginUser(req, res, user);
   })
 );
