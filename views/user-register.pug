@@ -8,7 +8,7 @@ block content
                 input(type="hidden" value=csrfToken name="_csrf")
                 +field("Username", "username", reqBody.username)
                 +field("Email Address", "email", reqBody.email)
-                +field("Password", "password")
-                +field("Confirm Password", "confirmedPassword")
+                +field("Password", "password", "password")
+                +field("Confirm Password", "confirmedPassword", "password")
                 div(class="form-group")
                     button(class="login-page-btn") get on wit it

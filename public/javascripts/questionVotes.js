@@ -27,10 +27,19 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     for (let q in userVotes) {
       if (userVotes[q] == true) {
-        document.getElementById(`upVote-${q}`).classList.toggle("voted")
+        const $upVote = document.getElementById(`upVote-${q}`);
+
+        if ($upVote) {
+          $upVote.classList.toggle("voted")
+        }
+
       }
       if (userVotes[q] == false) {
-        document.getElementById(`downVote-${q}`).classList.toggle("voted")
+        const $downVote = document.getElementById(`downVote-${q}`)
+
+        if ($downVote) {
+          $downVote.classList.toggle("voted")
+        }
       }
     }
   }
