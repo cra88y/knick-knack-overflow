@@ -3,7 +3,6 @@ include utils.pug
 block content
   script(src="/javascripts/votes.js")
   script(src="/javascripts/delete-answers.js")
-  //- script(src="/javascripts/questionVotes.js")
   div.question-detail
     div.answers-content
       include question-card
@@ -11,7 +10,6 @@ block content
         div(class="answers-container")
           each answer in answers
             div(class=`answer-${answer.id}`)
-              //- (let votable = false) 
               include answer-card
         div(class="write-answer-container")
           form(action=`/api/questions/${question.id}/answers`, method="post")

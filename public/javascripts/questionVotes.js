@@ -11,8 +11,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
   });
   let questionVotes;
 
+  try {
   async function hookVotes() {
-    try {
       const res = await fetch(`/qVote/q`)
         .then((res) => res.json())
         .then((data) => {
@@ -43,11 +43,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
           }
         }
       }
-      hookVotes();
-    } catch (err) {
-      console.log('No votes on this page...');
     }
-    }
+    hookVotes();
+  } catch (err) {
+    console.log('No votes on this page...');
+  }
 });
 
 

@@ -128,36 +128,7 @@ router.get(
       return s.voteCount - f.voteCount;
     });
 
-    // const votes = await db.Vote.findAll({
-    //   include: [
-    //     {
-    //       model: db.Answer,
-    //       where: {
-    //         questionId,
-    //       },
-    //     },
-    //   ],
-    // });
-
-    // let answerVotes = {};
-    // votes.forEach((vote) => {
-    //   if (answerVotes[vote.answerId]) {
-    //     if (vote.voteType == true) {
-    //       answerVotes[vote.answerId] += 1;
-    //     } else {
-    //       answerVotes[vote.answerId] -= 1;
-    //     }
-    //   } else {
-    //     if (vote.voteType == true) {
-    //       answerVotes[vote.answerId] = 1;
-    //     } else {
-    //       answerVotes[vote.answerId] = -1;
-    //     }
-    //   }
-    // });
-
-    /////////////////// Suggested questions /////////////////////////
-    // go through current question title and grab all words seperately
+  
     const titleTerms = question.title.split(" ");
     const suggested = await db.Question.findAll({
       where: {
