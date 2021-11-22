@@ -12,38 +12,42 @@ window.addEventListener("DOMContentLoaded", (event) => {
   let questionVotes;
 
   async function hookVotes() {
-    const res = await fetch(`/qVote/q`)
-      .then((res) => res.json())
-      .then((data) => {
-        userVotes = data.userVotes;
-        voteHiLows = data.voteHiLows
-      });
-    for (let q in voteHiLows) {
-      let voteCountId = `voteCount-${q}`
-      let count = voteHiLows[q]
+    try {
+      const res = await fetch(`/qVote/q`)
+        .then((res) => res.json())
+        .then((data) => {
+          userVotes = data.userVotes;
+          voteHiLows = data.voteHiLows
+        });
+      for (let q in voteHiLows) {
+        let voteCountId = `voteCount-${q}`
+        let count = voteHiLows[q]
 
-      hiOrLowVote(voteCountId, count)
-    }
-
-    for (let q in userVotes) {
-      if (userVotes[q] == true) {
-        const $upVote = document.getElementById(`upVote-${q}`);
-
-        if ($upVote) {
-          $upVote.classList.toggle("voted")
-        }
-
+        hiOrLowVote(voteCountId, count)
       }
-      if (userVotes[q] == false) {
-        const $downVote = document.getElementById(`downVote-${q}`)
 
-        if ($downVote) {
-          $downVote.classList.toggle("voted")
+      for (let q in userVotes) {
+        if (userVotes[q] == true) {
+          const $upVote = document.getElementById(`upVote-${q}`);
+
+          if ($upVote) {
+            $upVote.classList.toggle("voted")
+          }
+
+        }
+        if (userVotes[q] == false) {
+          const $downVote = document.getElementById(`downVote-${q}`)
+
+          if ($downVote) {
+            $downVote.classList.toggle("voted")
+          }
         }
       }
+      hookVotes();
+    } catch (err) {
+      console.log('No votes on this page...');
     }
-  }
-  hookVotes();
+    }
 });
 
 
