@@ -7,9 +7,9 @@ Knick Knack Overflow is a full-stack web app for users to ask questions, discuss
 To explore the app you can visit:
 https://knackerflow.herokuapp.com/
 
-Landing Page (TODO PNG):
+# Screenshots
+![image](https://user-images.githubusercontent.com/22042885/156962704-3c7751fc-20e5-4e11-a71d-73d9049e0a16.png)
 
-Question Thread (TODO PNG):
 
 ## Features
 - Sign Up / Log with persistent sessions and secure password hashing using Bcrypt
