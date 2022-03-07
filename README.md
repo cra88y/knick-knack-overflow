@@ -8,8 +8,7 @@ To explore the app you can visit:
 https://knackerflow.herokuapp.com/
 
 # Screenshots
-![image](https://user-images.githubusercontent.com/22042885/156962704-3c7751fc-20e5-4e11-a71d-73d9049e0a16.png)
-
+![image](https://user-images.githubusercontent.com/22042885/156962809-0c44b4f2-c38f-4fd9-9090-0e4057777fb6.png)
 
 ## Features
 - Sign Up / Log with persistent sessions and secure password hashing using Bcrypt
